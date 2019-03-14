@@ -1,133 +1,150 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:async';
 
-class SignUpPage extends StatefulWidget{
+class SignupPage extends StatefulWidget {
   @override
-  _SignupPageSate createState()=>_SignupPageSate();
+  _SignupPageState createState() => _SignupPageState();
 }
-class _SignupPageSate extends State<SignUpPage>{
-  String _email;
-  String   _password;
-  final formkey=new GlobalKey<FormState>();
-  checkFields(){
-    final form=formkey.currentState;
-    if(form.validate()){
-      form.save();
-      return true;
-    }
-    return false;
-  }
 
-
-
-   createUser()async{
-    if (checkFields()){
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email, password: _password)
-          .then((user){
-        print('signed in as ${user.uid}');
-
-        Navigator.of(context).pop();
-        Navigator.of(context).pushNamed('/userpage');
-      }).catchError((e){
-        print(e);
-      });
-    }
-  }
-
+class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return new Scaffold(
-
-      appBar: AppBar(
-        title: Image(image:AssetImage("images/flutter1.png",),
-          height: 30.0,
-          fit: BoxFit.fitHeight,),
-        elevation: 0.0,
-
-        centerTitle: true,
-        backgroundColor: Colors.black12,
-
-      ),
-      body:ListView(
-        shrinkWrap: true,
-        children: <Widget>[
-          Container(
-            height: 210.0,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('images/google2.gif'),
-                    fit: BoxFit.contain),
-                borderRadius: BorderRadius.only
-                  (
-                    bottomLeft: Radius.circular(500.0),
-                    bottomRight: Radius.circular(500.0)
-                )),
-          ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(28.0),
-              child: Center(
-                  child: new Form(
-                    key: formkey,
-                    child: Center(
-                      child: new ListView(
-                        shrinkWrap: true,
-                        children: <Widget>[
-
-                         _input("required email",false,"Email",'Enter your Email',(value) => _email = value),
-                          SizedBox(width: 20.0,height: 20.0,),
-                          _input("required password",true,"Password",'Password',(value) => _password = value),
-
-                          Center(
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 138.0,top: 8.0),
-                              child: Row(
-                                children: <Widget>[
-                                  OutlineButton(
-                                    child: Text("Register"),
-                                    onPressed: createUser,
-                                  ),
-                                  SizedBox(height: 18.0,width: 18.0,),
-
-
-                                ],
-                              ),
-                            ),
-                          ),
-
-                        ],
+        resizeToAvoidBottomPadding: false,
+        body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                child: Stack(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
+                      child: Text(
+                        'Signup',
+                        style: TextStyle(
+                            fontSize: 80.0, fontWeight: FontWeight.bold),
                       ),
                     ),
-                  )
+                    Container(
+                      padding: EdgeInsets.fromLTRB(260.0, 125.0, 0.0, 0.0),
+                      child: Text(
+                        '.',
+                        style: TextStyle(
+                            fontSize: 80.0,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xfffe8a71)),
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          ),
-        ],
-      ) ,
-    );
-  }
-  Widget _input(String validation,bool ,String label,String hint, save ){
-
-    return new TextFormField(
-      decoration: InputDecoration(
-          hintText: hint,
-          labelText: label,
-          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 20.0),
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20.0)
-          ),
-
-
-      ),
-      obscureText: bool,
-      validator: (value)=>
-      value.isEmpty ? validation: null,
-      onSaved: save ,
-
-    );
-
+              Container(
+                  padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+                  child: Column(
+                    children: <Widget>[
+                      TextField(
+                        decoration: InputDecoration(
+                            labelText: 'EMAIL',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            // hintText: 'EMAIL',
+                            // hintStyle: ,
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.blue))),
+                      ),
+                      SizedBox(height: 10.0),
+                      TextField(
+                        decoration: InputDecoration(
+                            labelText: 'PASSWORD ',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.blue))),
+                        obscureText: true,
+                      ),
+                      SizedBox(height: 10.0),
+                      TextField(
+                        decoration: InputDecoration(
+                            labelText: 'NICK NAME ',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.blue))),
+                      ),
+                      SizedBox(height: 50.0),
+                      Container(
+                          height: 40.0,
+                          child: Material(
+                            borderRadius: BorderRadius.circular(20.0),
+                            shadowColor: Colors.blueAccent,
+                            color: Colors.blue,
+                            elevation: 7.0,
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: Center(
+                                child: Text(
+                                  'SIGNUP',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Montserrat'),
+                                ),
+                              ),
+                            ),
+                          )),
+                      SizedBox(height: 20.0),
+                      Container(
+                        height: 40.0,
+                        color: Colors.transparent,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Colors.black,
+                                  style: BorderStyle.solid,
+                                  width: 1.0),
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(20.0)),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Center(
+                              child: Text('Go Back',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Montserrat')),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
+              // SizedBox(height: 15.0),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: <Widget>[
+              //     Text(
+              //       'New to Spotify?',
+              //       style: TextStyle(
+              //         fontFamily: 'Montserrat',
+              //       ),
+              //     ),
+              //     SizedBox(width: 5.0),
+              //     InkWell(
+              //       child: Text('Register',
+              //           style: TextStyle(
+              //               color: Colors.blue,
+              //               fontFamily: 'Montserrat',
+              //               fontWeight: FontWeight.bold,
+              //               decoration: TextDecoration.underline)),
+              //     )
+              //   ],
+              // )
+            ]));
   }
 }
-
