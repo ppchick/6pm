@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'pages/welcome/signup.dart';
 import 'pages/welcome/welcome.dart';
-import 'pages/home/home.dart';
+import 'pages/home.dart';
 
 void main() => runApp(new MyApp());
 
