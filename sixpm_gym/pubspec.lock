@@ -92,7 +92,11 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "1.5.5"
+=======
+    version: "1.5.4"
+>>>>>>> master
   stack_trace:
     dependency: transitive
     description:
@@ -143,4 +147,8 @@ packages:
     source: hosted
     version: "2.0.8"
 sdks:
+<<<<<<< HEAD
   dart: ">=2.1.1-dev.0.0 <3.0.0"
+=======
+  dart: ">=2.1.0 <3.0.0"
+>>>>>>> master
