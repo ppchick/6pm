@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:sixpm_gym/flutterteam.dart';
-import 'package:sixpm_gym/loginpage.dart';
-import 'package:sixpm_gym/people.dart';
-import 'package:sixpm_gym/signup.dart';
+import 'package:flutter_firebase/flutterteam.dart';
+import 'package:flutter_firebase/loginpage.dart';
+import 'package:flutter_firebase/people.dart';
+import 'package:flutter_firebase/signup.dart';
 
 class Page extends StatefulWidget {
   @override
