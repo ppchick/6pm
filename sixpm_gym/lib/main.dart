@@ -1,49 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:sixpm_gym/homepage.dart';
+import 'package:sixpm_gym/loginpage.dart';
+import 'package:sixpm_gym/signup.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
+void main()=>runApp(FireAuth());
 
-void main() {
-  runApp(MaterialApp(
-    title: 'Navigation Basics',
-    home: FirstRoute(),
-  ));
-}
-
-class FirstRoute extends StatelessWidget {
+class FireAuth extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('First Route'),
-      ),
-      body: Center(
-        child: RaisedButton(
-          child: Text('Open route'),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SecondRoute()),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
+    // TODO: implement build
+    return new MaterialApp(
+      title: "Firebase Auth",
+      debugShowCheckedModeBanner: false,
+theme: ThemeData(primarySwatch: Colors.blue),
+      home:LoginPage(),
+      routes: <String,WidgetBuilder>{
+        "/userpage":(BuildContext context)=>new Page(),
+        "/loginpage":(BuildContext context)=>new LoginPage(),
+        "/signup":(BuildContext context)=>new SignUpPage()
 
-class SecondRoute extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Second Route"),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Go back!'),
-        ),
-      ),
+      },
     );
   }
 }
