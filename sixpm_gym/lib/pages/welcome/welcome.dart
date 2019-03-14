@@ -182,7 +182,7 @@ class _MyHomePageState extends State<WelcomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                // FIXME Button made for easy navigation
+                // NOTE Button
                 ButtonBar(
                     alignment: MainAxisAlignment.center,
                     children: <Widget>[
