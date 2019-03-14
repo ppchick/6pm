@@ -1,4 +1,4 @@
-# sinpm_gym
+# sixpm_gym
 
 A new Flutter project.
 

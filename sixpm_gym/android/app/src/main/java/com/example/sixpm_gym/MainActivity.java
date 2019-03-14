@@ -1,4 +1,4 @@
-package com.example.sinpm_gym;
+package com.example.sixpm_gym;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
