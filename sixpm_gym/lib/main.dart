@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase/homepage.dart';
-import 'package:flutter_firebase/loginpage.dart';
-import 'package:flutter_firebase/signup.dart';
+import 'package:sixpm_gym/homepage.dart';
+import 'package:sixpm_gym/loginpage.dart';
+import 'package:sixpm_gym/signup.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 void main()=>runApp(FireAuth());
 
