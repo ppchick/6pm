@@ -122,7 +122,6 @@ packages:
       name: pedantic
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "1.5.0"
   petitparser:
     dependency: transitive
@@ -137,8 +136,6 @@ packages:
       name: pool
       url: "https://pub.dartlang.org"
     source: hosted
-=======
->>>>>>> master
     version: "1.4.0"
   quiver:
     dependency: transitive
