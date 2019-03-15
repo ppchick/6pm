@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import './widgets/placeholder.dart';
+import './session/session.dart';
+import './gym/gym.dart';
+import './profile/profile.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,9 +13,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    PlaceholderWidget(Colors.white),
-    PlaceholderWidget(Colors.deepOrange),
-    PlaceholderWidget(Colors.green)
+    gym_placeholder,
+    session_placeholder,
+    profile_placeholder,
   ];
 
   @override
