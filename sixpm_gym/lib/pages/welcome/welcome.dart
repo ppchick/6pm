@@ -182,7 +182,7 @@ class _MyHomePageState extends State<WelcomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                // NOTE Button
+                // ANCHOR  Button for test easy navigation
                 ButtonBar(
                     alignment: MainAxisAlignment.center,
                     children: <Widget>[
