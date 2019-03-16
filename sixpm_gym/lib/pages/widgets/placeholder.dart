@@ -8,21 +8,24 @@ class PlaceholderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white,
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              text,
-              style: TextStyle(
-                fontSize: 40.0,
-                color: color,
+    return Padding(
+      padding: EdgeInsets.fromLTRB(15.0, 20.0, 15.0, 20.0),
+      child: Card(
+        color: Colors.white,
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                text,
+                style: TextStyle(
+                  fontSize: 40.0,
+                  color: color,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

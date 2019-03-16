@@ -68,7 +68,19 @@ class _SignupPageState extends State<SignupPage> {
                       SizedBox(height: 10.0),
                       TextField(
                         decoration: InputDecoration(
-                            labelText: 'NICK NAME ',
+                            labelText: 'CONFIRM PASSWORD ',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.blue))),
+                        obscureText: true,
+                      ),
+                      SizedBox(height: 10.0),
+                      TextField(
+                        decoration: InputDecoration(
+                            labelText: 'USERNAME ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -78,25 +90,28 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                       SizedBox(height: 50.0),
                       Container(
-                          height: 40.0,
-                          child: Material(
-                            borderRadius: BorderRadius.circular(20.0),
-                            shadowColor: Colors.blueAccent,
-                            color: Colors.blue,
-                            elevation: 7.0,
-                            child: GestureDetector(
-                              onTap: () {},
-                              child: Center(
-                                child: Text(
-                                  'SIGNUP',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Montserrat'),
-                                ),
+                        height: 40.0,
+                        child: Material(
+                          borderRadius: BorderRadius.circular(20.0),
+                          shadowColor: Colors.blueAccent,
+                          color: Colors.blue,
+                          elevation: 7.0,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pushNamed('/signup2');
+                            },
+                            child: Center(
+                              child: Text(
+                                'NEXT',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Montserrat'),
                               ),
                             ),
-                          )),
+                          ),
+                        ),
+                      ),
                       SizedBox(height: 20.0),
                       Container(
                         height: 40.0,
@@ -114,10 +129,13 @@ class _SignupPageState extends State<SignupPage> {
                               Navigator.of(context).pop();
                             },
                             child: Center(
-                              child: Text('Go Back',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Montserrat')),
+                              child: Text(
+                                'Go Back',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Montserrat',
+                                ),
+                              ),
                             ),
                           ),
                         ),
