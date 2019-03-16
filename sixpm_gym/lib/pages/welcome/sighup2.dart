@@ -8,6 +8,7 @@ class SignupPage2 extends StatefulWidget {
 class _SignupPageState2 extends State<SignupPage2> {
   final TextStyle blue = new TextStyle(
       inherit: false, color: Colors.blue, decorationColor: Colors.blue);
+  String _genderValue = 'Male';
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -79,6 +80,7 @@ class _SignupPageState2 extends State<SignupPage2> {
                               children: <Widget>[
                                 Text('Gender: '),
                                 new DropdownButton<String>(
+                                  value: _genderValue,
                                   style: blue,
                                   items: <String>['Male', 'Femail', 'Other']
                                       .map((String value) {
@@ -88,7 +90,10 @@ class _SignupPageState2 extends State<SignupPage2> {
                                     );
                                   }).toList(),
                                   onChanged: (item) {
-                                    print('[Dropdown] changed' + item);
+                                    print('[Dropdown] changed to ' + item);
+                                    setState(() {
+                                      _genderValue = item;
+                                    });
                                   },
                                 ),
                               ],
