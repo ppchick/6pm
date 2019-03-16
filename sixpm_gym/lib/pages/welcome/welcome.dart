@@ -17,13 +17,13 @@ class _MyHomePageState extends State<WelcomePage> {
               child: Stack(
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(15.0, 80.0, 0.0, 0.0),
                     child: Text('Hello',
                         style: TextStyle(
                             fontSize: 80.0, fontWeight: FontWeight.bold)),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(16.0, 175.0, 0.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(16.0, 155.0, 0.0, 0.0),
                     child: Text('There',
                         style: TextStyle(
                             fontSize: 80.0, fontWeight: FontWeight.bold)),
@@ -40,7 +40,7 @@ class _MyHomePageState extends State<WelcomePage> {
               ),
             ),
             Container(
-                padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+                padding: EdgeInsets.only(top: 15.0, left: 20.0, right: 20.0),
                 child: Column(
                   children: <Widget>[
                     TextField(
@@ -53,7 +53,7 @@ class _MyHomePageState extends State<WelcomePage> {
                           focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.blue))),
                     ),
-                    SizedBox(height: 20.0),
+                    SizedBox(height: 10.0),
                     TextField(
                       decoration: InputDecoration(
                           labelText: 'PASSWORD',
@@ -68,7 +68,7 @@ class _MyHomePageState extends State<WelcomePage> {
                     SizedBox(height: 5.0),
                     Container(
                       alignment: Alignment(1.0, 0.0),
-                      padding: EdgeInsets.only(top: 15.0, left: 20.0),
+                      padding: EdgeInsets.only(top: 5.0, left: 20.0),
                       child: InkWell(
                         child: Text(
                           'Forgot Password',
@@ -80,7 +80,7 @@ class _MyHomePageState extends State<WelcomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 40.0),
+                    SizedBox(height: 20.0),
                     Container(
                       height: 40.0,
                       child: Material(
@@ -102,7 +102,6 @@ class _MyHomePageState extends State<WelcomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20.0),
 
                     // REVIEW Login with Facebook
                     // Container(

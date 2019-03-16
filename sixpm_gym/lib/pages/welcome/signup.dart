@@ -17,7 +17,7 @@ class _SignupPageState extends State<SignupPage> {
                 child: Stack(
                   children: <Widget>[
                     Container(
-                      padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
+                      padding: EdgeInsets.fromLTRB(15.0, 80.0, 0.0, 0.0),
                       child: Text(
                         'Signup',
                         style: TextStyle(
@@ -25,7 +25,7 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.fromLTRB(260.0, 125.0, 0.0, 0.0),
+                      padding: EdgeInsets.fromLTRB(260.0, 95.0, 0.0, 0.0),
                       child: Text(
                         '.',
                         style: TextStyle(
@@ -38,7 +38,7 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               Container(
-                  padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+                  padding: EdgeInsets.only(top: 30.0, left: 20.0, right: 20.0),
                   child: Column(
                     children: <Widget>[
                       TextField(
@@ -53,7 +53,7 @@ class _SignupPageState extends State<SignupPage> {
                             focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.blue))),
                       ),
-                      SizedBox(height: 10.0),
+                      SizedBox(height: 15.0),
                       TextField(
                         decoration: InputDecoration(
                             labelText: 'PASSWORD ',
@@ -65,7 +65,7 @@ class _SignupPageState extends State<SignupPage> {
                                 borderSide: BorderSide(color: Colors.blue))),
                         obscureText: true,
                       ),
-                      SizedBox(height: 10.0),
+                      SizedBox(height: 15.0),
                       TextField(
                         decoration: InputDecoration(
                             labelText: 'CONFIRM PASSWORD ',
@@ -77,7 +77,7 @@ class _SignupPageState extends State<SignupPage> {
                                 borderSide: BorderSide(color: Colors.blue))),
                         obscureText: true,
                       ),
-                      SizedBox(height: 10.0),
+                      SizedBox(height: 15.0),
                       TextField(
                         decoration: InputDecoration(
                             labelText: 'USERNAME ',
@@ -98,6 +98,7 @@ class _SignupPageState extends State<SignupPage> {
                           elevation: 7.0,
                           child: GestureDetector(
                             onTap: () {
+                              print('[NEXT] Pressed');
                               Navigator.of(context).pushNamed('/signup2');
                             },
                             child: Center(
@@ -126,6 +127,7 @@ class _SignupPageState extends State<SignupPage> {
                               borderRadius: BorderRadius.circular(20.0)),
                           child: InkWell(
                             onTap: () {
+                              print('[Go Back] Pressed');
                               Navigator.of(context).pop();
                             },
                             child: Center(
