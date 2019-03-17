@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
+
+import '../widgets/date_picker.dart';
 
 class SignupPage2 extends StatefulWidget {
   @override
@@ -6,8 +9,6 @@ class SignupPage2 extends StatefulWidget {
 }
 
 class _SignupPageState2 extends State<SignupPage2> {
-  final TextStyle blue = new TextStyle(
-      inherit: false, color: Colors.blue, decorationColor: Colors.blue);
   String _genderValue = 'Male';
   @override
   Widget build(BuildContext context) {
@@ -74,34 +75,42 @@ class _SignupPageState2 extends State<SignupPage2> {
                           ),
                         ),
                         Padding(
-                            padding: EdgeInsets.all(10.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text('Gender: '),
-                                new DropdownButton<String>(
-                                  value: _genderValue,
-                                  style: blue,
-                                  items: <String>['Male', 'Femail', 'Other']
-                                      .map((String value) {
-                                    return new DropdownMenuItem<String>(
-                                      value: value,
-                                      child: new Text(value),
-                                    );
-                                  }).toList(),
-                                  onChanged: (item) {
-                                    print('[Dropdown] changed to ' + item);
-                                    setState(() {
-                                      _genderValue = item;
-                                    });
-                                  },
+                          padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                'Gender:  ',
+                                style: TextStyle(
+                                  fontSize: 20.0,
                                 ),
-                              ],
-                            )),
-                        Padding(
-                          padding: EdgeInsets.all(10.0),
-                          // child: ,
+                              ),
+                              new DropdownButton<String>(
+                                value: _genderValue,
+                                style: TextStyle(
+                                    inherit: true,
+                                    fontSize: 20.0,
+                                    color: Colors.blue,
+                                    decorationColor: Colors.blue),
+                                items: <String>['Male', 'Female', 'Other']
+                                    .map((String value) {
+                                  return new DropdownMenuItem<String>(
+                                    value: value,
+                                    child: new Text(value),
+                                  );
+                                }).toList(),
+                                onChanged: (item) {
+                                  print('[Dropdown] changed to ' + item);
+                                  setState(() {
+                                    _genderValue = item;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
                         ),
+
+                        // DatePickerWidget(),
                       ],
                     ),
                   ),
