@@ -10,6 +10,7 @@ class SignupPage2 extends StatefulWidget {
 
 class _SignupPageState2 extends State<SignupPage2> {
   String _genderValue = 'Male';
+  String _levelValue = 'Newbie';
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -110,8 +111,43 @@ class _SignupPageState2 extends State<SignupPage2> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
+                          padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
                           child: DatePickerWidget(),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                'Level of Experience:  ',
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                ),
+                              ),
+                              new DropdownButton<String>(
+                                value: _levelValue,
+                                style: TextStyle(
+                                    inherit: true,
+                                    fontSize: 20.0,
+                                    color: Colors.blue,
+                                    decorationColor: Colors.blue),
+                                items: <String>['Pro', 'Newbie']
+                                    .map((String value) {
+                                  return new DropdownMenuItem<String>(
+                                    value: value,
+                                    child: new Text(value),
+                                  );
+                                }).toList(),
+                                onChanged: (item) {
+                                  print('[Dropdown] changed to ' + item);
+                                  setState(() {
+                                    _levelValue = item;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
