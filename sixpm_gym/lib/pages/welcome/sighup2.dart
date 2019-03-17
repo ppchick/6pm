@@ -163,9 +163,12 @@ class _SignupPageState2 extends State<SignupPage2> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        'Interest',
-                        style: TextStyle(fontSize: 20.0),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(10.0, 5.0, 0.0, 0.0),
+                        child: Text(
+                          'Interest',
+                          style: TextStyle(fontSize: 20.0),
+                        ),
                       ),
                       InterestCheckboxWidget(),
                     ],
@@ -179,9 +182,12 @@ class _SignupPageState2 extends State<SignupPage2> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        'Strength',
-                        style: TextStyle(fontSize: 20.0),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(10.0, 5.0, 0.0, 0.0),
+                        child: Text(
+                          'Strength',
+                          style: TextStyle(fontSize: 20.0),
+                        ),
                       ),
                       StrengthCheckboxWidget(),
                     ],
