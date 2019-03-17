@@ -109,8 +109,10 @@ class _SignupPageState2 extends State<SignupPage2> {
                             ],
                           ),
                         ),
-
-                        // DatePickerWidget(),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
+                          child: DatePickerWidget(),
+                        ),
                       ],
                     ),
                   ),

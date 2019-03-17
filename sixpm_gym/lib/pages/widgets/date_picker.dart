@@ -14,9 +14,9 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
   int _month = 11;
   int _date = 11;
 
-  String _lang = 'zh';
-  String _format = 'yyyy-mm-dd';
-  bool _showTitleActions = true;
+  String _lang = 'en';
+  String _format = 'yyyy-mmmm-dd';
+  bool _showTitleActions = false;
 
   TextEditingController _langCtrl = TextEditingController();
   TextEditingController _formatCtrl = TextEditingController();
@@ -24,8 +24,8 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
   @override
   void initState() {
     super.initState();
-    _langCtrl.text = 'zh';
-    _formatCtrl.text = 'yyyy-mm-dd';
+    _langCtrl.text = 'en';
+    _formatCtrl.text = 'yyyy-mmmm-dd';
 
     DateTime now = DateTime.now();
     _year = now.year;
@@ -45,11 +45,11 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
       initialMonth: _month,
       initialDate: _date,
       confirm: Text(
-        'custom ok',
+        'Confirm',
         style: TextStyle(color: Colors.red),
       ),
       cancel: Text(
-        'custom cancel',
+        'Cancel',
         style: TextStyle(color: Colors.cyan),
       ),
       locale: _lang,
@@ -78,67 +78,17 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        RaisedButton(
-          onPressed: _showDatePicker,
-          child: Icon(Icons.date_range),
-        ),
-        // show title actions checkbox
-        // Row(
-        //   children: <Widget>[
-        //     Text(
-        //       'Show title actions',
-        //       style: TextStyle(fontSize: 16.0),
-        //     ),
-        //     Checkbox(
-        //       value: _showTitleActions,
-        //       onChanged: (value) {
-        //         setState(() {
-        //           _showTitleActions = value;
-        //         });
-        //       },
-        //     )
-        //   ],
-        // ),
-
-        // Language input field
-        // TextField(
-        //   controller: _langCtrl,
-        //   keyboardType: TextInputType.url,
-        //   decoration: InputDecoration(
-        //     labelText: 'Language',
-        //     hintText: 'en / zh ...',
-        //     hintStyle: TextStyle(color: Colors.black26),
-        //   ),
-        //   onChanged: (value) {
-        //     _lang = value;
-        //   },
-        // ),
-
-        // Formatter input field
-        // TextField(
-        //   controller: _formatCtrl,
-        //   keyboardType: TextInputType.url,
-        //   decoration: InputDecoration(
-        //     labelText: 'Formatter',
-        //     hintText: 'yyyy-mm-dd / yyyy-mmm-dd / yyyy-mmmm-dd',
-        //     hintStyle: TextStyle(color: Colors.black26),
-        //   ),
-        //   onChanged: (value) {
-        //     _format = value;
-        //   },
-        // ),
-
-        // Selected date
         Container(
-          margin: EdgeInsets.only(top: 40.0),
+          margin: EdgeInsets.only(left: 10.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Selected Date:',
-                style: Theme.of(context).textTheme.subhead,
+                'Birthday:',
+                style: TextStyle(fontSize: 20.0),
               ),
               Container(
                 padding: EdgeInsets.only(left: 12.0),
@@ -150,13 +100,62 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
             ],
           ),
         ),
+        Container(
+          padding: EdgeInsets.only(left: 30.0),
+          child: RaisedButton(
+            onPressed: _showDatePicker,
+            child: Icon(Icons.date_range),
+          ),
+        ),
       ],
-    );
-    floatingActionButton:
-    FloatingActionButton(
-      onPressed: _showDatePicker,
-      tooltip: 'Show DatePicker',
-      child: Icon(Icons.date_range),
+
+      // Selected dat
     );
   }
 }
+
+// show title actions checkbox
+// Row(
+//   children: <Widget>[
+//     Text(
+//       'Show title actions',
+//       style: TextStyle(fontSize: 16.0),
+//     ),
+//     Checkbox(
+//       value: _showTitleActions,
+//       onChanged: (value) {
+//         setState(() {
+//           _showTitleActions = value;
+//         });
+//       },
+//     )
+//   ],
+// ),
+
+// Language input field
+// TextField(
+//   controller: _langCtrl,
+//   keyboardType: TextInputType.url,
+//   decoration: InputDecoration(
+//     labelText: 'Language',
+//     hintText: 'en / zh ...',
+//     hintStyle: TextStyle(color: Colors.black26),
+//   ),
+//   onChanged: (value) {
+//     _lang = value;
+//   },
+// ),
+
+// Formatter input field
+// TextField(
+//   controller: _formatCtrl,
+//   keyboardType: TextInputType.url,
+//   decoration: InputDecoration(
+//     labelText: 'Formatter',
+//     hintText: 'yyyy-mm-dd / yyyy-mmm-dd / yyyy-mmmm-dd',
+//     hintStyle: TextStyle(color: Colors.black26),
+//   ),
+//   onChanged: (value) {
+//     _format = value;
+//   },
+// ),

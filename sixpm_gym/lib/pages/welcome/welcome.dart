@@ -65,7 +65,7 @@ class _MyHomePageState extends State<WelcomePage> {
                               borderSide: BorderSide(color: Colors.blue))),
                       obscureText: true,
                     ),
-                    SizedBox(height: 5.0),
+                    SizedBox(height: 20.0),
                     Container(
                       alignment: Alignment(1.0, 0.0),
                       padding: EdgeInsets.only(top: 5.0, left: 20.0),
@@ -80,7 +80,7 @@ class _MyHomePageState extends State<WelcomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20.0),
+                    SizedBox(height: 40.0),
                     Container(
                       height: 40.0,
                       child: Material(
@@ -88,8 +88,10 @@ class _MyHomePageState extends State<WelcomePage> {
                         shadowColor: Colors.blueAccent,
                         color: Colors.blue,
                         elevation: 7.0,
-                        child: GestureDetector(
-                          onTap: () {},
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.of(context).pushNamed('/homepage');
+                          },
                           child: Center(
                             child: Text(
                               'LOGIN',
@@ -135,7 +137,7 @@ class _MyHomePageState extends State<WelcomePage> {
                     // )
                   ],
                 )),
-            SizedBox(height: 15.0),
+            SizedBox(height: 25.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -178,29 +180,6 @@ class _MyHomePageState extends State<WelcomePage> {
                 // )
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                // ANCHOR  Button for test easy navigation
-                ButtonBar(
-                    alignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      FlatButton(
-                        child: Text(
-                          'Home',
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/homepage');
-                        },
-                      )
-                    ]),
-              ],
-            )
           ],
         ));
   }

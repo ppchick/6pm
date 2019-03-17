@@ -96,7 +96,7 @@ class _SignupPageState extends State<SignupPage> {
                           shadowColor: Colors.blueAccent,
                           color: Colors.blue,
                           elevation: 7.0,
-                          child: GestureDetector(
+                          child: InkWell(
                             onTap: () {
                               print('[NEXT] Pressed');
                               Navigator.of(context).pushNamed('/signup2');
