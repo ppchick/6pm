@@ -13,6 +13,7 @@ class _InterestCheckboxWidgetState extends State<InterestCheckboxWidget> {
     'Burpees': false,
     'Yoga': false,
     'Aerobics': false,
+    'Boxing': false,
   };
 
   // bool flag = false;
@@ -23,7 +24,7 @@ class _InterestCheckboxWidgetState extends State<InterestCheckboxWidget> {
         child: new Column(
           children: interest_values.keys
               .map((key) => Container(
-                    height: 50.0,
+                    height: 45.0,
                     child: CheckboxListTile(
                       value: interest_values[key],
                       onChanged: (value) {

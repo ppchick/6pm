@@ -58,7 +58,7 @@ class _SignupPageState2 extends State<SignupPage2> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0.0, 5.0, 0, 0),
+                      padding: EdgeInsets.fromLTRB(0.0, 15.0, 0, 0),
                       child: Material(
                         elevation: 4.0,
                         shape: CircleBorder(),
@@ -78,7 +78,7 @@ class _SignupPageState2 extends State<SignupPage2> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
+                      padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -195,6 +195,35 @@ class _SignupPageState2 extends State<SignupPage2> {
                 ),
               ),
             ],
+          ),
+          SizedBox(
+            height: 15.0,
+          ),
+          Center(
+            child: Container(
+              height: 40.0,
+              width: 390.0,
+              child: Material(
+                borderRadius: BorderRadius.circular(20.0),
+                shadowColor: Colors.blueAccent,
+                color: Colors.blue,
+                elevation: 7.0,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/homepage');
+                  },
+                  child: Center(
+                    child: Text(
+                      'LOGIN',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Montserrat'),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ),
         ],
       ),
