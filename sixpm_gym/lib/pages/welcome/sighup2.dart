@@ -214,7 +214,7 @@ class _SignupPageState2 extends State<SignupPage2> {
                   },
                   child: Center(
                     child: Text(
-                      'LOGIN',
+                      'FINISH',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
