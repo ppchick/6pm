@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './session/session.dart';
+import './session/sessionMain.dart';
 import './gym/gym.dart';
 import './profile/profile.dart';
 
@@ -11,10 +11,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
+  int _currentIndex = 1;
   final List<Widget> _children = [
     gym_placeholder,
-    session_placeholder,
+    SessionHistory(),
     profile_placeholder,
   ];
 
@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
             new BottomNavigationBarItem(
                 icon: new Icon(Icons.map), title: new Text("gym")),
             new BottomNavigationBarItem(
-                icon: new Icon(Icons.home), title: new Text("home")),
+                icon: new Icon(Icons.home), title: new Text("session")),
             new BottomNavigationBarItem(
                 icon: new Icon(Icons.person), title: new Text("profile"))
           ],
