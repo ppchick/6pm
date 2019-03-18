@@ -101,7 +101,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
           ),
         ),
         Container(
-          padding: EdgeInsets.only(left: 30.0),
+          // padding: EdgeInsets.only(left: 30.0),
           child: IconButton(
             onPressed: _showDatePicker,
             icon: Icon(Icons.today),
@@ -159,4 +159,3 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
 //     _format = value;
 //   },
 // ),
-

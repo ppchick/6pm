@@ -23,7 +23,7 @@ class _StrengthCheckboxWidgetState extends State<StrengthCheckboxWidget> {
         child: new Column(
           children: strength_values.keys
               .map((key) => Container(
-                    height: 50.0,
+                    height: 45.0,
                     child: CheckboxListTile(
                       value: strength_values[key],
                       onChanged: (value) {
