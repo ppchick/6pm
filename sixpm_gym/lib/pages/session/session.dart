@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/placeholder.dart';
+import '../widgets/sessionWidget.dart';
 
-final PlaceholderWidget session_placeholder =
-    new PlaceholderWidget(Colors.indigo, 'Session Placeholder');
+final StatelessWidget session =
+    new SessionWidget();

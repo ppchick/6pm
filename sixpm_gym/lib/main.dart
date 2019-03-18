@@ -16,6 +16,8 @@ class MyApp extends StatelessWidget {
         '/signup': (BuildContext context) => new SignupPage(),
         '/homepage': (BuildContext context) => new HomePage(),
         '/signup2': (BuildContext context) => new SignupPage2(),
+        //'/createSession': (BuildContext context) => new createSessionPage(),
+        //'/joinSession': (BuildContext context) => new joinSessionPage(),
       },
       home: new WelcomePage(),
     );
