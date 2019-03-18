@@ -13,6 +13,7 @@ class _InterestCheckboxWidgetState extends State<InterestCheckboxWidget> {
     'Burpees': false,
     'Yoga': false,
     'Aerobics': false,
+    'Boxing': false,
   };
 
   // bool flag = false;
