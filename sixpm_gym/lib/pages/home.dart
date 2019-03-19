@@ -14,8 +14,13 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 1;
   final List<Widget> _children = [
     gym_placeholder,
+
+    session_placeholder,
+    profile_placeholder,
+
     SessionHistory(),
     MyProfile(),
+
   ];
 
   @override
