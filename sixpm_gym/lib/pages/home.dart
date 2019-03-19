@@ -15,7 +15,6 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _children = [
     gym_placeholder,
     session,
-    profile_placeholder,
     MyProfile(),
   ];
 
