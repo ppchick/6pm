@@ -15,30 +15,33 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _children = [
     GymPage(),
     SessionHistory(),
-    profile_placeholder,
+    MyProfile(),
   ];
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
-        appBar: AppBar(
-          title: Text('Home'),
-        ),
+      appBar: AppBar(
+        title: Text('Home'),
+        // elevation: 0.0,
+      ),
+      backgroundColor: Colors.white,
+      body: _children[_currentIndex],
+      bottomNavigationBar: new BottomNavigationBar(
         backgroundColor: Colors.white,
-        body: _children[_currentIndex],
-        bottomNavigationBar: new BottomNavigationBar(
-          currentIndex: _currentIndex,
-          onTap: onTabTapped,
-          items: [
-            new BottomNavigationBarItem(
-                icon: new Icon(Icons.map), title: new Text("gym")),
-            new BottomNavigationBarItem(
-                icon: new Icon(Icons.home), title: new Text("session")),
-            new BottomNavigationBarItem(
-                icon: new Icon(Icons.person), title: new Text("profile"))
-          ],
-        ));
+        currentIndex: _currentIndex,
+        onTap: onTabTapped,
+        items: [
+          new BottomNavigationBarItem(
+              icon: new Icon(Icons.map), title: new Text("gym")),
+          new BottomNavigationBarItem(
+              icon: new Icon(Icons.home), title: new Text("session")),
+          new BottomNavigationBarItem(
+              icon: new Icon(Icons.person), title: new Text("profile"))
+        ],
+      ),
+    );
   }
 
   void onTabTapped(int index) {
