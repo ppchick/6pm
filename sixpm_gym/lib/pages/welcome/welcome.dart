@@ -23,13 +23,13 @@ class _MyHomePageState extends State<WelcomePage> {
                             fontSize: 80.0, fontWeight: FontWeight.bold)),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(16.0, 175.0, 0.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(16.0, 155.0, 0.0, 0.0),
                     child: Text('There',
                         style: TextStyle(
                             fontSize: 80.0, fontWeight: FontWeight.bold)),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(220.0, 155.0, 0.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(225.0, 155.0, 0.0, 0.0),
                     child: Text('.',
                         style: TextStyle(
                             fontSize: 80.0,

@@ -67,7 +67,7 @@ class _SignupPageState2 extends State<SignupPage2> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0.0, 15.0, 0, 20.0),
+                      padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
                       child: Material(
                         elevation: 4.0,
                         shape: CircleBorder(),

@@ -18,7 +18,6 @@ class _HomePageState extends State<HomePage> {
     session,
     profile_placeholder,
     MyProfile(),
-
   ];
 
   @override
