@@ -3,6 +3,7 @@ import './session/sessionMain.dart';
 import './gym/gym.dart';
 import './profile/profile.dart';
 
+
 class HomePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -14,11 +15,8 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 1;
   final List<Widget> _children = [
     gym_placeholder,
-
-    session_placeholder,
+    session,
     profile_placeholder,
-
-    SessionHistory(),
     MyProfile(),
 
   ];
@@ -34,7 +32,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       body: _children[_currentIndex],
       bottomNavigationBar: new BottomNavigationBar(
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
         currentIndex: _currentIndex,
         onTap: onTabTapped,
         items: [

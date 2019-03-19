@@ -28,7 +28,6 @@ class MyApp extends StatelessWidget {
         '/createSession': (BuildContext context) => new CreateSession(),
         '/createSession2':(BuildContext context) => new CreateSession2(),
         '/sessionInfo':(BuildContext context) => new SessionInfo(),
-        //'/joinSession': (BuildContext context) => new joinSessionPage(),
         '/joinSession': (BuildContext context) => new JoinSessionPage(),
 
       },

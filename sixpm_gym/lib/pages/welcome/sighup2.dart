@@ -220,7 +220,8 @@ class _SignupPageState2 extends State<SignupPage2> {
                 elevation: 7.0,
                 child: InkWell(
                   onTap: () {
-                    Navigator.of(context).pushNamed('/homepage');
+                    Navigator.popUntil(context, ModalRoute.withName('/'));
+                    Navigator.pushNamed(context, '/homepage');
                   },
                   child: Center(
                     child: Text(
