@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './session/sessionMain.dart';
+import './widgets/sessionMain.dart';
 import './gym/gym.dart';
 import './profile/profile.dart';
 

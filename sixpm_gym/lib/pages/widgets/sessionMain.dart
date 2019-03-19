@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+final StatelessWidget session = new SessionWidget();
+
 class SessionWidget extends StatelessWidget {
   SessionWidget();
 
