@@ -17,7 +17,7 @@ class _MyHomePageState extends State<WelcomePage> {
               child: Stack(
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.fromLTRB(15.0, 100.0, 0.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(15.0, 90.0, 0.0, 0.0),
                     child: Text('Hello',
                         style: TextStyle(
                             fontSize: 80.0, fontWeight: FontWeight.bold)),
@@ -29,7 +29,7 @@ class _MyHomePageState extends State<WelcomePage> {
                             fontSize: 80.0, fontWeight: FontWeight.bold)),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(220.0, 175.0, 0.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(220.0, 155.0, 0.0, 0.0),
                     child: Text('.',
                         style: TextStyle(
                             fontSize: 80.0,
@@ -136,7 +136,7 @@ class _MyHomePageState extends State<WelcomePage> {
                     // )
                   ],
                 )),
-            SizedBox(height: 25.0),
+            SizedBox(height: 15.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
