@@ -48,7 +48,7 @@ class _SignupPageState2 extends State<SignupPage2> {
             height: 15.0,
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 20.0),
+            padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
             child: Card(
               color: Colors.white,
               child: Center(
@@ -58,7 +58,7 @@ class _SignupPageState2 extends State<SignupPage2> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0.0, 15.0, 0, 0),
+                      padding: EdgeInsets.fromLTRB(0.0, 15.0, 0, 20.0),
                       child: Material(
                         elevation: 4.0,
                         shape: CircleBorder(),
