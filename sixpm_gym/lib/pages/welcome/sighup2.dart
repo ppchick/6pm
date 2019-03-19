@@ -44,12 +44,11 @@ class _SignupPageState2 extends State<SignupPage2> {
               ],
             ),
           ),
-<<<<<<< HEAD
+
           SizedBox(
             height: 15.0,
           ),
-          Padding(
-=======
+          // Padding(
           // FIXME Layout for big and small screen device
           // SizedBox(
           //   height: 15.0,
@@ -58,7 +57,6 @@ class _SignupPageState2 extends State<SignupPage2> {
           //   child: ,
           // ),
           Container(
->>>>>>> 9f51db8d6918da2de808c7d8435e2b884435c185
             padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
             child: Card(
               color: Colors.white,

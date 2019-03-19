@@ -8,7 +8,6 @@ import 'pages/session/createSession.dart';
 import 'pages/session/createSession2.dart';
 import 'pages/session/sessionInfo.dart';
 import 'pages/home.dart';
-import 'pages/session/createSession.dart';
 import 'pages/session/joinSession.dart';
 
 void main() {
@@ -25,15 +24,13 @@ class MyApp extends StatelessWidget {
         '/signup': (BuildContext context) => new SignupPage(),
         '/homepage': (BuildContext context) => new HomePage(),
         '/signup2': (BuildContext context) => new SignupPage2(),
-<<<<<<< HEAD
+
         '/createSession': (BuildContext context) => new CreateSession(),
         '/createSession2':(BuildContext context) => new CreateSession2(),
         '/sessionInfo':(BuildContext context) => new SessionInfo(),
         //'/joinSession': (BuildContext context) => new joinSessionPage(),
-=======
-        '/createSession': (BuildContext context) => new CreateSessionPage(),
         '/joinSession': (BuildContext context) => new JoinSessionPage(),
->>>>>>> 9f51db8d6918da2de808c7d8435e2b884435c185
+
       },
       home: new WelcomePage(),
     );
