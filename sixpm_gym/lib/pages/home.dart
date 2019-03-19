@@ -29,7 +29,6 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       body: _children[_currentIndex],
       bottomNavigationBar: new BottomNavigationBar(
-        backgroundColor: Colors.white,
         currentIndex: _currentIndex,
         onTap: onTabTapped,
         items: [
