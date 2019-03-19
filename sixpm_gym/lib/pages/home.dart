@@ -13,7 +13,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 1;
   final List<Widget> _children = [
-    gym_placeholder,
+    GymPage(),
     SessionHistory(),
     profile_placeholder,
   ];
