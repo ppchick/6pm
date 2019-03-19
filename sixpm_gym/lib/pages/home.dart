@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './session/session.dart';
+import './session/sessionMain.dart';
 import './gym/gym.dart';
 import './profile/profile.dart';
 
@@ -14,31 +14,34 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 1;
   final List<Widget> _children = [
     gym_placeholder,
-    session,
-    profile_placeholder,
+    SessionHistory(),
+    MyProfile(),
   ];
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
-        appBar: AppBar(
-          title: Text('Home'),
-        ),
+      appBar: AppBar(
+        title: Text('Home'),
+        // elevation: 0.0,
+      ),
+      backgroundColor: Colors.white,
+      body: _children[_currentIndex],
+      bottomNavigationBar: new BottomNavigationBar(
         backgroundColor: Colors.white,
-        body: _children[_currentIndex],
-        bottomNavigationBar: new BottomNavigationBar(
-          currentIndex: _currentIndex,
-          onTap: onTabTapped,
-          items: [
-            new BottomNavigationBarItem(
-                icon: new Icon(Icons.map), title: new Text("gym")),
-            new BottomNavigationBarItem(
-                icon: new Icon(Icons.home), title: new Text("home")),
-            new BottomNavigationBarItem(
-                icon: new Icon(Icons.person), title: new Text("profile"))
-          ],
-        ));
+        currentIndex: _currentIndex,
+        onTap: onTabTapped,
+        items: [
+          new BottomNavigationBarItem(
+              icon: new Icon(Icons.map), title: new Text("gym")),
+          new BottomNavigationBarItem(
+              icon: new Icon(Icons.home), title: new Text("session")),
+          new BottomNavigationBarItem(
+              icon: new Icon(Icons.person), title: new Text("profile"))
+        ],
+      ),
+    );
   }
 
   void onTabTapped(int index) {
