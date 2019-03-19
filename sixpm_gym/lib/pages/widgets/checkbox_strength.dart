@@ -13,7 +13,7 @@ class _StrengthCheckboxWidgetState extends State<StrengthCheckboxWidget> {
     'Burpees': false,
     'Yoga': false,
     'Aerobics': false,
-    'Boxing': false,
+    // 'Boxing': false,
   };
 
   // bool flag = false;
