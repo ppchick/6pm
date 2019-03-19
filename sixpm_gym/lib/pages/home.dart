@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './session/sessionMain.dart';
+import './widgets/sessionMain.dart';
 import './gym/gym.dart';
 import './profile/profile.dart';
 
@@ -24,12 +24,22 @@ class _HomePageState extends State<HomePage> {
     return new Scaffold(
       appBar: AppBar(
         title: Text('Home'),
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          FlatButton(
+            textColor: Colors.white,
+            onPressed: () {
+              Navigator.popUntil(context, ModalRoute.withName('/'));
+            },
+            child: Text('Logout'),
+          ),
+        ],
         // elevation: 0.0,
       ),
       backgroundColor: Colors.white,
       body: _children[_currentIndex],
       bottomNavigationBar: new BottomNavigationBar(
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
         currentIndex: _currentIndex,
         onTap: onTabTapped,
         items: [
