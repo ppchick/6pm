@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import 'pages/welcome/signup.dart';
 import 'pages/welcome/welcome.dart';
@@ -7,7 +8,10 @@ import 'pages/home.dart';
 import 'pages/session/createSession.dart';
 import 'pages/session/joinSession.dart';
 
-void main() => runApp(new MyApp());
+void main() {
+  // debugPaintSizeEnabled = true;
+  runApp(new MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
