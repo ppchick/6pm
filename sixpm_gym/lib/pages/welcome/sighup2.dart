@@ -44,11 +44,15 @@ class _SignupPageState2 extends State<SignupPage2> {
               ],
             ),
           ),
-          SizedBox(
-            height: 15.0,
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 20.0),
+          // FIXME Layout for big and small screen device
+          // SizedBox(
+          //   height: 15.0,
+          // ),
+          // SingleChildScrollView(
+          //   child: ,
+          // ),
+          Container(
+            padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
             child: Card(
               color: Colors.white,
               child: Center(
@@ -196,6 +200,7 @@ class _SignupPageState2 extends State<SignupPage2> {
               ),
             ],
           ),
+          // FIXME Layout for big and small screen device
           SizedBox(
             height: 15.0,
           ),
@@ -214,7 +219,7 @@ class _SignupPageState2 extends State<SignupPage2> {
                   },
                   child: Center(
                     child: Text(
-                      'LOGIN',
+                      'FINISH',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
