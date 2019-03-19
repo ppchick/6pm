@@ -3,7 +3,6 @@ import './session/sessionMain.dart';
 import './gym/gym.dart';
 import './profile/profile.dart';
 
-
 class HomePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -26,6 +25,16 @@ class _HomePageState extends State<HomePage> {
     return new Scaffold(
       appBar: AppBar(
         title: Text('Home'),
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          FlatButton(
+            textColor: Colors.white,
+            onPressed: () {
+              Navigator.popUntil(context, ModalRoute.withName('/'));
+            },
+            child: Text('Logout'),
+          ),
+        ],
         // elevation: 0.0,
       ),
       backgroundColor: Colors.white,
