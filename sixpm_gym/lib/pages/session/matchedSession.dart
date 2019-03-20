@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class SessionInfo extends StatefulWidget {
+class MatchedSession extends StatefulWidget {
   @override
-  SessionInfoState createState() => new SessionInfoState();
+  MatchedSessionState createState() => new MatchedSessionState ();
 }
 
-class SessionInfoState extends State<SessionInfo> {
+class MatchedSessionState extends State<MatchedSession> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +19,7 @@ class SessionInfoState extends State<SessionInfo> {
                   new Icon(Icons.person, color: Colors.black, size: 100),
                   // SizedBox(width : 50),
                   new Icon(Icons.link, color: Colors.black, size: 80),
-                  new Icon(Icons.help, color: Colors.black, size: 100),
+                  new Icon(Icons.person, color: Colors.black, size: 100),
                 ],
               ),
             ),
@@ -32,17 +32,9 @@ class SessionInfoState extends State<SessionInfo> {
                     style:
                         TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height:30),
-
-                ],),
-                
-
-              ),
-              SizedBox(height: 100),
                   SizedBox(height: 30),
                   Card(
                     color: Colors.white,
-
                     child: Center(
                       child: Column(
                         children: <Widget>[
@@ -115,7 +107,7 @@ class SessionInfoState extends State<SessionInfo> {
                         },
                         child: Center(
                           child: Text(
-                            'CANCEL',
+                            'CANCEL SESSION',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -128,5 +120,9 @@ class SessionInfoState extends State<SessionInfo> {
                 ],
               ),
             ),
-        );
-}}
+          ],
+        ),
+      ),
+    );
+  }
+}
