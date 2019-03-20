@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/Placeholder.dart';
 import '../widgets/date_picker_session.dart';
 
 class CreateSession extends StatefulWidget {

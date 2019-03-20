@@ -67,7 +67,7 @@ class _SignupPageState2 extends State<SignupPage2> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0.0, 15.0, 0, 20.0),
+                      padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
                       child: Material(
                         elevation: 4.0,
                         shape: CircleBorder(),
@@ -220,7 +220,8 @@ class _SignupPageState2 extends State<SignupPage2> {
                 elevation: 7.0,
                 child: InkWell(
                   onTap: () {
-                    Navigator.of(context).pushNamed('/homepage');
+                    Navigator.popUntil(context, ModalRoute.withName('/'));
+                    Navigator.pushNamed(context, '/homepage');
                   },
                   child: Center(
                     child: Text(
