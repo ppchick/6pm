@@ -86,7 +86,7 @@ class SessionInfoState extends State<SessionInfo> {
                   child: InkWell(
                     onTap: () {
                       print('[NEXT] Pressed');
-                      Navigator.of(context).pushNamed('/signup2');
+                      // Navigator.of(context).pushNamed('/signup2');
                     },
                     child: Center(
                       child: Text(
