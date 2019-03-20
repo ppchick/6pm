@@ -37,7 +37,7 @@ class CreateSessionState2 extends State<CreateSession2> {
                     ),
                   ),
                   SessionfocusCheckbox(),
-                  SizedBox(height: 20),
+                  SizedBox(height: 10),
                 ],
               ),
             ),
@@ -93,7 +93,7 @@ class CreateSessionState2 extends State<CreateSession2> {
               child: Column(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.fromLTRB(15.0, 20.0, 50.0, 0.0),
+                padding: EdgeInsets.fromLTRB(15.0, 10.0, 50.0, 0.0),
                 child: Text(
                   'Do you prefer partner of the same gender?',
                   style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
@@ -103,7 +103,7 @@ class CreateSessionState2 extends State<CreateSession2> {
             ],
           )),
           Container(
-              padding: EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0),
+              padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
               child: Row(
                 children: <Widget>[
                   SizedBox(
@@ -138,7 +138,7 @@ class CreateSessionState2 extends State<CreateSession2> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20.0, width: 150),
+                  SizedBox(height: 10.0, width: 150),
                   Container(
                     // padding: EdgeInsets.only(top: 10.0, left: 0.0, right: 20.0),
                     height: 40.0,
