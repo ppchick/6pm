@@ -10,6 +10,8 @@ import 'pages/session/sessionInfo.dart';
 import 'pages/home.dart';
 import 'pages/session/joinSession.dart';
 import 'pages/session/sessionHistory.dart';
+import 'pages/session/matchedSession.dart';
+
 void main() {
   // debugPaintSizeEnabled = true;
   runApp(new MyApp());
@@ -29,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/createSession2':(BuildContext context) => new CreateSession2(),
         '/sessionInfo':(BuildContext context) => new SessionInfo(),
         '/joinSession': (BuildContext context) => new JoinSessionPage(),
+        '/matchedSession': (BuildContext context) => new MatchedSession(),
 
       },
       home: new WelcomePage(),
