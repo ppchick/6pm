@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1007999244616",
+    "firebase_url": "https://api-project-1007999244616.firebaseio.com",
+    "project_id": "api-project-1007999244616",
+    "storage_bucket": "api-project-1007999244616.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1007999244616:android:4bafa7f6e6207f58",
+        "android_client_info": {
+          "package_name": "com.example.sixpm_gym"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1007999244616-lf4h736tisl552o63d37f883fg31m6mu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACN7RAxbf8ptps_yqd3Ki0ZAj03OJDEFE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
