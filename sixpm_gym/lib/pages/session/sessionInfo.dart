@@ -115,7 +115,7 @@ class SessionInfoState extends State<SessionInfo> {
                         },
                         child: Center(
                           child: Text(
-                            'CANCEL',
+                            'CANCEL SESSION',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,

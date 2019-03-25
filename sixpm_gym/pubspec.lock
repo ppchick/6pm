@@ -28,11 +28,7 @@ packages:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "0.8.2+3"
-=======
     version: "0.9.7"
->>>>>>> 02bad023b3260d3dce32ff1b6741f1a2826b8d65
   collection:
     dependency: transitive
     description:
@@ -47,10 +43,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.2"
-<<<<<<< HEAD
-  firebase_core:
-    dependency: transitive
-=======
   firebase_auth:
     dependency: "direct main"
     description:
@@ -60,16 +52,11 @@ packages:
     version: "0.8.2"
   firebase_core:
     dependency: "direct main"
->>>>>>> 02bad023b3260d3dce32ff1b6741f1a2826b8d65
     description:
       name: firebase_core
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "0.2.5+1"
-=======
     version: "0.3.1+1"
->>>>>>> 02bad023b3260d3dce32ff1b6741f1a2826b8d65
   flutter:
     dependency: "direct main"
     description: flutter
@@ -121,7 +108,7 @@ packages:
       name: pedantic
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.0"
+    version: "1.4.0"
   quiver:
     dependency: transitive
     description:
@@ -140,7 +127,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.5"
+    version: "1.5.4"
   stack_trace:
     dependency: transitive
     description:
@@ -191,5 +178,5 @@ packages:
     source: hosted
     version: "2.0.8"
 sdks:
-  dart: ">=2.2.0 <3.0.0"
+  dart: ">=2.1.0 <3.0.0"
   flutter: ">=0.11.9 <2.0.0"
