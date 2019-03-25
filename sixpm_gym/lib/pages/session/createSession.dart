@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/date_picker_session.dart';
+import '../session/search_session_gym.dart';
+import 'global.dart' as globals;
 
 class CreateSession extends StatefulWidget {
   @override
@@ -84,6 +86,30 @@ class CreateSessionState extends State<CreateSession> {
                   ),
                 ),
                 Container(
+                    height: 40.0,
+                    width: 1000.0,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(10.0),
+                      // shadowColor: Colors.grey,
+                      color: Colors.white,
+                      elevation: 7.0,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).pushNamed('/searchSession');
+                        },
+                        child: Center(
+                          child: Text(
+                            globals.gymText,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Montserrat'),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                /*Container(
                   padding: EdgeInsets.only(top: 20.0, left: 40.0, right: 40.0),
                   child: TextField(
                     decoration: InputDecoration(
@@ -95,7 +121,8 @@ class CreateSessionState extends State<CreateSession> {
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.blue))),
                   ),
-                ),
+                ),*/
+                // SearchGym(),
               ],
             ),
           ),
@@ -241,6 +268,7 @@ class CreateSessionState extends State<CreateSession> {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
+                          globals.gymText = 'SEARCH FOR GYM';
                           Navigator.of(context).pushNamed('/createSession2');
                         },
                         child: Center(
