@@ -25,7 +25,7 @@ class JoinSessionState extends State<JoinSessionPage> {
             decoration: new BoxDecoration(
                 border: new Border(
                     right: new BorderSide(width: 1.0, color: Colors.white24))),
-            child: Icon(Icons.autorenew,
+            child: Icon(Icons.person,
                 color: Colors
                     .white), //NOTE PROFILE PIC OF USER WHO POSTED THE SESSION HERE
           ),
