@@ -14,6 +14,7 @@ class CreateSessionState extends State<CreateSession> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(children: <Widget>[
         Container(
           padding : EdgeInsets.fromLTRB(10.0,80.0,0.0,0.0),
