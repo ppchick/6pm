@@ -87,7 +87,7 @@ class _DatePickerSessionState extends State<DatePickerSession> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Date::',
+                'Date:',
                 style: TextStyle(fontSize: 20.0),
               ),
               Container(
