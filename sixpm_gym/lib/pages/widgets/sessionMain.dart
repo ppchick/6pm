@@ -207,7 +207,7 @@ class SessionWidget extends StatelessWidget {
                     ),
                   )
                 ],
-              )),
+              ),),
         ],
       ),
     );
@@ -231,6 +231,13 @@ List getSessionCards() {
         endTime: "11:00",
         focus: "Yoga",
         location: "Gymboxx"),
+    SessionCard(
+        name: "Name 3",
+        date: "22/03/2019",
+        startTime: "11:00",
+        endTime: "12:00",
+        focus: "Boxing",
+        location: "Gym A"),
     SessionCard(
         name: "Name 3",
         date: "22/03/2019",

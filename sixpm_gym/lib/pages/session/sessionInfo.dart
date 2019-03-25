@@ -32,9 +32,17 @@ class SessionInfoState extends State<SessionInfo> {
                     style:
                         TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                   ),
+                  SizedBox(height:30),
+
+                ],),
+                
+
+              ),
+              SizedBox(height: 100),
                   SizedBox(height: 30),
                   Card(
                     color: Colors.white,
+
                     child: Center(
                       child: Column(
                         children: <Widget>[
@@ -107,7 +115,7 @@ class SessionInfoState extends State<SessionInfo> {
                         },
                         child: Center(
                           child: Text(
-                            'CANCEL',
+                            'CANCEL SESSION',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -120,9 +128,5 @@ class SessionInfoState extends State<SessionInfo> {
                 ],
               ),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+        );
+}}

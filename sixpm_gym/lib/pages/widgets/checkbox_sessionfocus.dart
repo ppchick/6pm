@@ -65,14 +65,14 @@ class _SessionfocusCheckboxState extends State<SessionfocusCheckbox> {
                           onChanged: (value) {
                             if (flag == false) {
                               setState(() {
-                                focus_values[key] = value;
+                                focus_values1[key] = value;
                                 flag = true;
                               });
                             }
                             if (flag == true) {
                               if (value == false) {
                                 setState(() {
-                                  focus_values[key] = value;
+                                  focus_values1[key] = value;
                                   flag = false;
                                 });
                               }
