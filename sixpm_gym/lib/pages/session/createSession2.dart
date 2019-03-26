@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/radiobutton_sessionfocus.dart';
 import '../widgets/radiobutton_genderPreference.dart';
+import 'global.dart' as globals;
 
 class CreateSession2 extends StatefulWidget {
   @override
@@ -35,6 +36,7 @@ class CreateSessionState2 extends State<CreateSession2> {
             new FlatButton(
               child: new Text("Confirm"),
               onPressed: () {
+                globals.gymText ="SEARCH FOR GYM";
                 Navigator.popUntil(context, ModalRoute.withName('/homepage'));
               },
             ),

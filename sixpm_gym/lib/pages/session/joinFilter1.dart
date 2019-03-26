@@ -226,7 +226,8 @@ class JoinFilter1State extends State<JoinFilter1Page> {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          print('[Cancel] Pressed');
+                          print('[Go Back] Pressed');
+                          globals.gymText ="SEARCH FOR GYM";
                           Navigator.of(context).pop();
                         },
                         child: Center(

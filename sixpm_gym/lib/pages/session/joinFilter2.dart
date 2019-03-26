@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/radiobutton_sessionfocus.dart';
 import '../widgets/radiobutton_genderPreference.dart';
+import 'global.dart' as globals;
 
 class JoinFilter2Page extends StatefulWidget {
   @override
@@ -149,6 +150,7 @@ class JoinFilter2State extends State<JoinFilter2Page> {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
+                          globals.gymText ="SEARCH FOR GYM";
                           Navigator.popUntil(
                               context, ModalRoute.withName('/homepage'));
                         },

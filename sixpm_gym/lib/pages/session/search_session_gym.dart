@@ -75,7 +75,7 @@ class SearchSessionState extends State<SearchSession> {
           title: Text(filteredNames[index]),
           onTap: ()=>
           { _filter.text = filteredNames[index],
-            Navigator.of(context).pushNamed('/createSession')
+            Navigator.of(context).pop()
           } ,
         );
         },
