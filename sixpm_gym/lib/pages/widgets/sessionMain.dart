@@ -5,7 +5,7 @@ final StatelessWidget session = new SessionWidget();
 
 class SessionWidget extends StatelessWidget {
   SessionWidget();
-  List sessionCards = getSessionCards();
+  final List sessionCards = getSessionCards();
 
   @override
   Widget build(BuildContext context) {
@@ -191,7 +191,7 @@ class SessionWidget extends StatelessWidget {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          Navigator.of(context).pushNamed('/rateSession');
+                          Navigator.of(context).pushNamed('/joinSession');
                         },
                         child: Center(
                           child: Text(

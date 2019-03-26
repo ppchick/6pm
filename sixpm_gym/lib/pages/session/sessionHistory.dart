@@ -19,7 +19,7 @@ class _SessionHistoryState extends State<SessionHistory>{
         children: <Widget>[
           Container(
             padding: const EdgeInsets.fromLTRB(30, 20, 0, 0),
-            child: Text('Histroy',
+            child: Text('History',
               style:TextStyle(
                 fontSize: 35.0,
                 fontWeight: FontWeight.bold

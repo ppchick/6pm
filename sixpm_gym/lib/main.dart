@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import 'pages/welcome/signup.dart';
 import 'pages/welcome/welcome.dart';
@@ -9,6 +8,8 @@ import 'pages/session/createSession2.dart';
 import 'pages/session/sessionInfo.dart';
 import 'pages/home.dart';
 import 'pages/session/joinSession.dart';
+import 'pages/session/joinFilter1.dart';
+import 'pages/session/joinFilter2.dart';
 import 'pages/session/sessionHistory.dart';
 import 'pages/session/matchedSession.dart';
 import 'pages/session/search_session_gym.dart';
@@ -35,6 +36,8 @@ class MyApp extends StatelessWidget {
         '/createSession2':(BuildContext context) => new CreateSession2(),
         '/sessionInfo':(BuildContext context) => new SessionInfo(),
         '/joinSession': (BuildContext context) => new JoinSessionPage(),
+        '/joinFilter1': (BuildContext context) => new JoinFilter1Page(),
+        '/joinFilter2': (BuildContext context) => new JoinFilter2Page(),
         '/matchedSession': (BuildContext context) => new MatchedSession(),
         '/searchSession':(BuildContext context) => new SearchSession(),
 

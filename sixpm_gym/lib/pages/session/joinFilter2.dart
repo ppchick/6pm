@@ -2,52 +2,13 @@ import 'package:flutter/material.dart';
 import '../widgets/radiobutton_sessionfocus.dart';
 import '../widgets/radiobutton_genderPreference.dart';
 
-class CreateSession2 extends StatefulWidget {
+class JoinFilter2Page extends StatefulWidget {
   @override
-  CreateSessionState2 createState() => new CreateSessionState2();
+  JoinFilter2State createState() => new JoinFilter2State();
 }
 
-class CreateSessionState2 extends State<CreateSession2> {
+class JoinFilter2State extends State<JoinFilter2Page> {
   String _level = 'Newbie';
-  
-// user defined function
-  void _showDialog() {
-    // flutter defined function
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-          title: new Text("New Session Info"),
-          content: 
-             new Text("Time  \n"+"Gym  \n"+"Focus  \n"+"Level of experience  \n"),
-
-          actions: <Widget>[
-            // usually buttons at the bottom of the dialog
-            Container(
-              child:Row(children: <Widget>[
-                new FlatButton(
-              child: new Text("Back"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            new FlatButton(
-              child: new Text("Confirm"),
-              onPressed: () {
-                Navigator.popUntil(context, ModalRoute.withName('/homepage'));
-              },
-            ),
-
-              ],),
-            ),
-            
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +17,7 @@ class CreateSessionState2 extends State<CreateSession2> {
           Container(
             padding: EdgeInsets.fromLTRB(10.0, 80.0, 0.0, 0.0),
             child: Text(
-              'Create my own session!',
+              'Filter Results',
               style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
             ),
           ),
@@ -188,8 +149,8 @@ class CreateSessionState2 extends State<CreateSession2> {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          //Navigator.popUntil(context, ModalRoute.withName('/homepage'));
-                          _showDialog();
+                          Navigator.popUntil(
+                              context, ModalRoute.withName('/homepage'));
                         },
                         child: Center(
                           child: Text(

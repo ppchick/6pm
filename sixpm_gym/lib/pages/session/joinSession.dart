@@ -21,32 +21,79 @@ class JoinSessionState extends State<JoinSessionPage> {
           contentPadding:
               EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
           leading: Container(
-            padding: EdgeInsets.only(right: 12.0),
-            decoration: new BoxDecoration(
-                border: new Border(
-                    right: new BorderSide(width: 1.0, color: Colors.white24))),
-            child: Icon(Icons.person,
-                color: Colors
-                    .white), //NOTE PROFILE PIC OF USER WHO POSTED THE SESSION HERE
-          ),
-          title: Text(
-            sessionCard.date +
-                ", " +
-                sessionCard.startTime +
-                " - " +
-                sessionCard.endTime, 
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          subtitle: Row(
-            children: <Widget>[
-              Text(sessionCard.location + ", Focus: " + sessionCard.focus,
-                  style: TextStyle(
-                      color: Colors
-                          .white))
-            ],
-          ),
-          trailing:
-              Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
+              height: 80,
+              padding: EdgeInsets.only(left: 30.0, top: 5.0),
+              // decoration: new BoxDecoration(
+              //   border: new Border.all(color: Colors.black),
+              //   borderRadius: BorderRadius.circular(20.0),
+              // ),
+              child: Center(
+                  child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Icon(Icons.people, color: Colors.black, size: 70.0),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                            sessionCard.date +
+                                ', ' +
+                                sessionCard.startTime +
+                                ' - ' +
+                                sessionCard.endTime,
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold)),
+                        Container(
+                            child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                                height: 40.0,
+                                width: 110.0,
+                                color: Colors.transparent,
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.black,
+                                            style: BorderStyle.solid,
+                                            width: 1.0),
+                                        color: Colors.transparent,
+                                        borderRadius:
+                                            BorderRadius.circular(20.0)),
+                                    child: Center(
+                                      child: Text(sessionCard.location,
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold)),
+                                    ))),
+                            Container(
+                                height: 40.0,
+                                width: 110.0,
+                                color: Colors.transparent,
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.black,
+                                            style: BorderStyle.solid,
+                                            width: 1.0),
+                                        color: Colors.transparent,
+                                        borderRadius:
+                                            BorderRadius.circular(20.0)),
+                                    child: Center(
+                                      child: Text(sessionCard.focus,
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold)),
+                                    ))),
+                          ],
+                        ))
+                      ],
+                    ),
+                  )
+                ],
+              ))),
           onTap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => SessionInfo()));
@@ -57,7 +104,7 @@ class JoinSessionState extends State<JoinSessionPage> {
           elevation: 8.0,
           margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
           child: Container(
-            decoration: BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
+            decoration: BoxDecoration(color: Color.fromRGBO(255, 255, 255, 0)),
             child: makeListTile(sessionCard),
           ),
         );
@@ -89,7 +136,7 @@ class JoinSessionState extends State<JoinSessionPage> {
                 child: InkWell(
                   onTap: () {
                     print('[Join Filter] Pressed');
-                    //Navigator.of(context).pushNamed('/joinFilter');
+                    Navigator.of(context).pushNamed('/joinFilter1');
                   },
                   child: Center(
                     child: Text(

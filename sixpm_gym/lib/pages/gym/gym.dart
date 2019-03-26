@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/placeholder.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 
