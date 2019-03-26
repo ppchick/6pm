@@ -10,7 +10,7 @@ class CreateSession2 extends StatefulWidget {
 
 class CreateSessionState2 extends State<CreateSession2> {
   String _level = 'Newbie';
-  
+
 // user defined function
   void _showDialog() {
     // flutter defined function
@@ -20,30 +20,31 @@ class CreateSessionState2 extends State<CreateSession2> {
         // return object of type Dialog
         return AlertDialog(
           title: new Text("New Session Info"),
-          content: 
-             new Text("Time  \n"+"Gym  \n"+"Focus  \n"+"Level of experience  \n"),
-
+          content: new Text(
+              "Time  \n" + "Gym  \n" + "Focus  \n" + "Level of experience  \n"),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             Container(
-              child:Row(children: <Widget>[
-                new FlatButton(
-              child: new Text("Back"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+              child: Row(
+                children: <Widget>[
+                  new FlatButton(
+                    child: new Text("Back"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  new FlatButton(
+                    child: new Text("Confirm"),
+                    onPressed: () {
+                      //TODO ADD NEW SESSION TO DB
+                      globals.gymText = "SEARCH FOR GYM";
+                      Navigator.popUntil(
+                          context, ModalRoute.withName('/homepage'));
+                    },
+                  ),
+                ],
+              ),
             ),
-            new FlatButton(
-              child: new Text("Confirm"),
-              onPressed: () {
-                globals.gymText ="SEARCH FOR GYM";
-                Navigator.popUntil(context, ModalRoute.withName('/homepage'));
-              },
-            ),
-
-              ],),
-            ),
-            
           ],
         );
       },
@@ -71,7 +72,7 @@ class CreateSessionState2 extends State<CreateSession2> {
                   Container(
                     padding: EdgeInsets.fromLTRB(0.0, 10.0, 245.0, 0.0),
                     child: Text(
-                      'My Focus :',
+                      'My Focus:',
                       style: TextStyle(
                           fontSize: 25.0, fontWeight: FontWeight.bold),
                     ),

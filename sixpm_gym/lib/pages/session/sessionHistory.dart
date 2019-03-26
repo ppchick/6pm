@@ -11,7 +11,7 @@ class _SessionHistoryState extends State<SessionHistory> {
 
   @override
   void initState() {
-    sessionCards = getSessionCards();
+    sessionCards = getSessionCards(); //TODO GET DB DATA (MATCHED SESSIONS BY THIS USER THAT ARE COMPLETED ALREADY)
     super.initState();
   }
 
@@ -137,7 +137,7 @@ class _SessionHistoryState extends State<SessionHistory> {
   }
 }
 
-//TESTING DATA
+//NOTE TESTING DATA REMOVE AFTER LINKING DB
 List getSessionCards() {
   return [
     SessionCard(

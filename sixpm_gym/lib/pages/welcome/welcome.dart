@@ -86,7 +86,7 @@ class _MyHomePageState extends State<WelcomePage> {
                                         BorderSide(color: Colors.blue))),
                             obscureText: true,
                           ),
-                          Container(
+                          Container(                        //TODO IMPLEMENT OR REMOVE
                             alignment: Alignment(1.0, 0.0),
                             padding: EdgeInsets.only(top: 25.0, left: 20.0),
                             child: InkWell(

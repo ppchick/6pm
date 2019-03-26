@@ -33,7 +33,7 @@ class MatchedSessionState extends State<MatchedSession> {
                         TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 30),
-                  Card(
+                  Card(                         //TODO GET DB DATA (SESSION DETAILS)
                     color: Colors.white,
                     child: Center(
                       child: Column(
@@ -105,7 +105,7 @@ class MatchedSessionState extends State<MatchedSession> {
                       child: InkWell(
                         onTap: () {
                           print('[Cancel Session] Pressed');
-                          //TODO CANCEL SESSION
+                          //TODO IMPLEMENT CANCEL SESSION
                           Navigator.of(context).pop();  
                         },
                         child: Center(

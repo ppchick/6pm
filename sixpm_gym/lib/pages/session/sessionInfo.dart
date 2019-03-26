@@ -37,7 +37,7 @@ class SessionInfoState extends State<SessionInfo> {
               ),
             ),
             SizedBox(height: 30),
-            Card(
+            Card(               //TODO GET DB DATA (SESSION DETAILS)
               color: Colors.white,
               child: Center(
                 child: Column(
@@ -81,6 +81,7 @@ class SessionInfoState extends State<SessionInfo> {
                 elevation: 7.0,
                 child: InkWell(
                   onTap: () {
+                    //TODO IMPLEMENT JOIN SESSION
                     print('[Join Session] Pressed');
                     Navigator.popUntil(
                         context, ModalRoute.withName('/homepage'));

@@ -31,7 +31,7 @@ class JoinFilter2State extends State<JoinFilter2Page> {
                   Container(
                     padding: EdgeInsets.fromLTRB(0.0, 10.0, 245.0, 0.0),
                     child: Text(
-                      'My Focus :',
+                      'My Focus:',
                       style: TextStyle(
                           fontSize: 25.0, fontWeight: FontWeight.bold),
                     ),
@@ -150,6 +150,7 @@ class JoinFilter2State extends State<JoinFilter2Page> {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
+                          //TODO IMPLEMENT FILTER LOGIC
                           globals.gymText ="SEARCH FOR GYM";
                           Navigator.popUntil(
                               context, ModalRoute.withName('/homepage'));

@@ -12,7 +12,7 @@ class JoinSessionState extends State<JoinSessionPage> {
 
   @override
   void initState() {
-    sessionCards = getSessionCards();
+    sessionCards = getSessionCards(); //TODO GET DB DATA (ALL UNMATCHED SESSIONS)
     super.initState();
   }
 
@@ -165,7 +165,7 @@ class JoinSessionState extends State<JoinSessionPage> {
   }
 }
 
-//TESTING DATA
+//NOTE TESTING DATA REMOVE AFTER LINKING DB
 List getSessionCards() {
   return [
     SessionCard(
