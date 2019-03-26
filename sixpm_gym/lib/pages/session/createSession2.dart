@@ -10,6 +10,45 @@ class CreateSession2 extends StatefulWidget {
 
 class CreateSessionState2 extends State<CreateSession2> {
   String _level = 'Newbie';
+  
+// user defined function
+  void _showDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("New Session Info"),
+          content: 
+             new Text("Time  \n"+"Gym  \n"+"Focus  \n"+"Level of experience  \n"),
+
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            Container(
+              child:Row(children: <Widget>[
+                new FlatButton(
+              child: new Text("Back"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            new FlatButton(
+              child: new Text("Confirm"),
+              onPressed: () {
+                Navigator.popUntil(context, ModalRoute.withName('/homepage'));
+              },
+            ),
+
+              ],),
+            ),
+            
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,7 +189,8 @@ class CreateSessionState2 extends State<CreateSession2> {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          Navigator.popUntil(context, ModalRoute.withName('/homepage'));
+                          //Navigator.popUntil(context, ModalRoute.withName('/homepage'));
+                          _showDialog();
                         },
                         child: Center(
                           child: Text(
