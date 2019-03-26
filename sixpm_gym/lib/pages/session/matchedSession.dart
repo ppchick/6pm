@@ -103,7 +103,7 @@ class MatchedSessionState extends State<MatchedSession> {
                       child: InkWell(
                         onTap: () {
                           print('[Cancel] Pressed');
-                          Navigator.of(context).pop();
+                          // Navigator.of(context).pop();
                         },
                         child: Center(
                           child: Text(

@@ -191,7 +191,7 @@ class SessionWidget extends StatelessWidget {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          Navigator.of(context).pushNamed('/joinSession');
+                          Navigator.of(context).pushNamed('/rateSession');
                         },
                         child: Center(
                           child: Text(
