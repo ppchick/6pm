@@ -12,6 +12,8 @@ import 'pages/session/joinSession.dart';
 import 'pages/session/sessionHistory.dart';
 import 'pages/session/matchedSession.dart';
 import 'pages/session/search_session_gym.dart';
+import 'pages/session/rateSession.dart';
+
 
 void main() {
   // debugPaintSizeEnabled = true;
@@ -28,6 +30,7 @@ class MyApp extends StatelessWidget {
         '/homepage': (BuildContext context) => new HomePage(),
         '/signup2': (BuildContext context) => new SignupPage2(),
         '/sessionHistory': (BuildContext context) => new SessionHistory(),
+        '/rateSession': (BuildContext context) => new RateSession(),
         '/createSession': (BuildContext context) => new CreateSession(),
         '/createSession2':(BuildContext context) => new CreateSession2(),
         '/sessionInfo':(BuildContext context) => new SessionInfo(),
