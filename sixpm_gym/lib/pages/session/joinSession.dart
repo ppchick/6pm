@@ -121,7 +121,6 @@ class JoinSessionState extends State<JoinSessionPage> {
                       TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold)),
             ),
             SizedBox(height: 10.0),
-            // NOTE Filters Button
             Container(
               height: 40.0,
               color: Colors.transparent,
