@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grouped_buttons/grouped_buttons.dart';
+import '../session/global.dart' as globals;
 
 class GenderPrefrenceRadioButton extends StatefulWidget {
   @override
@@ -20,6 +21,12 @@ class _GenderPrefrenceRadioButtonState extends State<GenderPrefrenceRadioButton>
       margin: const EdgeInsets.only(left: 12.0),
       onSelected: (String selected) => setState(() {
             _picked = selected;
+            if(_picked == "YES"){
+              globals.sameGender = true;
+            }
+            else{
+              globals.sameGender = false;
+            }
           }),
       labels: <String>[
         "Yes",

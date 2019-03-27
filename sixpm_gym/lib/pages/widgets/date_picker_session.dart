@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
+import '../session/global.dart' as globals;
 
 class DatePickerSession extends StatefulWidget {
   DatePickerSession({Key key}) : super(key: key);
@@ -73,6 +74,7 @@ class _DatePickerSessionState extends State<DatePickerSession> {
       _month = month;
       _date = date;
       _datetime = '$year-$month-$date';
+      globals.datetime = _datetime;
     });
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grouped_buttons/grouped_buttons.dart';
+import '../session/global.dart' as globals;
 
 class SessionfocusRadioButton extends StatefulWidget {
   @override
@@ -25,6 +26,7 @@ class _SessionfocusRadioButtonState extends State<SessionfocusRadioButton> {
               padding: EdgeInsets.fromLTRB(0.0, 10.0, 120, 0.0),
               onSelected: (String selected) => setState(() {
                     _picked = selected;
+                    globals.focus = _picked;
                   }),
               labels: <String>[
                 "HIIT",

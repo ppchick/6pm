@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/date_picker_session.dart';
 import 'global.dart' as globals;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CreateSession extends StatefulWidget {
   @override
@@ -8,6 +9,7 @@ class CreateSession extends StatefulWidget {
 }
 
 class CreateSessionState extends State<CreateSession> {
+  
   String _startTime = '00:00';
   String _endTime = '00:00';
   List<String> time = [
@@ -59,6 +61,8 @@ class CreateSessionState extends State<CreateSession> {
     '23:00',
     '23:30',
   ];
+
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -172,6 +176,7 @@ class CreateSessionState extends State<CreateSession> {
                                   print('[Dropdown] changed to ' + item);
                                   setState(() {
                                     _startTime = item;
+                                    globals.startTime =_startTime;
                                   });
                                 },
                               ),
@@ -206,6 +211,7 @@ class CreateSessionState extends State<CreateSession> {
                                   print('[Dropdown] changed to ' + item);
                                   setState(() {
                                     _endTime = item;
+                                    globals.endTime = _endTime;
                                   });
                                 },
                               ),
@@ -239,7 +245,7 @@ class CreateSessionState extends State<CreateSession> {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          print('[Go Back] Pressed');
+                          // print('[Go Back] Pressed');
                           globals.gymText ="SEARCH FOR GYM";
                           Navigator.of(context).pop();
                         },
@@ -267,7 +273,6 @@ class CreateSessionState extends State<CreateSession> {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          globals.gymText = 'SEARCH FOR GYM';
                           Navigator.of(context).pushNamed('/createSession2');
                         },
                         child: Center(

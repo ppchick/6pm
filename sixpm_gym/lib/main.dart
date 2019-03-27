@@ -16,6 +16,7 @@ import 'pages/session/search_session_gym.dart';
 import 'pages/session/rateSession.dart';
 
 
+
 void main() {
   // debugPaintSizeEnabled = true;
   runApp(new MyApp());
