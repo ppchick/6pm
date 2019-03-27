@@ -1,6 +1,6 @@
 library session.global;
 
-int idNum = 0;
+int idNum = 1;
 String gymText = "SEARCH FOR GYM";
 String startTime = '00:00';
 String endTime = '00:00';
