@@ -6,14 +6,14 @@ class SessionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('UnmatchedSession').snapshots(),
+      stream: Firestore.instance.collection('UnmatchedSession').snapshots(),    //get collection
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
-        switch (snapshot.connectionState) {
+        if (snapshot.hasError) return new Text('Error: ${snapshot.error}');     //error checking
+        switch (snapshot.connectionState) {                                     //if takes too long to load, display "loading"
           case ConnectionState.waiting:
             return new Text('Loading...');
           default:
-            final int sessionCount = snapshot.data.documents.length;
+            final int sessionCount = snapshot.data.documents.length;            //get number of documents in collection
             return ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
@@ -115,7 +115,7 @@ class SessionList extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      SessionInfo(document: document)));
+                                      SessionInfo(document: document))); //Sends current session document to sessionInfo page
                         },
                       ),
                     ));
@@ -177,7 +177,7 @@ class JoinSessionPage extends StatelessWidget {
                       TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
             ),
             new Expanded(
-              child: SessionList(),
+              child: SessionList(), //Load sessions from DB
             )
           ],
         ));

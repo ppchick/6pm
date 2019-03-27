@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SessionInfo extends StatelessWidget {
-  SessionInfo({this.document});
+  SessionInfo({this.document});                 //constructor receives session document from joinSession
   final DocumentSnapshot document;
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,6 @@ class SessionInfo extends StatelessWidget {
               child: Row(
                 children: <Widget>[
                   new Icon(Icons.person, color: Colors.black, size: 100),
-                  // SizedBox(width : 50),
                   new Icon(Icons.link, color: Colors.black, size: 80),
                   new Icon(Icons.help, color: Colors.black, size: 100),
                 ],
