@@ -11,7 +11,7 @@ class CreateSession2 extends StatefulWidget {
 
 class CreateSessionState2 extends State<CreateSession2> {
   String _level = 'Newbie';
-  final CollectionReference doc = Firestore.instance.collection('UnmatchedSession');
+  DocumentReference doc = Firestore.instance.document('UnmatchedSession/session');
 // user defined function
   void _showDialog() {
     // flutter defined function
@@ -53,7 +53,8 @@ class CreateSessionState2 extends State<CreateSession2> {
     );
   }
     void add(){
-      globals.idNum  = globals.idNum +1;
+      String idNum = globals.idNum.toString();
+    doc = Firestore.instance.document('UnmatchedSession/session$idNum'); 
     Map<String,Object> data = <String,Object>{
       'ID':globals.idNum,
       'location':globals.gymText,
@@ -65,8 +66,9 @@ class CreateSessionState2 extends State<CreateSession2> {
       'sameGender':globals.sameGender,
       'isMatched':false,
     };
+    globals.idNum  = globals.idNum +1;
 
-    doc.add(data).whenComplete((){
+    doc.setData(data).whenComplete((){
       print("data added");
 
     }).catchError((e)=>print(e));
