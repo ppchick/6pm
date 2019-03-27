@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class SessionInfo extends StatefulWidget {
-  @override
-  SessionInfoState createState() => new SessionInfoState();
-}
-
-class SessionInfoState extends State<SessionInfo> {
+class SessionInfo extends StatelessWidget {
+  SessionInfo({this.document});
+  final DocumentSnapshot document;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,32 +35,33 @@ class SessionInfoState extends State<SessionInfo> {
               ),
             ),
             SizedBox(height: 30),
-            Card(               //TODO GET DB DATA (SESSION DETAILS)
+            Card(               
               color: Colors.white,
               child: Center(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     SizedBox(height: 30),
                     Text(
-                      'Time:         ',
+                      'Time: ' + document['startTime'] + ' - ' + document['endTime'],
                       style: TextStyle(
                           fontSize: 20.0, fontWeight: FontWeight.normal),
                     ),
                     SizedBox(height: 10),
                     Text(
-                      'Gym:      ',
+                      'Location: ' + document['location'],
                       style: TextStyle(
                           fontSize: 20.0, fontWeight: FontWeight.normal),
                     ),
                     SizedBox(height: 10),
                     Text(
-                      'Focus:       ',
+                      'Focus: ' + document['focus'],
                       style: TextStyle(
                           fontSize: 20.0, fontWeight: FontWeight.normal),
                     ),
                     SizedBox(height: 10),
                     Text(
-                      'Level of experience:   ',
+                      'Level of experience: ' + document['level'],
                       style: TextStyle(
                           fontSize: 20.0, fontWeight: FontWeight.normal),
                     ),

@@ -114,7 +114,7 @@ class SessionList extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SessionInfo()));
+                                  builder: (context) => SessionInfo(document: document)));
                         },
                       ),
                     ));
