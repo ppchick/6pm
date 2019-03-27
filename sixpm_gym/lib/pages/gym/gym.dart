@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/placeholder.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
-
-final PlaceholderWidget gym_placeholder =
-    new PlaceholderWidget(Colors.pink, 'Gym Placeholder');
 
 class GymPage extends StatefulWidget {
   @override

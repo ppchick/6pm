@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'SessionCard.dart';
-import 'sessionInfo.dart';
 
-class JoinSessionPage extends StatefulWidget {
+class SessionHistory extends StatefulWidget {
   @override
-  JoinSessionState createState() => JoinSessionState();
+  _SessionHistoryState createState() => _SessionHistoryState();
 }
 
-class JoinSessionState extends State<JoinSessionPage> {
+class _SessionHistoryState extends State<SessionHistory> {
   List sessionCards;
 
   @override
   void initState() {
-    sessionCards = getSessionCards(); //TODO GET DB DATA (ALL UNMATCHED SESSIONS)
+    sessionCards = getSessionCards(); //TODO GET DB DATA (MATCHED SESSIONS BY THIS USER THAT ARE COMPLETED ALREADY)
     super.initState();
   }
 
@@ -95,8 +94,7 @@ class JoinSessionState extends State<JoinSessionPage> {
                 ],
               ))),
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => SessionInfo()));
+            Navigator.of(context).pushNamed('/matchedSession');
           },
         );
 
@@ -110,45 +108,19 @@ class JoinSessionState extends State<JoinSessionPage> {
         );
 
     return new Scaffold(
+        appBar: AppBar(
+          title: Text('Back'),
+          // elevation: 0.0,
+        ),
         resizeToAvoidBottomPadding: false,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              padding: EdgeInsets.fromLTRB(60.0, 50.0, 0.0, 0.0),
-              child: Text('Join A Session!',
-                  style:
-                      TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold)),
-            ),
-            SizedBox(height: 10.0),
-            Container(
-              height: 40.0,
-              color: Colors.transparent,
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Colors.black,
-                        style: BorderStyle.solid,
-                        width: 1.0),
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(20.0)),
-                child: InkWell(
-                  onTap: () {
-                    print('[Join Filter] Pressed');
-                    Navigator.of(context).pushNamed('/joinFilter1');
-                  },
-                  child: Center(
-                    child: Text(
-                      'Filter Results',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Montserrat',
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+                padding: const EdgeInsets.fromLTRB(30, 20, 0, 0),
+                child: Text('History',
+                    style: TextStyle(
+                        fontSize: 35.0, fontWeight: FontWeight.bold))),
             SizedBox(height: 10.0),
             new Expanded(
               child: ListView.builder(

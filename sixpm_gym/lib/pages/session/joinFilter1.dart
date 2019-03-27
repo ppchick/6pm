@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import '../widgets/date_picker_session.dart';
 import 'global.dart' as globals;
 
-class CreateSession extends StatefulWidget {
+class JoinFilter1Page extends StatefulWidget {
   @override
-  CreateSessionState createState() => new CreateSessionState();
+  JoinFilter1State createState() => new JoinFilter1State();
 }
 
-class CreateSessionState extends State<CreateSession> {
+class JoinFilter1State extends State<JoinFilter1Page> {
   String _startTime = '00:00';
   String _endTime = '00:00';
   List<String> time = [
@@ -59,6 +59,7 @@ class CreateSessionState extends State<CreateSession> {
     '23:00',
     '23:30',
   ];
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -68,7 +69,7 @@ class CreateSessionState extends State<CreateSession> {
           Container(
             padding: EdgeInsets.fromLTRB(10.0, 80.0, 0.0, 0.0),
             child: Text(
-              'Create my own session!',
+              'Filter Results',
               style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
             ),
           ),
@@ -107,20 +108,6 @@ class CreateSessionState extends State<CreateSession> {
                       ),
                     ),
                   ),
-                /*Container(
-                  padding: EdgeInsets.only(top: 20.0, left: 40.0, right: 40.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        labelText: 'Search For Gym',
-                        labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.blue))),
-                  ),
-                ),*/
-                // SearchGym(),
               ],
             ),
           ),
@@ -267,8 +254,7 @@ class CreateSessionState extends State<CreateSession> {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          globals.gymText = 'SEARCH FOR GYM';
-                          Navigator.of(context).pushNamed('/createSession2');
+                          Navigator.of(context).pushNamed('/joinFilter2');
                         },
                         child: Center(
                           child: Text(
@@ -289,3 +275,4 @@ class CreateSessionState extends State<CreateSession> {
     );
   }
 }
+
