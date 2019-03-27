@@ -21,7 +21,7 @@ class _GenderPrefrenceRadioButtonState extends State<GenderPrefrenceRadioButton>
       margin: const EdgeInsets.only(left: 12.0),
       onSelected: (String selected) => setState(() {
             _picked = selected;
-            if(_picked == "YES"){
+            if(_picked == "Yes"){
               globals.sameGender = true;
             }
             else{

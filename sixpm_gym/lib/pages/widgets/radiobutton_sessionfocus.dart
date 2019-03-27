@@ -50,6 +50,7 @@ class _SessionfocusRadioButtonState extends State<SessionfocusRadioButton> {
               orientation: GroupedButtonsOrientation.VERTICAL,
               onSelected: (String selected) => setState(() {
                     _picked = selected;
+                    globals.focus = _picked;
                   }),
               labels: <String>[
                 "Burpees",
