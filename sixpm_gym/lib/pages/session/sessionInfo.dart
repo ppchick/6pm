@@ -35,7 +35,7 @@ class SessionInfo extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30),
-            Card(               
+            Card(
               color: Colors.white,
               child: Center(
                 child: Column(
@@ -43,7 +43,10 @@ class SessionInfo extends StatelessWidget {
                   children: <Widget>[
                     SizedBox(height: 30),
                     Text(
-                      'Time: ' + document['startTime'] + ' - ' + document['endTime'],
+                      'Time: ' +
+                          document['startTime'] +
+                          ' - ' +
+                          document['endTime'],
                       style: TextStyle(
                           fontSize: 20.0, fontWeight: FontWeight.normal),
                     ),
