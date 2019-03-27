@@ -5,7 +5,7 @@ final StatelessWidget session = new SessionWidget();
 
 class SessionWidget extends StatelessWidget {
   SessionWidget();
-  List sessionCards = getSessionCards();
+  final List sessionCards = getSessionCards(); //TODO GET DB DATA (MATCHED SESSIONS BELONGING TO THIS USER)
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +104,7 @@ class SessionWidget extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(100.0, 20.0, 0.0, 10.0),
               child: Row(children: [
                 Icon(Icons.cloud, color: Colors.black),
-                Text('  Good evening xxx!',
+                Text('  Good evening xxx!',   //TODO ENTER USER NAME HERE
                     style:
                         TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold))
               ])),
@@ -131,7 +131,7 @@ class SessionWidget extends StatelessWidget {
                               style: TextStyle(fontSize: 20.0))),
                       Container(
                           alignment: Alignment(0.0, -0.8),
-                          child: Text('30 HOURS',
+                          child: Text('30 HOURS', //TODO sumHours HERE
                               style: TextStyle(
                                   fontSize: 40.0, fontWeight: FontWeight.bold)))
                     ],
@@ -191,7 +191,7 @@ class SessionWidget extends StatelessWidget {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          Navigator.of(context).pushNamed('/rateSession');
+                          Navigator.of(context).pushNamed('/joinSession');
                         },
                         child: Center(
                           child: Text(
@@ -247,107 +247,3 @@ List getSessionCards() {
         location: "Gym A"),
   ];
 }
-
-//   Widget build(BuildContext context) {
-//     return new Scaffold(
-//         resizeToAvoidBottomPadding: false,
-//         body: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: <Widget>[
-//             Container(
-//               height: 30.0,
-//               padding: EdgeInsets.fromLTRB(65.0, 30.0, 0.0, 0.0),
-//               child: Text(
-//                 'Good Afternoon!',
-//                 style: TextStyle(
-//                     color: Colors.black,
-//                     fontSize: 30,
-//                     fontWeight: FontWeight.bold,
-//                     fontFamily: 'Montserrat'),
-//               ),
-//             ),
-//             Container(
-//               height: 30.0,
-//               padding: EdgeInsets.only(left: 20.0, top: 50.0),
-//               child: Text(
-//                 'You have exercised with us for X hours.',
-//                 style: TextStyle(
-//                     color: Colors.black,
-//                     fontSize: 18,
-//                     fontWeight: FontWeight.bold,
-//                     fontFamily: 'Montserrat'),
-//               ),
-//             ),
-//             SizedBox(
-//                 height:
-//                     450.0), //NOTE Replace this with list of current sessions
-//             Row(
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               children: <Widget>[
-//                 // NOTE Create Session Button
-//                 Container(
-//                   height: 40.0,
-//                   width: 180.0,
-//                   color: Colors.transparent,
-//                   child: Container(
-//                     decoration: BoxDecoration(
-//                         border: Border.all(
-//                             color: Colors.black,
-//                             style: BorderStyle.solid,
-//                             width: 1.0),
-//                         color: Colors.transparent,
-//                         borderRadius: BorderRadius.circular(20.0)),
-//                     child: InkWell(
-//                       onTap: () {
-//                         print('[Create Session] Pressed');
-//                         Navigator.of(context).pushNamed('/createSession');
-//                       },
-//                       child: Center(
-//                         child: Text(
-//                           'Create Session',
-//                           style: TextStyle(
-//                             fontWeight: FontWeight.bold,
-//                             fontFamily: 'Montserrat',
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//                 SizedBox(width: 10.0),
-//                 // NOTE Join Session Button
-//                 Container(
-//                   height: 40.0,
-//                   width: 180.0,
-//                   color: Colors.transparent,
-//                   child: Container(
-//                     decoration: BoxDecoration(
-//                         border: Border.all(
-//                             color: Colors.black,
-//                             style: BorderStyle.solid,
-//                             width: 1.0),
-//                         color: Colors.transparent,
-//                         borderRadius: BorderRadius.circular(20.0)),
-//                     child: InkWell(
-//                       onTap: () {
-//                         print('[Join Session] Pressed');
-//                         Navigator.of(context).pushNamed('/joinSession');
-//                       },
-//                       child: Center(
-//                         child: Text(
-//                           'Join Session',
-//                           style: TextStyle(
-//                             fontWeight: FontWeight.bold,
-//                             fontFamily: 'Montserrat',
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ],
-//         ));
-//   }
-// }

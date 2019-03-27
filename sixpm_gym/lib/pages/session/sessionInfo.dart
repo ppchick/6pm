@@ -32,101 +32,100 @@ class SessionInfoState extends State<SessionInfo> {
                     style:
                         TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height:30),
-
-                ],),
-                
-
-              ),
-              SizedBox(height: 100),
                   SizedBox(height: 30),
-                  Card(
-                    color: Colors.white,
-
-                    child: Center(
-                      child: Column(
-                        children: <Widget>[
-                          SizedBox(height: 30),
-                          Text(
-                            'Time:         ',
-                            style: TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.normal),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            'Gym:      ',
-                            style: TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.normal),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            'Focus:       ',
-                            style: TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.normal),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            'Level of experience:   ',
-                            style: TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.normal),
-                          ),
-                          SizedBox(height: 30),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 60),
-                  Container(
-                    height: 40.0,
-                    child: Material(
-                      borderRadius: BorderRadius.circular(20.0),
-                      shadowColor: Colors.blueAccent,
-                      color: Colors.blue,
-                      elevation: 7.0,
-                      child: InkWell(
-                        onTap: () {
-                          print('[Join Session] Pressed');
-                          Navigator.popUntil(context, ModalRoute.withName('/homepage'));
-                        },
-                        child: Center(
-                          child: Text(
-                            'Join Session',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Montserrat'),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 30),
-                  Container(
-                    height: 40.0,
-                    child: Material(
-                      borderRadius: BorderRadius.circular(20.0),
-                      shadowColor: Colors.grey,
-                      color: Colors.white,
-                      elevation: 7.0,
-                      child: InkWell(
-                        onTap: () {
-                          print('[Cancel] Pressed');
-                          Navigator.of(context).pop();
-                        },
-                        child: Center(
-                          child: Text(
-                            'CANCEL SESSION',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Montserrat'),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
-        );
-}}
+            SizedBox(height: 30),
+            Card(               //TODO GET DB DATA (SESSION DETAILS)
+              color: Colors.white,
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: 30),
+                    Text(
+                      'Time:         ',
+                      style: TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.normal),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Gym:      ',
+                      style: TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.normal),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Focus:       ',
+                      style: TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.normal),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Level of experience:   ',
+                      style: TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.normal),
+                    ),
+                    SizedBox(height: 30),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 60),
+            Container(
+              height: 40.0,
+              child: Material(
+                borderRadius: BorderRadius.circular(20.0),
+                shadowColor: Colors.blueAccent,
+                color: Colors.blue,
+                elevation: 7.0,
+                child: InkWell(
+                  onTap: () {
+                    //TODO IMPLEMENT JOIN SESSION
+                    print('[Join Session] Pressed');
+                    Navigator.popUntil(
+                        context, ModalRoute.withName('/homepage'));
+                  },
+                  child: Center(
+                    child: Text(
+                      'Join Session',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Montserrat'),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 30),
+            Container(
+              height: 40.0,
+              child: Material(
+                borderRadius: BorderRadius.circular(20.0),
+                shadowColor: Colors.grey,
+                color: Colors.white,
+                elevation: 7.0,
+                child: InkWell(
+                  onTap: () {
+                    print('[Go Back] Pressed');
+                    Navigator.of(context).pop();
+                  },
+                  child: Center(
+                    child: Text(
+                      'Go Back',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Montserrat'),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

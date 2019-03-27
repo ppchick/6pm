@@ -116,7 +116,9 @@ class _RateSessionState extends State<RateSession>{
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          Navigator.of(context).pushNamed('/homepage');
+                          //TODO UPDATE DB WITH RATE ETC
+                          Navigator.popUntil(
+                        context, ModalRoute.withName('/homepage'));
                         },
                         child: Center(
                           child: Text(

@@ -28,12 +28,12 @@ class MatchedSessionState extends State<MatchedSession> {
               child: Column(
                 children: <Widget>[
                   Text(
-                    'Waiting for someone to join...',
+                    'Your Upcoming Session Details:',
                     style:
                         TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 30),
-                  Card(
+                  Card(                         //TODO GET DB DATA (SESSION DETAILS)
                     color: Colors.white,
                     child: Center(
                       child: Column(
@@ -77,12 +77,14 @@ class MatchedSessionState extends State<MatchedSession> {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          print('[Join Session] Pressed');
-                          Navigator.popUntil(context, ModalRoute.withName('/homepage'));
+                          print('[Check In] Pressed');
+                          Navigator.of(context).pushNamed('/rateSession'); //NOTE TEMP
+                          //TODO CHECK IN PAGE
+                          //Navigator.pushNamed('/checkIn');
                         },
                         child: Center(
                           child: Text(
-                            'Join Session',
+                            'Check In',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -102,14 +104,15 @@ class MatchedSessionState extends State<MatchedSession> {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          print('[Cancel] Pressed');
-                          // Navigator.of(context).pop();
+                          print('[Cancel Session] Pressed');
+                          //TODO IMPLEMENT CANCEL SESSION
+                          Navigator.of(context).pop();  
                         },
                         child: Center(
                           child: Text(
                             'CANCEL SESSION',
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.red,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'Montserrat'),
                           ),
