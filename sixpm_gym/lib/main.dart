@@ -14,15 +14,15 @@ import 'pages/session/sessionHistory.dart';
 import 'pages/session/matchedSession.dart';
 import 'pages/session/search_session_gym.dart';
 import 'pages/session/rateSession.dart';
-
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() {
-  // debugPaintSizeEnabled = true;
   runApp(new MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  MyApp({this.firestore});
+  final Firestore firestore;
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -34,14 +34,13 @@ class MyApp extends StatelessWidget {
         '/sessionHistory': (BuildContext context) => new SessionHistory(),
         '/rateSession': (BuildContext context) => new RateSession(),
         '/createSession': (BuildContext context) => new CreateSession(),
-        '/createSession2':(BuildContext context) => new CreateSession2(),
-        '/sessionInfo':(BuildContext context) => new SessionInfo(),
+        '/createSession2': (BuildContext context) => new CreateSession2(),
+        '/sessionInfo': (BuildContext context) => new SessionInfo(),
         '/joinSession': (BuildContext context) => new JoinSessionPage(),
         '/joinFilter1': (BuildContext context) => new JoinFilter1Page(),
         '/joinFilter2': (BuildContext context) => new JoinFilter2Page(),
         '/matchedSession': (BuildContext context) => new MatchedSession(),
-        '/searchSession':(BuildContext context) => new SearchSession(),
-
+        '/searchSession': (BuildContext context) => new SearchSession(),
       },
       home: new WelcomePage(),
     );

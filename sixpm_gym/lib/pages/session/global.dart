@@ -6,5 +6,5 @@ String startTime = '00:00';
 String endTime = '00:00';
 String datetime = '';
 String level = 'Newbie';
-String focus = 'HITT';
+String focus = 'HIIT';
 bool sameGender = true;

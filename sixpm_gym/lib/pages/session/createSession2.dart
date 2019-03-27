@@ -58,7 +58,7 @@ class CreateSessionState2 extends State<CreateSession2> {
     Map<String,Object> data = <String,Object>{
       'ID':globals.idNum,
       'location':globals.gymText,
-      'starTime':globals.startTime,
+      'startTime':globals.startTime,
       'endTime':globals.endTime,
       'date':globals.datetime,
       'focus':globals.focus,
