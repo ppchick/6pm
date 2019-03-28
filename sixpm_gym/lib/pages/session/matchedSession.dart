@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class MatchedSession extends StatefulWidget {
-  @override
-  MatchedSessionState createState() => new MatchedSessionState ();
-}
 
-class MatchedSessionState extends State<MatchedSession> {
+class MatchedSession extends StatelessWidget {
+  MatchedSession(
+      {this.document}); //constructor receives session document from joinSession
+  final DocumentSnapshot document;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -30,14 +30,21 @@ class SessionInfo extends StatelessWidget {
                   style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                 ),
           ),
-          SizedBox(height: 30),
+          SizedBox(height: 10),
           Card(
             color: Colors.white,
             child: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  SizedBox(height: 30),
+                  SizedBox(height: 20),
+                  Text(
+                    'Date: ' +
+                        document['date'],
+                    style: TextStyle(
+                        fontSize: 20.0, fontWeight: FontWeight.normal),
+                  ),
+                  SizedBox(height: 10),
                   Text(
                     'Time: ' +
                         document['startTime'] +
@@ -64,12 +71,18 @@ class SessionInfo extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 20.0, fontWeight: FontWeight.normal),
                   ),
-                  SizedBox(height: 30),
+                  SizedBox(height: 10),
+                  Text(
+                    'Gender: ' + document['userGender'],
+                    style: TextStyle(
+                        fontSize: 20.0, fontWeight: FontWeight.normal),
+                  ),
+                  SizedBox(height: 20),
                 ],
               ),
             ),
           ),
-          SizedBox(height: 30),
+          SizedBox(height: 20),
           Container(
         height: 40.0,
         child: Material(
@@ -95,7 +108,7 @@ class SessionInfo extends StatelessWidget {
           ),
         ),
       ),
-          SizedBox(height: 30),
+          SizedBox(height: 10),
           Container(
             height: 40.0,
             child: Material(

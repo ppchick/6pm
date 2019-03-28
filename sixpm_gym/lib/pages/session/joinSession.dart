@@ -12,13 +12,11 @@ class SessionListState extends State<SessionList> {
   CollectionReference col = Firestore.instance.collection('UnmatchedSession');
   String _gender = '';
 
-  Future getCurrentGender() async {
-    await Firestore.instance //Get current user gender
+  Future getCurrentGender() async{
+    DocumentReference document = Firestore.instance //Get current user gender
         .collection('Profile')
-        .where('userID', isEqualTo: globalUID.uid)
-        .getDocuments()
-        .then((doc) {
-      DocumentSnapshot profile = doc.documents[0];
+        .document(globalUID.uid);
+    document.get().then((profile) {
       setState(() {
         _gender = profile['gender'];
       });
@@ -39,17 +37,20 @@ class SessionListState extends State<SessionList> {
     Query sameGender = notMatched.where('sameGender', isEqualTo: true);
     Query sameGender2 = sameGender.where('userGender', isEqualTo: _gender);
 
-    Query uidGreater1 = notSameGender.where('userID', isGreaterThan: globalUID.uid);
+    Query uidGreater1 =
+        notSameGender.where('userID', isGreaterThan: globalUID.uid);
     Query uidLess1 = notSameGender.where('userID', isLessThan: globalUID.uid);
 
-    Query uidGreater2 = sameGender2.where('userID', isGreaterThan: globalUID.uid);
+    Query uidGreater2 =
+        sameGender2.where('userID', isGreaterThan: globalUID.uid);
     Query uidLess2 = sameGender2.where('userID', isLessThan: globalUID.uid);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         StreamBuilder<QuerySnapshot>(
-          stream: uidGreater1.snapshots(), //get sessions where sameGender = false, and not matched yet
+          stream: uidGreater1
+              .snapshots(), //get sessions where sameGender = false, and not matched yet
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError)
@@ -179,7 +180,8 @@ class SessionListState extends State<SessionList> {
           },
         ),
         StreamBuilder<QuerySnapshot>(
-          stream: uidLess1.snapshots(), //get sessions where sameGender = false, and not matched yet
+          stream: uidLess1
+              .snapshots(), //get sessions where sameGender = false, and not matched yet
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError)
@@ -310,7 +312,8 @@ class SessionListState extends State<SessionList> {
           },
         ),
         StreamBuilder<QuerySnapshot>(
-          stream: uidGreater2.snapshots(), //get sessions where sameGender = true, and not matched yet
+          stream: uidGreater2
+              .snapshots(), //get sessions where sameGender = true, and not matched yet
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError)
@@ -440,7 +443,8 @@ class SessionListState extends State<SessionList> {
           },
         ),
         StreamBuilder<QuerySnapshot>(
-          stream: uidLess2.snapshots(), //get sessions where sameGender = true, and not matched yet
+          stream: uidLess2
+              .snapshots(), //get sessions where sameGender = true, and not matched yet
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError)
