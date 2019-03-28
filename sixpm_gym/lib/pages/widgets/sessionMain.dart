@@ -207,7 +207,7 @@ class SessionWidget extends StatelessWidget {
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Montserrat'),
-                        ),
+                        )
                       ),
                     ),
                   ),
