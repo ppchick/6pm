@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
+import '../session/global.dart' as globals;
 
 class DatePickerSession extends StatefulWidget {
   DatePickerSession({Key key}) : super(key: key);
@@ -10,12 +11,12 @@ class DatePickerSession extends StatefulWidget {
 
 class _DatePickerSessionState extends State<DatePickerSession> {
   String _datetime = '';
-  int _year = 2018;
-  int _month = 11;
-  int _date = 11;
+  String _year = '2018';
+  String _month = '11';
+  String _date = '11';
 
   String _lang = 'en';
-  String _format = 'yyyy-mmmm-dd';
+  String _format = 'dd-mmmm-yyyy';
   bool _showTitleActions = false;
 
   TextEditingController _langCtrl = TextEditingController();
@@ -25,12 +26,12 @@ class _DatePickerSessionState extends State<DatePickerSession> {
   void initState() {
     super.initState();
     _langCtrl.text = 'en';
-    _formatCtrl.text = 'yyyy-mmmm-dd';
+    _formatCtrl.text = 'dd-mmmm-yyyy';
 
     DateTime now = DateTime.now();
-    _year = now.year;
-    _month = now.month;
-    _date = now.day;
+    _year = now.year.toString();
+    _month = now.month.toString();
+    _date = now.day.toString();
   }
 
   /// Display date picker.
@@ -40,10 +41,10 @@ class _DatePickerSessionState extends State<DatePickerSession> {
       context,
       showTitleActions: _showTitleActions,
       minYear: DateTime.now().year,
-      maxYear: DateTime.now().year+1,
-      initialYear: _year,
-      initialMonth: _month,
-      initialDate: _date,
+      maxYear: DateTime.now().year + 1,
+      initialYear: DateTime.now().year,
+      initialMonth: DateTime.now().month,
+      initialDate: DateTime.now().day,
       confirm: Text(
         'Confirm',
         style: TextStyle(color: Colors.red),
@@ -55,7 +56,7 @@ class _DatePickerSessionState extends State<DatePickerSession> {
       locale: _lang,
       dateFormat: _format,
       onChanged: (year, month, date) {
-        debugPrint('onChanged date: $year-$month-$date');
+        debugPrint('onChanged date: $date/$month/$year');
 
         if (!showTitleActions) {
           _changeDatetime(year, month, date);
@@ -69,10 +70,17 @@ class _DatePickerSessionState extends State<DatePickerSession> {
 
   void _changeDatetime(int year, int month, int date) {
     setState(() {
-      _year = year;
-      _month = month;
-      _date = date;
-      _datetime = '$year-$month-$date';
+      _year = year.toString();
+      if (month < 10)
+        _month = '0' + month.toString();
+      else
+        _month = month.toString();
+      if (date < 10)
+        _date = '0' + date.toString();
+      else
+        _date = date.toString();
+      _datetime = _date + '/' + _month + '/' + _year;
+      globals.datetime = _datetime;
     });
   }
 

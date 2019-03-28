@@ -46,7 +46,7 @@ class MatchedSessionState extends State<MatchedSession> {
                           ),
                           SizedBox(height: 10),
                           Text(
-                            'Gym:      ',
+                            'Location:      ',
                             style: TextStyle(
                                 fontSize: 20.0, fontWeight: FontWeight.normal),
                           ),
