@@ -116,19 +116,27 @@ class SessionWidget extends StatelessWidget {
                   .snapshots(), //get collection
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
-                return Container(
-                    padding: EdgeInsets.fromLTRB(100.0, 20.0, 0.0, 10.0),
-                    child: Row(children: [
-                      Icon(Icons.cloud, color: Colors.black),
-                      Text(
-                          '  Good evening ' +
-                              snapshot.data.documents[0]['firstName'] +
-                              ' ' +
-                              snapshot.data.documents[0]
-                                  ['lastName'], //TODO ENTER USER NAME HERE
-                          style: TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.bold))
-                    ]));
+                if (snapshot.hasError)
+                  return new Text('Error: ${snapshot.error}'); //error checking
+                switch (snapshot.connectionState) {
+                  //if takes too long to load, display "loading"
+                  case ConnectionState.waiting:
+                    return new Text('Loading...');
+                  default:
+                    return Container(
+                        padding: EdgeInsets.fromLTRB(100.0, 20.0, 0.0, 10.0),
+                        child: Row(children: [
+                          Icon(Icons.cloud, color: Colors.black),
+                          Text(
+                              '  Good evening ' +
+                                  snapshot.data.documents[0]['firstName'] +
+                                  ' ' +
+                                  snapshot.data.documents[0]
+                                      ['lastName'], //TODO ENTER USER NAME HERE
+                              style: TextStyle(
+                                  fontSize: 20.0, fontWeight: FontWeight.bold))
+                        ]));
+                }
               }),
           StreamBuilder<QuerySnapshot>(
               stream: Firestore.instance
@@ -159,7 +167,8 @@ class SessionWidget extends StatelessWidget {
                             Container(
                                 alignment: Alignment(0.0, -0.8),
                                 child: Text(
-                                    snapshot.data.documents[0]['hourSum'].toString() +
+                                    snapshot.data.documents[0]['hourSum']
+                                            .toString() +
                                         ' HOURS', //TODO sumHours HERE
                                     style: TextStyle(
                                         fontSize: 40.0,

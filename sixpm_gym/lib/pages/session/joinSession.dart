@@ -296,40 +296,6 @@ class JoinSessionPage extends StatelessWidget {
                       TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold)),
             ),
             SizedBox(height: 10.0),
-            Container(
-              height: 40.0,
-              color: Colors.transparent,
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Colors.black,
-                        style: BorderStyle.solid,
-                        width: 1.0),
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(20.0)),
-                child: InkWell(
-                  onTap: () {
-                    print('[Join Filter] Pressed');
-                    Navigator.of(context).pushNamed('/joinFilter1');
-                  },
-                  child: Center(
-                    child: Text(
-                      'Filter Results',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Montserrat',
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 10.0),
-            Container(
-              child: Text('Session list:',
-                  style:
-                      TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
-            ),
             new Expanded(
               child: SessionList(), //Load sessions from DB
             )
