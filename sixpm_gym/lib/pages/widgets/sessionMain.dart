@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import '../session/SessionCard.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../globalUserID.dart' as globalUID;
 
 final StatelessWidget session = new SessionWidget();
 
 class SessionWidget extends StatelessWidget {
   SessionWidget();
+  DocumentSnapshot profile;
   final List sessionCards =
       getSessionCards(); //TODO GET DB DATA (MATCHED SESSIONS BELONGING TO THIS USER)
 
@@ -106,45 +109,83 @@ class SessionWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           //header (greetings)
-          Container(
-              padding: EdgeInsets.fromLTRB(100.0, 20.0, 0.0, 10.0),
-              child: Row(children: [
-                Icon(Icons.cloud, color: Colors.black),
-                Text('  Good evening xxx!', //TODO ENTER USER NAME HERE
-                    style:
-                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold))
-              ])),
-
-          //Exercise time counting
-          Container(
-            padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-            decoration: new BoxDecoration(
-              border: new Border.all(color: Colors.black),
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            child: InkWell(
-                onTap: () {
-                  Navigator.of(context).pushNamed('/sessionHistory');
-                },
-                child: Row(children: [
-                  Expanded(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          alignment: Alignment(0.0, -0.9),
-                          child: Text('You have exercised with us for',
-                              style: TextStyle(fontSize: 20.0))),
-                      Container(
-                          alignment: Alignment(0.0, -0.8),
-                          child: Text('30 HOURS', //TODO sumHours HERE
+          StreamBuilder<QuerySnapshot>(
+              stream: Firestore.instance
+                  .collection('Profile')
+                  .where('userID', isEqualTo: globalUID.uid)
+                  .snapshots(), //get collection
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError)
+                  return new Text('Error: ${snapshot.error}'); //error checking
+                switch (snapshot.connectionState) {
+                  //if takes too long to load, display "loading"
+                  case ConnectionState.waiting:
+                    return new Text('Loading...');
+                  default:
+                    return Container(
+                        padding: EdgeInsets.fromLTRB(100.0, 20.0, 0.0, 10.0),
+                        child: Row(children: [
+                          Icon(Icons.cloud, color: Colors.black),
+                          Text(
+                              '   Hello ' +
+                                  snapshot.data.documents[0]['firstName'] +
+                                  ' ' +
+                                  snapshot.data.documents[0]
+                                      ['lastName'], 
                               style: TextStyle(
-                                  fontSize: 40.0, fontWeight: FontWeight.bold)))
-                    ],
-                  ))
-                ])),
+                                  fontSize: 20.0, fontWeight: FontWeight.bold))
+                        ]));
+                }
+              }),
+          StreamBuilder<QuerySnapshot>(
+              stream: Firestore.instance
+                  .collection('Profile')
+                  .where('userID', isEqualTo: globalUID.uid)
+                  .snapshots(), //get collection
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                return Container(
+                  padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                  decoration: new BoxDecoration(
+                    border: new Border.all(color: Colors.black),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/sessionHistory');
+                      },
+                      child: Row(children: [
+                        Expanded(
+                            child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                                alignment: Alignment(0.0, -0.9),
+                                child: Text('You have exercised with us for',
+                                    style: TextStyle(fontSize: 20.0))),
+                            Container(
+                                alignment: Alignment(0.0, -0.8),
+                                child: Text(
+                                    snapshot.data.documents[0]['hourSum']
+                                            .toString() +
+                                        ' HOURS', //TODO sumHours HERE
+                                    style: TextStyle(
+                                        fontSize: 40.0,
+                                        fontWeight: FontWeight.bold)))
+                          ],
+                        ))
+                      ])),
+                );
+              }),
+          //Exercise time counting
+            Container(
+            alignment: Alignment.center,
+            child: Text(
+                  'Your upcoming sessions:',
+                  style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+                ),
           ),
-          SizedBox(height: 10.0),
           new Expanded(
             child: ListView.builder(
               shrinkWrap: true,
@@ -219,6 +260,7 @@ class SessionWidget extends StatelessWidget {
       ),
     );
   }
+
 }
 
 //TESTING DATA

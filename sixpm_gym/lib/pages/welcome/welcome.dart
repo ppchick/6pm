@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../globalUserID.dart' as globalUID;
 import 'package:firebase_auth/firebase_auth.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -216,6 +217,7 @@ class _MyHomePageState extends State<WelcomePage> {
       try {
         FirebaseUser user = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: _email, password: _password);
+            globalUID.uid = user.uid;
         // Navigator.push(
         //     context, MaterialPageRoute(builder: (context) => Home(user: user)));
         Navigator.pushNamed(context, '/homepage', arguments: {user: user});
