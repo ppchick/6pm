@@ -5,7 +5,8 @@ final StatelessWidget session = new SessionWidget();
 
 class SessionWidget extends StatelessWidget {
   SessionWidget();
-  final List sessionCards = getSessionCards(); //TODO GET DB DATA (MATCHED SESSIONS BELONGING TO THIS USER)
+  final List sessionCards =
+      getSessionCards(); //TODO GET DB DATA (MATCHED SESSIONS BELONGING TO THIS USER)
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,12 @@ class SessionWidget extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(sessionCard.date + ', ' + sessionCard.startTime + ' - ' + sessionCard.endTime,
+                        Text(
+                            sessionCard.date +
+                                ', ' +
+                                sessionCard.startTime +
+                                ' - ' +
+                                sessionCard.endTime,
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold)),
                         Container(
@@ -104,7 +110,7 @@ class SessionWidget extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(100.0, 20.0, 0.0, 10.0),
               child: Row(children: [
                 Icon(Icons.cloud, color: Colors.black),
-                Text('  Good evening xxx!',   //TODO ENTER USER NAME HERE
+                Text('  Good evening xxx!', //TODO ENTER USER NAME HERE
                     style:
                         TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold))
               ])),
@@ -150,64 +156,65 @@ class SessionWidget extends StatelessWidget {
           ),
           //choose button(join session, create session)
           Container(
-              padding: EdgeInsets.fromLTRB(35.0, 10.0, 30.0, 20.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                    height: 50,
-                    width: 170,
-                    child: Material(
-                      borderRadius: BorderRadius.circular(10.0),
-                      shadowColor: Colors.blueAccent,
-                      color: Colors.blue,
-                      elevation: 7.0,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.of(context).pushNamed('/createSession');
-                        },
-                        child: Center(
-                          child: Text(
-                            'Create Session',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Montserrat'),
-                          ),
+            padding: EdgeInsets.fromLTRB(35.0, 10.0, 30.0, 20.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                  height: 50,
+                  width: 170,
+                  child: Material(
+                    borderRadius: BorderRadius.circular(10.0),
+                    shadowColor: Colors.blueAccent,
+                    color: Colors.blue,
+                    elevation: 7.0,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/createSession');
+                      },
+                      child: Center(
+                        child: Text(
+                          'Create Session',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat'),
                         ),
                       ),
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    height: 50,
-                    width: 170,
-                    child: Material(
-                      borderRadius: BorderRadius.circular(10.0),
-                      shadowColor: Colors.blueAccent,
-                      color: Colors.blue,
-                      elevation: 7.0,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.of(context).pushNamed('/joinSession');
-                        },
-                        child: Center(
-                          child: Text(
-                            'Join Session',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Montserrat'),
-                          ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  height: 50,
+                  width: 170,
+                  child: Material(
+                    borderRadius: BorderRadius.circular(10.0),
+                    shadowColor: Colors.blueAccent,
+                    color: Colors.blue,
+                    elevation: 7.0,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/joinSession');
+                      },
+                      child: Center(
+                        child: Text(
+                          'Join Session',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat'),
                         ),
                       ),
                     ),
-                  )
-                ],
-              ),),
+                  ),
+                )
+              ],
+            ),
+          ),
         ],
       ),
     );

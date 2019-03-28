@@ -58,7 +58,7 @@ class SearchSessionState extends State<SearchSession> {
     );
   }
 
-  Widget _buildList() {
+  Widget _buildList() {   //TODO GET DB DATA (GYM LIST)
     if (!(_searchText.isEmpty)) {
       List tempList = new List();
       for (int i = 0; i < filteredNames.length; i++) {
