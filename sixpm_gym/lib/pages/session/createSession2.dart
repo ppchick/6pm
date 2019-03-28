@@ -11,7 +11,8 @@ class CreateSession2 extends StatefulWidget {
 
 class CreateSessionState2 extends State<CreateSession2> {
   String _level = 'Newbie';
-  DocumentReference doc = Firestore.instance.document('UnmatchedSession/session');
+  DocumentReference doc =
+      Firestore.instance.document('UnmatchedSession/session');
 // user defined function
   void _showDialog() {
     // flutter defined function
@@ -52,32 +53,46 @@ class CreateSessionState2 extends State<CreateSession2> {
       },
     );
   }
-    void add(){
-      String idNum = globals.idNum.toString();
-    doc = Firestore.instance.document('UnmatchedSession/session$idNum'); 
-    Map<String,Object> data = <String,Object>{
-      'ID':globals.idNum,
-      'location':globals.gymText,
-      'startTime':globals.startTime,
-      'endTime':globals.endTime,
-      'date':globals.datetime,
-      'focus':globals.focus,
-      'level':globals.level,
-      'sameGender':globals.sameGender,
-      'isMatched':false,
+
+  Future add() async {
+    var highestID = 0;
+    await Firestore.instance
+        .collection('UnmatchedSession')
+        .getDocuments()
+        .then((doc) {
+      int sessionCount = doc.documents.length;
+      if (sessionCount != 0) {
+        for (int i = 0; i < sessionCount; i++) {
+          DocumentSnapshot session = doc.documents[i];
+          int sessionID = int.parse(session['ID']);
+          if (sessionID > highestID) 
+            highestID = sessionID;
+        }
+      }
+    });
+
+    String idNum = (highestID + 1).toString();
+    doc = Firestore.instance.document('UnmatchedSession/session$idNum');
+    Map<String, Object> data = <String, Object>{
+      'ID': idNum,
+      'location': globals.gymText,
+      'startTime': globals.startTime,
+      'endTime': globals.endTime,
+      'date': globals.datetime,
+      'focus': globals.focus,
+      'level': globals.level,
+      'sameGender': globals.sameGender,
+      'isMatched': false,
     };
-    globals.idNum  = globals.idNum +1;
+    globals.idNum = int.parse(idNum);
 
-    doc.setData(data).whenComplete((){
-      print("data added");
-
-    }).catchError((e)=>print(e));
-
+    doc.setData(data).whenComplete(() {
+      print("UnmatchedSession/session$idNum added");
+    }).catchError((e) => print(e));
   }
 
   @override
   Widget build(BuildContext context) {
-     
     return Scaffold(
       body: Column(
         children: <Widget>[
