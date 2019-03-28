@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SessionInfo extends StatelessWidget {
-  SessionInfo({this.document});                 //constructor receives session document from joinSession
+  SessionInfo(
+      {this.document}); //constructor receives session document from joinSession
   final DocumentSnapshot document;
   @override
   Widget build(BuildContext context) {
