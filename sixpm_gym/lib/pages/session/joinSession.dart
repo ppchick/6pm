@@ -4,16 +4,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../globalUserID.dart' as globalUID;
 
 class SessionList extends StatelessWidget {
+  CollectionReference col = Firestore.instance.collection('UnmatchedSession');
   @override
   Widget build(BuildContext context) {
+    Query notMatched = col.where('isMatched', isEqualTo: false);
+    Query uidGreater = notMatched.where('userID', isGreaterThan: globalUID.uid);
+    Query uidLess = notMatched.where('userID', isLessThan: globalUID.uid);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         StreamBuilder<QuerySnapshot>(
-          stream: Firestore.instance
-              .collection('UnmatchedSession')
-              .where('userID', isGreaterThan: globalUID.uid)
-              .snapshots(), //get collection
+          stream: uidGreater.snapshots(), //get collection
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError)
@@ -143,10 +145,7 @@ class SessionList extends StatelessWidget {
           },
         ),
         StreamBuilder<QuerySnapshot>(
-          stream: Firestore.instance
-              .collection('UnmatchedSession')
-              .where('userID', isLessThan: globalUID.uid)
-              .snapshots(), //get collection
+          stream: uidLess.snapshots(), //get collection
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError)

@@ -5,64 +5,9 @@ class SessionInfo extends StatelessWidget {
   SessionInfo(
       {this.document}); //constructor receives session document from joinSession
   final DocumentSnapshot document;
-  bool isMatched;
-  String displayText = "Waiting for someone to join...";
-
-  Widget joinButton(context) {
-    if (isMatched) {
-      return Container(
-        height: 40.0,
-        child: Material(
-          borderRadius: BorderRadius.circular(20.0),
-          shadowColor: Colors.blueAccent,
-          color: Colors.grey,
-          elevation: 7.0,
-          child: InkWell(
-            child: Center(
-              child: Text(
-                'Join Session',
-                style: TextStyle(
-                    color: Colors.blueGrey,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat'),
-              ),
-            ),
-          ),
-        ),
-      );
-    } else {
-      return Container(
-        height: 40.0,
-        child: Material(
-          borderRadius: BorderRadius.circular(20.0),
-          shadowColor: Colors.blueAccent,
-          color: Colors.blue,
-          elevation: 7.0,
-          child: InkWell(
-            onTap: () {
-              //TODO IMPLEMENT JOIN SESSION
-              print('[Join Session] Pressed');
-              Navigator.popUntil(context, ModalRoute.withName('/homepage'));
-            },
-            child: Center(
-              child: Text(
-                'Join Session',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat'),
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    isMatched = document['isMatched'];
-    if (isMatched) displayText = "This session is already matched";
     return Scaffold(
       appBar: AppBar(
         title: Text('Session Details'),
@@ -84,7 +29,7 @@ class SessionInfo extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Text(
-                  displayText,
+                  'Waiting for someone to join...',
                   style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 20),
@@ -131,7 +76,31 @@ class SessionInfo extends StatelessWidget {
             ),
           ),
           SizedBox(height: 30),
-          joinButton(context),
+          Container(
+        height: 40.0,
+        child: Material(
+          borderRadius: BorderRadius.circular(20.0),
+          shadowColor: Colors.blueAccent,
+          color: Colors.blue,
+          elevation: 7.0,
+          child: InkWell(
+            onTap: () {
+              //TODO IMPLEMENT JOIN SESSION
+              print('[Join Session] Pressed');
+              Navigator.popUntil(context, ModalRoute.withName('/homepage'));
+            },
+            child: Center(
+              child: Text(
+                'Join Session',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Montserrat'),
+              ),
+            ),
+          ),
+        ),
+      ),
           SizedBox(height: 30),
           Container(
             height: 40.0,
