@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/date_picker_session.dart';
+import './joinFilter2.dart';
 import 'global.dart' as globals;
 
 class JoinFilter1Page extends StatefulWidget {
@@ -8,7 +9,7 @@ class JoinFilter1Page extends StatefulWidget {
 }
 
 class JoinFilter1State extends State<JoinFilter1Page> {
-  String _startTime, _endTime, _location;
+  String _startTime, _endTime, _location = 'SEARCH FOR GYM';
   List<String> time = [
     '00:00',
     '00:30',
@@ -59,6 +60,31 @@ class JoinFilter1State extends State<JoinFilter1Page> {
     '23:00',
     '23:30',
   ];
+  void initState() {
+    super.initState();
+    globals.init();
+    String _hour, _min, _endHour;
+    DateTime now = DateTime.now();
+    if (now.hour < 10)
+      _hour = "0" + now.hour.toString();
+    else
+      _hour = now.hour.toString();
+
+    if (now.minute < 30)
+      _min = "00";
+    else
+      _min = "30";
+
+    _startTime = _hour + ':' + _min;
+
+    if (now.hour == 23)
+      _endHour = "01";
+    else if (now.hour < 9)
+      _endHour = "0" + (now.hour + 1).toString();
+    else
+      _endHour = (now.hour + 1).toString();
+    _endTime = _endHour + ':' + _min;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,29 +111,29 @@ class JoinFilter1State extends State<JoinFilter1Page> {
                   ),
                 ),
                 Container(
-                    height: 40.0,
-                    width: 1000.0,
-                    child: Material(
-                      borderRadius: BorderRadius.circular(10.0),
-                      // shadowColor: Colors.grey,
-                      color: Colors.white,
-                      elevation: 7.0,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.of(context).pushNamed('/searchSession');
-                        },
-                        child: Center(
-                          child: Text(
-                            globals.gymText,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Montserrat'),
-                          ),
+                  height: 40.0,
+                  width: 1000.0,
+                  child: Material(
+                    borderRadius: BorderRadius.circular(10.0),
+                    // shadowColor: Colors.grey,
+                    color: Colors.white,
+                    elevation: 7.0,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/searchSession');
+                      },
+                      child: Center(
+                        child: Text(
+                          globals.gymText,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat'),
                         ),
                       ),
                     ),
                   ),
+                ),
               ],
             ),
           ),
@@ -227,7 +253,7 @@ class JoinFilter1State extends State<JoinFilter1Page> {
                       child: InkWell(
                         onTap: () {
                           print('[Go Back] Pressed');
-                          globals.gymText ="SEARCH FOR GYM";
+                          globals.gymText = "SEARCH FOR GYM";
                           Navigator.of(context).pop();
                         },
                         child: Center(
@@ -275,4 +301,3 @@ class JoinFilter1State extends State<JoinFilter1Page> {
     );
   }
 }
-

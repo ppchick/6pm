@@ -4,7 +4,7 @@ import 'pages/welcome/signup.dart';
 import 'pages/welcome/welcome.dart';
 import 'pages/welcome/sighup2.dart';
 import 'pages/session/createSession.dart';
-import 'pages/session/createSession2.dart';
+//import 'pages/session/createSession2.dart';
 import 'pages/session/sessionInfo.dart';
 import 'pages/home.dart';
 import 'pages/session/joinSession.dart';
@@ -15,15 +15,12 @@ import 'pages/session/matchedSession.dart';
 import 'pages/session/search_session_gym.dart';
 import 'pages/session/rateSession.dart';
 import 'pages/session/sessionHistoryInfo.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() {
   runApp(new MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({this.firestore});
-  final Firestore firestore;
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(

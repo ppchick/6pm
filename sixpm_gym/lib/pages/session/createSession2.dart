@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../widgets/radiobutton_sessionfocus.dart';
 import '../widgets/radiobutton_genderPreference.dart';
 import 'global.dart' as globals;
+import '../globalUserID.dart' as globalUID;
 
 class CreateSession2 extends StatelessWidget {
   List<Map<String, dynamic>> params;
@@ -41,6 +42,7 @@ class CreateSession2 extends StatelessWidget {
                       params.add({'level': _level});
                       params.add({'focus': globals.focus});
                       params.add({'sameGender': globals.sameGender});
+                      params.add({'userID' : globalUID.uid});
                       add();
                       Navigator.popUntil(
                           context, ModalRoute.withName('/homepage'));
@@ -82,6 +84,7 @@ class CreateSession2 extends StatelessWidget {
       'focus': params[5]['focus'],
       'level': params[4]['level'],
       'sameGender': params[6]['sameGender'],
+      'userID': params[7]['userID'],
       'isMatched': false,
     };
     globals.idNum = int.parse(idNum);
