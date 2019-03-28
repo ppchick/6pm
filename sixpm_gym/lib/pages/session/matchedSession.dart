@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class MatchedSession extends StatefulWidget {
-  @override
-  MatchedSessionState createState() => new MatchedSessionState ();
-}
 
-class MatchedSessionState extends State<MatchedSession> {
+class MatchedSession extends StatelessWidget {
+  MatchedSession(
+      {this.document}); //constructor receives session document from joinSession
+  final DocumentSnapshot document;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Session Details'),
+      ),
       body: Container(
         child: Column(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.fromLTRB(70, 100, 0, 0),
+              padding: EdgeInsets.fromLTRB(70, 50, 0, 0),
               child: Row(
                 children: <Widget>[
                   new Icon(Icons.person, color: Colors.black, size: 100),
@@ -32,7 +36,7 @@ class MatchedSessionState extends State<MatchedSession> {
                     style:
                         TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 30),
+                  SizedBox(height: 20),
                   Card(                         //TODO GET DB DATA (SESSION DETAILS)
                     color: Colors.white,
                     child: Center(
@@ -67,7 +71,7 @@ class MatchedSessionState extends State<MatchedSession> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 60),
+                  SizedBox(height: 30),
                   Container(
                     height: 40.0,
                     child: Material(

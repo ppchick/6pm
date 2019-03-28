@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import '../session/global.dart' as globals;
 
-class DatePickerSession extends StatefulWidget {
-  DatePickerSession({Key key}) : super(key: key);
-
-  @override
-  _DatePickerSessionState createState() => _DatePickerSessionState();
-}
-
-class _DatePickerSessionState extends State<DatePickerSession> {
+class DatePickerSession extends StatelessWidget {
+  BuildContext context;
+  DatePickerSession(this.context);
   String _datetime;
   String _year;
   String _month;
@@ -22,23 +17,22 @@ class _DatePickerSessionState extends State<DatePickerSession> {
   TextEditingController _langCtrl = TextEditingController();
   TextEditingController _formatCtrl = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
+  void initDate() {
     _langCtrl.text = 'en';
     _formatCtrl.text = 'dd-mmmm-yyyy';
 
     DateTime now = DateTime.now();
     _year = now.year.toString();
     if (now.month < 10)
-        _month = '0' + now.month.toString();
-      else
-        _month = now.month.toString();
-      if (now.day < 10)
-        _date = '0' + now.day.toString();
-      else
-        _date =  now.day.toString();
-      _datetime = _date + '/' + _month + '/' + _year; 
+      _month = '0' + now.month.toString();
+    else
+      _month = now.month.toString();
+    if (now.day < 10)
+      _date = '0' + now.day.toString();
+    else
+      _date = now.day.toString();
+    _datetime = _date + '/' + _month + '/' + _year;
+    globals.datetime = _datetime;
   }
 
   /// Display date picker.
@@ -76,23 +70,22 @@ class _DatePickerSessionState extends State<DatePickerSession> {
   }
 
   void _changeDatetime(int year, int month, int date) {
-    setState(() {
-      _year = year.toString();
-      if (month < 10)
-        _month = '0' + month.toString();
-      else
-        _month = month.toString();
-      if (date < 10)
-        _date = '0' + date.toString();
-      else
-        _date = date.toString();
-      _datetime = _date + '/' + _month + '/' + _year;
-      globals.datetime = _datetime;
-    });
+    _year = year.toString();
+    if (month < 10)
+      _month = '0' + month.toString();
+    else
+      _month = month.toString();
+    if (date < 10)
+      _date = '0' + date.toString();
+    else
+      _date = date.toString();
+    _datetime = _date + '/' + _month + '/' + _year;
+    globals.datetime = _datetime;
   }
 
   @override
   Widget build(BuildContext context) {
+    initDate();
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
