@@ -10,10 +10,10 @@ class DatePickerSession extends StatefulWidget {
 }
 
 class _DatePickerSessionState extends State<DatePickerSession> {
-  String _datetime = '';
-  String _year = '2018';
-  String _month = '11';
-  String _date = '11';
+  String _datetime;
+  String _year;
+  String _month;
+  String _date;
 
   String _lang = 'en';
   String _format = 'dd-mmmm-yyyy';
@@ -30,8 +30,15 @@ class _DatePickerSessionState extends State<DatePickerSession> {
 
     DateTime now = DateTime.now();
     _year = now.year.toString();
-    _month = now.month.toString();
-    _date = now.day.toString();
+    if (now.month < 10)
+        _month = '0' + now.month.toString();
+      else
+        _month = now.month.toString();
+      if (now.day < 10)
+        _date = '0' + now.day.toString();
+      else
+        _date =  now.day.toString();
+      _datetime = _date + '/' + _month + '/' + _year; 
   }
 
   /// Display date picker.
