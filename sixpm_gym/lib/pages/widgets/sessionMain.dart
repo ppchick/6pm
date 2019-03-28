@@ -86,7 +86,8 @@ class SessionListState extends State<SessionList> {
           ),
         ),
         SizedBox(height: 10),
-        new Expanded(
+        new Container(
+            height: 250,
             child: StreamBuilder<QuerySnapshot>(
           stream: matched
               .snapshots(), //get all matched session NOTE PLACEHOLDER QUERY
@@ -218,6 +219,66 @@ class SessionListState extends State<SessionList> {
             }
           },
         )),
+        Container(
+            padding: EdgeInsets.fromLTRB(35.0, 10.0, 30.0, 20.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                  height: 50,
+                  width: 170,
+                  child: Material(
+                    borderRadius: BorderRadius.circular(10.0),
+                    shadowColor: Colors.blueAccent,
+                    color: Colors.blue,
+                    elevation: 7.0,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/createSession');
+                      },
+                      child: Center(
+                        child: Text(
+                          'Create Session',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat'),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  height: 50,
+                  width: 170,
+                  child: Material(
+                    borderRadius: BorderRadius.circular(10.0),
+                    shadowColor: Colors.blueAccent,
+                    color: Colors.blue,
+                    elevation: 7.0,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/joinSession');
+                      },
+                      child: Center(
+                        child: Text(
+                          'Join Session',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat'),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
       ],
     );
   }
