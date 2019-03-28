@@ -8,8 +8,7 @@ class JoinFilter1Page extends StatefulWidget {
 }
 
 class JoinFilter1State extends State<JoinFilter1Page> {
-  String _startTime = '00:00';
-  String _endTime = '00:00';
+  String _startTime, _endTime, _location;
   List<String> time = [
     '00:00',
     '00:30',
@@ -29,6 +28,7 @@ class JoinFilter1State extends State<JoinFilter1Page> {
     '07:30',
     '08:00',
     '08:30',
+    '09:00',
     '09:30',
     '10:00',
     '10:30',
@@ -200,7 +200,7 @@ class JoinFilter1State extends State<JoinFilter1Page> {
                           ),
                         ),
                         Container(
-                          child: DatePickerSession(),
+                          child: DatePickerSession(context),
                         ),
                       ],
                     ),

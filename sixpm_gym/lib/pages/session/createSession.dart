@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../widgets/date_picker_session.dart';
+import './search_session_gym.dart';
+import './createSession2.dart';
 import 'global.dart' as globals;
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CreateSession extends StatefulWidget {
   @override
@@ -9,8 +10,7 @@ class CreateSession extends StatefulWidget {
 }
 
 class CreateSessionState extends State<CreateSession> {
-  String _startTime;
-  String _endTime;
+  String _startTime, _endTime, _location = 'SEARCH FOR GYM';
   List<String> time = [
     '00:00',
     '00:30',
@@ -65,6 +65,7 @@ class CreateSessionState extends State<CreateSession> {
   @override
   void initState() {
     super.initState();
+    globals.init();
     String _hour, _min, _endHour;
     DateTime now = DateTime.now();
     if (now.hour < 10)
@@ -89,6 +90,8 @@ class CreateSessionState extends State<CreateSession> {
   }
 
   Widget build(BuildContext context) {
+    List<Map<String, dynamic>> params = [];
+
     return new Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(
@@ -121,11 +124,17 @@ class CreateSessionState extends State<CreateSession> {
                     elevation: 7.0,
                     child: InkWell(
                       onTap: () {
-                        Navigator.of(context).pushNamed('/searchSession');
+                        Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SearchSession()))
+                            .then((location) {
+                          _location = location.toString();
+                        });
                       },
                       child: Center(
                         child: Text(
-                          globals.gymText,
+                          _location,
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
@@ -200,7 +209,7 @@ class CreateSessionState extends State<CreateSession> {
                                   print('[Dropdown] changed to ' + item);
                                   setState(() {
                                     _startTime = item;
-                                    globals.startTime = _startTime;
+                                    //globals.startTime = _startTime;
                                   });
                                 },
                               ),
@@ -235,7 +244,7 @@ class CreateSessionState extends State<CreateSession> {
                                   print('[Dropdown] changed to ' + item);
                                   setState(() {
                                     _endTime = item;
-                                    globals.endTime = _endTime;
+                                    //globals.endTime = _endTime;
                                   });
                                 },
                               ),
@@ -243,7 +252,7 @@ class CreateSessionState extends State<CreateSession> {
                           ),
                         ),
                         Container(
-                          child: DatePickerSession(),
+                          child: DatePickerSession(context),
                         ),
                       ],
                     ),
@@ -270,7 +279,6 @@ class CreateSessionState extends State<CreateSession> {
                       child: InkWell(
                         onTap: () {
                           // print('[Go Back] Pressed');
-                          globals.gymText = "SEARCH FOR GYM";
                           Navigator.of(context).pop();
                         },
                         child: Center(
@@ -297,7 +305,15 @@ class CreateSessionState extends State<CreateSession> {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          Navigator.of(context).pushNamed('/createSession2');
+                          params.add({'location': _location});
+                          params.add({'startTime': _startTime});
+                          params.add({'endTime': _endTime});
+                          params.add({'date': globals.datetime});
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      CreateSession2(context, params)));
                         },
                         child: Center(
                           child: Text(
