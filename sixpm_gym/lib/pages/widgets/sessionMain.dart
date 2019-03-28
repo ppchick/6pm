@@ -128,11 +128,11 @@ class SessionWidget extends StatelessWidget {
                         child: Row(children: [
                           Icon(Icons.cloud, color: Colors.black),
                           Text(
-                              '  Good evening ' +
+                              '   Hello ' +
                                   snapshot.data.documents[0]['firstName'] +
                                   ' ' +
                                   snapshot.data.documents[0]
-                                      ['lastName'], //TODO ENTER USER NAME HERE
+                                      ['lastName'], 
                               style: TextStyle(
                                   fontSize: 20.0, fontWeight: FontWeight.bold))
                         ]));
@@ -179,8 +179,13 @@ class SessionWidget extends StatelessWidget {
                 );
               }),
           //Exercise time counting
-
-          SizedBox(height: 10.0),
+            Container(
+            alignment: Alignment.center,
+            child: Text(
+                  'Your upcoming sessions:',
+                  style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+                ),
+          ),
           new Expanded(
             child: ListView.builder(
               shrinkWrap: true,
@@ -256,17 +261,6 @@ class SessionWidget extends StatelessWidget {
     );
   }
 
-  Future<DocumentSnapshot> getProfileDocument() async {
-    DocumentSnapshot doc;
-    var query = Firestore.instance
-        .collection('Profile')
-        .where('userID', isEqualTo: globalUID.uid)
-        .limit(1);
-    await query.getDocuments().then((data) {
-      doc = data.documents[0];
-    });
-    return doc;
-  }
 }
 
 //TESTING DATA

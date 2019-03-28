@@ -26,17 +26,11 @@ class SessionInfo extends StatelessWidget {
           ),
           Container(
             padding: EdgeInsets.fromLTRB(20.0, 25.0, 20.0, 0.0),
-            child: Column(
-              children: <Widget>[
-                Text(
-                  'Waiting for someone to join...',
+            child: Text('Waiting for someone to join...',
                   style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 20),
-              ],
-            ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 30),
           Card(
             color: Colors.white,
             child: Center(
