@@ -271,7 +271,7 @@ class SessionListState extends State<SessionList> {
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Montserrat'),
-                        ),
+                        )
                       ),
                     ),
                   ),
