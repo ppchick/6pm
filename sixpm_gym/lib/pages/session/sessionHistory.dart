@@ -94,7 +94,7 @@ class _SessionHistoryState extends State<SessionHistory> {
                 ],
               ))),
           onTap: () {
-            Navigator.of(context).pushNamed('/matchedSession');
+            Navigator.of(context).pushNamed('/sessionHistoryInfo');
           },
         );
 

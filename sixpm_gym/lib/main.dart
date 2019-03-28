@@ -14,6 +14,7 @@ import 'pages/session/sessionHistory.dart';
 import 'pages/session/matchedSession.dart';
 import 'pages/session/search_session_gym.dart';
 import 'pages/session/rateSession.dart';
+import 'pages/session/sessionHistoryInfo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() {
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         '/joinFilter2': (BuildContext context) => new JoinFilter2Page(),
         '/matchedSession': (BuildContext context) => new MatchedSession(),
         '/searchSession': (BuildContext context) => new SearchSession(),
+        '/sessionHistoryInfo': (BuildContext context) => new SessionHistoryInfo(),
       },
       home: new WelcomePage(),
     );
