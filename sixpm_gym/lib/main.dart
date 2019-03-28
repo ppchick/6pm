@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         '/sessionHistory': (BuildContext context) => new SessionHistory(),
         '/rateSession': (BuildContext context) => new RateSession(),
         '/createSession': (BuildContext context) => new CreateSession(),
-        '/createSession2': (BuildContext context) => new CreateSession2(),
+        //'/createSession2': (BuildContext context) => new CreateSession2(),
         '/sessionInfo': (BuildContext context) => new SessionInfo(),
         '/joinSession': (BuildContext context) => new JoinSessionPage(),
         '/joinFilter1': (BuildContext context) => new JoinFilter1Page(),

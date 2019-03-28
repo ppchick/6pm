@@ -4,14 +4,15 @@ import '../widgets/radiobutton_sessionfocus.dart';
 import '../widgets/radiobutton_genderPreference.dart';
 import 'global.dart' as globals;
 
-class CreateSession2 extends StatefulWidget {
-  @override
-  CreateSessionState2 createState() => new CreateSessionState2();
-}
+class CreateSession2 extends StatelessWidget {
+  List<Map<String, dynamic>> params;
+  BuildContext context;
+  CreateSession2(this.context,
+      this.params); //constructor receives params from createSession
 
-class CreateSessionState2 extends State<CreateSession2> {
   String _level = 'Newbie';
-  DocumentReference doc = Firestore.instance.document('UnmatchedSession/session');
+
+  DocumentReference doc;
 // user defined function
   void _showDialog() {
     // flutter defined function
@@ -37,9 +38,10 @@ class CreateSessionState2 extends State<CreateSession2> {
                   new FlatButton(
                     child: new Text("Confirm"),
                     onPressed: () {
-                      //TODO ADD NEW SESSION TO DB
+                      params.add({'level': _level});
+                      params.add({'focus': globals.focus});
+                      params.add({'sameGender': globals.sameGender});
                       add();
-                      globals.gymText = "SEARCH FOR GYM";
                       Navigator.popUntil(
                           context, ModalRoute.withName('/homepage'));
                     },
@@ -52,32 +54,45 @@ class CreateSessionState2 extends State<CreateSession2> {
       },
     );
   }
-    void add(){
-      String idNum = globals.idNum.toString();
-    doc = Firestore.instance.document('UnmatchedSession/session$idNum'); 
-    Map<String,Object> data = <String,Object>{
-      'ID':globals.idNum,
-      'location':globals.gymText,
-      'startTime':globals.startTime,
-      'endTime':globals.endTime,
-      'date':globals.datetime,
-      'focus':globals.focus,
-      'level':globals.level,
-      'sameGender':globals.sameGender,
-      'isMatched':false,
+
+  Future add() async {
+    var highestID = 0;
+    await Firestore.instance
+        .collection('UnmatchedSession')
+        .getDocuments()
+        .then((doc) {
+      int sessionCount = doc.documents.length;
+      if (sessionCount != 0) {
+        for (int i = 0; i < sessionCount; i++) {
+          DocumentSnapshot session = doc.documents[i];
+          int sessionID = int.parse(session['ID']);
+          if (sessionID > highestID) highestID = sessionID;
+        }
+      }
+    });
+
+    String idNum = (highestID + 1).toString();
+    doc = Firestore.instance.document('UnmatchedSession/session$idNum');
+    Map<String, Object> data = <String, Object>{
+      'ID': idNum,
+      'location': params[0]['location'],
+      'startTime': params[1]['startTime'],
+      'endTime': params[2]['endTime'],
+      'date': params[3]['date'],
+      'focus': params[5]['focus'],
+      'level': params[4]['level'],
+      'sameGender': params[6]['sameGender'],
+      'isMatched': false,
     };
-    globals.idNum  = globals.idNum +1;
+    globals.idNum = int.parse(idNum);
 
-    doc.setData(data).whenComplete((){
-      print("data added");
-
-    }).catchError((e)=>print(e));
-
+    doc.setData(data).whenComplete(() {
+      print("UnmatchedSession/session$idNum added");
+    }).catchError((e) => print(e));
   }
 
   @override
   Widget build(BuildContext context) {
-     
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -137,10 +152,10 @@ class CreateSessionState2 extends State<CreateSession2> {
                       }).toList(),
                       onChanged: (item) {
                         print('[Dropdown] changed to ' + item);
-                        setState(() {
-                          _level = item;
-                          globals.level = _level;
-                        });
+                        //setState(() {
+                        _level = item;
+                        //globals.level = _level;
+                        //});
                       },
                     ),
                   ),
@@ -243,7 +258,6 @@ class CreateSessionState2 extends State<CreateSession2> {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          //Navigator.popUntil(context, ModalRoute.withName('/homepage'));
                           _showDialog();
                         },
                         child: Center(

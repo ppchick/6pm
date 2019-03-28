@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import 'global.dart' as globals;
 
-class SearchSession extends StatefulWidget {
-  // ExamplePage({ Key key }) : super(key: key);
-  @override
-  SearchSessionState createState() => new SearchSessionState();
-}
-
-class SearchSessionState extends State<SearchSession> {
+class SearchSession extends StatelessWidget {
  // final formKey = new GlobalKey<FormState>();
  // final key = new GlobalKey<ScaffoldState>();
   final TextEditingController _filter = new TextEditingController();
@@ -17,6 +11,7 @@ class SearchSessionState extends State<SearchSession> {
   Icon _searchIcon = new Icon(Icons.search);
   Widget _appBarTitle = new Text( '...' );
 
+/*
   SearchSessionState() {
     _filter.addListener(() {
       if (_filter.text.isEmpty) {
@@ -32,10 +27,9 @@ class SearchSessionState extends State<SearchSession> {
       }
     });
   }
+*/
 
   @override
-
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildBar(context),
@@ -52,7 +46,7 @@ class SearchSessionState extends State<SearchSession> {
       title: _appBarTitle,
       leading: new IconButton(
         icon: _searchIcon,
-        onPressed: _searchPressed,
+        //onPressed: _searchPressed,
 
       ),
     );
@@ -75,14 +69,14 @@ class SearchSessionState extends State<SearchSession> {
           title: Text(filteredNames[index]),
           onTap: ()=>
           { _filter.text = filteredNames[index],
-            Navigator.of(context).pop()
+            Navigator.pop(context, filteredNames[index])
           } ,
         );
         },
         );
       }
 
-
+/*
   void _searchPressed() {
     setState(() {
       if (this._searchIcon.icon == Icons.search) {
@@ -102,5 +96,5 @@ class SearchSessionState extends State<SearchSession> {
       }
     });
   }
-
+*/
 }
