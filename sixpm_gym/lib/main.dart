@@ -15,6 +15,7 @@ import 'pages/session/matchedSession.dart';
 import 'pages/session/search_session_gym.dart';
 import 'pages/session/rateSession.dart';
 import 'pages/session/sessionHistoryInfo.dart';
+import 'pages/auth.dart';
 
 void main() {
   runApp(new MyApp());
@@ -39,7 +40,8 @@ class MyApp extends StatelessWidget {
         //'/joinFilter2': (BuildContext context) => new JoinFilter2Page(),
         '/matchedSession': (BuildContext context) => new MatchedSession(),
         '/searchSession': (BuildContext context) => new SearchSession(),
-        '/sessionHistoryInfo': (BuildContext context) => new SessionHistoryInfo(),
+        '/sessionHistoryInfo': (BuildContext context) =>
+            new SessionHistoryInfo(),
       },
       home: new WelcomePage(),
     );

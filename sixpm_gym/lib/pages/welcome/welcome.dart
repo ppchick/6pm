@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../globalUserID.dart' as globalUID;
 import 'package:firebase_auth/firebase_auth.dart';
+import '../home.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -21,19 +22,19 @@ class _MyHomePageState extends State<WelcomePage> {
               child: Stack(
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.fromLTRB(15.0, 90.0, 0.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(15.0, 70.0, 0.0, 0.0),
                     child: Text('Hello',
                         style: TextStyle(
                             fontSize: 80.0, fontWeight: FontWeight.bold)),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(16.0, 155.0, 0.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(16.0, 135.0, 0.0, 0.0),
                     child: Text('There',
                         style: TextStyle(
                             fontSize: 80.0, fontWeight: FontWeight.bold)),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(225.0, 155.0, 0.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(225.0, 135.0, 0.0, 0.0),
                     child: Text('.',
                         style: TextStyle(
                             fontSize: 80.0,
@@ -87,7 +88,8 @@ class _MyHomePageState extends State<WelcomePage> {
                                         BorderSide(color: Colors.blue))),
                             obscureText: true,
                           ),
-                          Container(                        //TODO IMPLEMENT OR REMOVE
+                          Container(
+                            //TODO IMPLEMENT OR REMOVE
                             alignment: Alignment(1.0, 0.0),
                             padding: EdgeInsets.only(top: 25.0, left: 20.0),
                             child: InkWell(
@@ -111,10 +113,10 @@ class _MyHomePageState extends State<WelcomePage> {
                               elevation: 7.0,
                               child: InkWell(
                                 // NOTE Uncomment this and comment next line during testing
-                                onTap: () {
-                                  Navigator.of(context).pushNamed('/homepage');
-                                },
-                                // onTap: signIn,
+                                // onTap: () {
+                                //   Navigator.of(context).pushNamed('/homepage');
+                                // },
+                                onTap: signIn,
                                 child: Center(
                                   child: Text(
                                     'LOGIN',
@@ -217,12 +219,14 @@ class _MyHomePageState extends State<WelcomePage> {
       try {
         FirebaseUser user = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: _email, password: _password);
-            globalUID.uid = user.uid;
+        globalUID.uid = user.uid;
         // Navigator.push(
         //     context, MaterialPageRoute(builder: (context) => Home(user: user)));
-        Navigator.pushNamed(context, '/homepage', arguments: {user: user});
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => HomePage(user: user)));
         // Navigator.of(context).pushNamed('/homepage');
       } catch (e) {
+        print('Wrong account');
         print(e.message);
       }
     }
