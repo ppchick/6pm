@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import '../widgets/date_picker_session.dart';
 import 'global.dart' as globals;
-import 'package:cloud_firestore/cloud_firestore.dart';
 
-class CreateSession extends StatefulWidget {
+class JoinFilter1Page extends StatefulWidget {
   @override
-  CreateSessionState createState() => new CreateSessionState();
+  JoinFilter1State createState() => new JoinFilter1State();
 }
 
-class CreateSessionState extends State<CreateSession> {
-  String _startTime;
-  String _endTime;
+class JoinFilter1State extends State<JoinFilter1Page> {
+  String _startTime = '00:00';
+  String _endTime = '00:00';
   List<String> time = [
     '00:00',
     '00:30',
@@ -30,7 +29,6 @@ class CreateSessionState extends State<CreateSession> {
     '07:30',
     '08:00',
     '08:30',
-    '09:00',
     '09:30',
     '10:00',
     '10:30',
@@ -63,31 +61,6 @@ class CreateSessionState extends State<CreateSession> {
   ];
 
   @override
-  void initState() {
-    super.initState();
-    String _hour, _min, _endHour;
-    DateTime now = DateTime.now();
-    if (now.hour < 10)
-      _hour = "0" + now.hour.toString();
-    else
-      _hour = now.hour.toString();
-
-    if (now.minute < 30)
-      _min = "00";
-    else
-      _min = "30";
-
-    _startTime = _hour + ':' + _min;
-
-    if (now.hour == 23)
-      _endHour = "01";
-    else if (now.hour < 9)
-      _endHour = "0" + (now.hour + 1).toString();
-    else
-      _endHour = (now.hour + 1).toString();
-    _endTime = _endHour + ':' + _min;
-  }
-
   Widget build(BuildContext context) {
     return new Scaffold(
       resizeToAvoidBottomInset: false,
@@ -96,7 +69,7 @@ class CreateSessionState extends State<CreateSession> {
           Container(
             padding: EdgeInsets.fromLTRB(10.0, 80.0, 0.0, 0.0),
             child: Text(
-              'Create my own session!',
+              'Filter Results',
               style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
             ),
           ),
@@ -112,43 +85,29 @@ class CreateSessionState extends State<CreateSession> {
                   ),
                 ),
                 Container(
-                  height: 40.0,
-                  width: 1000.0,
-                  child: Material(
-                    borderRadius: BorderRadius.circular(10.0),
-                    // shadowColor: Colors.grey,
-                    color: Colors.white,
-                    elevation: 7.0,
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.of(context).pushNamed('/searchSession');
-                      },
-                      child: Center(
-                        child: Text(
-                          globals.gymText,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Montserrat'),
+                    height: 40.0,
+                    width: 1000.0,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(10.0),
+                      // shadowColor: Colors.grey,
+                      color: Colors.white,
+                      elevation: 7.0,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).pushNamed('/searchSession');
+                        },
+                        child: Center(
+                          child: Text(
+                            globals.gymText,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Montserrat'),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                /*Container(
-                  padding: EdgeInsets.only(top: 20.0, left: 40.0, right: 40.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        labelText: 'Search For Gym',
-                        labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.blue))),
-                  ),
-                ),*/
-                // SearchGym(),
               ],
             ),
           ),
@@ -200,7 +159,6 @@ class CreateSessionState extends State<CreateSession> {
                                   print('[Dropdown] changed to ' + item);
                                   setState(() {
                                     _startTime = item;
-                                    globals.startTime = _startTime;
                                   });
                                 },
                               ),
@@ -235,7 +193,6 @@ class CreateSessionState extends State<CreateSession> {
                                   print('[Dropdown] changed to ' + item);
                                   setState(() {
                                     _endTime = item;
-                                    globals.endTime = _endTime;
                                   });
                                 },
                               ),
@@ -269,8 +226,8 @@ class CreateSessionState extends State<CreateSession> {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          // print('[Go Back] Pressed');
-                          globals.gymText = "SEARCH FOR GYM";
+                          print('[Go Back] Pressed');
+                          globals.gymText ="SEARCH FOR GYM";
                           Navigator.of(context).pop();
                         },
                         child: Center(
@@ -297,7 +254,7 @@ class CreateSessionState extends State<CreateSession> {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          Navigator.of(context).pushNamed('/createSession2');
+                          Navigator.of(context).pushNamed('/joinFilter2');
                         },
                         child: Center(
                           child: Text(
@@ -318,3 +275,4 @@ class CreateSessionState extends State<CreateSession> {
     );
   }
 }
+

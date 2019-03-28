@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
-import '../session/SessionCard.dart';
+import 'SessionCard.dart';
 
-final StatelessWidget session = new SessionWidget();
+class SessionHistory extends StatefulWidget {
+  @override
+  _SessionHistoryState createState() => _SessionHistoryState();
+}
 
-class SessionWidget extends StatelessWidget {
-  SessionWidget();
-  final List sessionCards =
-      getSessionCards(); //TODO GET DB DATA (MATCHED SESSIONS BELONGING TO THIS USER)
+class _SessionHistoryState extends State<SessionHistory> {
+  List sessionCards;
 
   @override
+  void initState() {
+    sessionCards = getSessionCards(); //TODO GET DB DATA (MATCHED SESSIONS BY THIS USER THAT ARE COMPLETED ALREADY)
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     ListTile makeListTile(SessionCard sessionCard) => ListTile(
           contentPadding:
@@ -91,6 +97,7 @@ class SessionWidget extends StatelessWidget {
             Navigator.of(context).pushNamed('/matchedSession');
           },
         );
+
     Card makeCard(SessionCard sessionCard) => Card(
           elevation: 8.0,
           margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
@@ -101,127 +108,36 @@ class SessionWidget extends StatelessWidget {
         );
 
     return new Scaffold(
-      resizeToAvoidBottomPadding: false,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          //header (greetings)
-          Container(
-              padding: EdgeInsets.fromLTRB(100.0, 20.0, 0.0, 10.0),
-              child: Row(children: [
-                Icon(Icons.cloud, color: Colors.black),
-                Text('  Good evening xxx!', //TODO ENTER USER NAME HERE
-                    style:
-                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold))
-              ])),
-
-          //Exercise time counting
-          Container(
-            padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-            decoration: new BoxDecoration(
-              border: new Border.all(color: Colors.black),
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            child: InkWell(
-                onTap: () {
-                  Navigator.of(context).pushNamed('/sessionHistory');
+        appBar: AppBar(
+          title: Text('Back'),
+          // elevation: 0.0,
+        ),
+        resizeToAvoidBottomPadding: false,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+                padding: const EdgeInsets.fromLTRB(30, 20, 0, 0),
+                child: Text('History',
+                    style: TextStyle(
+                        fontSize: 35.0, fontWeight: FontWeight.bold))),
+            SizedBox(height: 10.0),
+            new Expanded(
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: sessionCards.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return makeCard(sessionCards[index]);
                 },
-                child: Row(children: [
-                  Expanded(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          alignment: Alignment(0.0, -0.9),
-                          child: Text('You have exercised with us for',
-                              style: TextStyle(fontSize: 20.0))),
-                      Container(
-                          alignment: Alignment(0.0, -0.8),
-                          child: Text('30 HOURS', //TODO sumHours HERE
-                              style: TextStyle(
-                                  fontSize: 40.0, fontWeight: FontWeight.bold)))
-                    ],
-                  ))
-                ])),
-          ),
-          SizedBox(height: 10.0),
-          new Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: sessionCards.length,
-              itemBuilder: (BuildContext context, int index) {
-                return makeCard(sessionCards[index]);
-              },
-            ),
-          ),
-          //choose button(join session, create session)
-          Container(
-            padding: EdgeInsets.fromLTRB(35.0, 10.0, 30.0, 20.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                  height: 50,
-                  width: 170,
-                  child: Material(
-                    borderRadius: BorderRadius.circular(10.0),
-                    shadowColor: Colors.blueAccent,
-                    color: Colors.blue,
-                    elevation: 7.0,
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.of(context).pushNamed('/createSession');
-                      },
-                      child: Center(
-                        child: Text(
-                          'Create Session',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Montserrat'),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  height: 50,
-                  width: 170,
-                  child: Material(
-                    borderRadius: BorderRadius.circular(10.0),
-                    shadowColor: Colors.blueAccent,
-                    color: Colors.blue,
-                    elevation: 7.0,
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.of(context).pushNamed('/joinSession');
-                      },
-                      child: Center(
-                        child: Text(
-                          'Join Session',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Montserrat'),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+              ),
+            )
+          ],
+        ));
   }
 }
 
-//TESTING DATA
+//NOTE TESTING DATA REMOVE AFTER LINKING DB
 List getSessionCards() {
   return [
     SessionCard(
@@ -246,11 +162,32 @@ List getSessionCards() {
         focus: "Boxing",
         location: "Gym A"),
     SessionCard(
-        name: "Name 3",
-        date: "22/03/2019",
-        startTime: "11:00",
-        endTime: "12:00",
-        focus: "Boxing",
-        location: "Gym A"),
+        name: "Name 4",
+        date: "23/03/2019",
+        startTime: "12:00",
+        endTime: "13:00",
+        focus: "Aerobics",
+        location: "Gym B"),
+    SessionCard(
+        name: "Name 5",
+        date: "24/03/2019",
+        startTime: "13:00",
+        endTime: "14:00",
+        focus: "Burpees",
+        location: "Gym C"),
+    SessionCard(
+        name: "Name 6",
+        date: "25/03/2019",
+        startTime: "14:00",
+        endTime: "15:00",
+        focus: "Strength Training",
+        location: "Gym D"),
+    SessionCard(
+        name: "Name 7",
+        date: "26/03/2019",
+        startTime: "15:00",
+        endTime: "16:00",
+        focus: "HIIT",
+        location: "Gym E"),
   ];
 }
