@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../widgets/radiobutton_sessionfocus.dart';
 import '../widgets/radiobutton_genderPreference.dart';
 import 'global.dart' as globals;
+import '../globalUserID.dart' as globalUID;
 
 class CreateSession2 extends StatelessWidget {
   List<Map<String, dynamic>> params;
@@ -41,6 +42,7 @@ class CreateSession2 extends StatelessWidget {
                       params.add({'level': _level});
                       params.add({'focus': globals.focus});
                       params.add({'sameGender': globals.sameGender});
+                      params.add({'userID': globalUID.uid});
                       add();
                       Navigator.popUntil(
                           context, ModalRoute.withName('/homepage'));
@@ -57,7 +59,7 @@ class CreateSession2 extends StatelessWidget {
 
   Future add() async {
     var highestID = 0;
-    await Firestore.instance
+    await Firestore.instance //Get highest session document ID
         .collection('UnmatchedSession')
         .getDocuments()
         .then((doc) {
@@ -69,6 +71,15 @@ class CreateSession2 extends StatelessWidget {
           if (sessionID > highestID) highestID = sessionID;
         }
       }
+    });
+    String _gender = '';
+    await Firestore.instance //Get current user gender
+        .collection('Profile')
+        .where('userID', isEqualTo: globalUID.uid)
+        .getDocuments()
+        .then((doc) {
+      DocumentSnapshot profile = doc.documents[0];
+      _gender = profile['gender'];
     });
 
     String idNum = (highestID + 1).toString();
@@ -82,6 +93,8 @@ class CreateSession2 extends StatelessWidget {
       'focus': params[5]['focus'],
       'level': params[4]['level'],
       'sameGender': params[6]['sameGender'],
+      'userID': params[7]['userID'],
+      'userGender': _gender,
       'isMatched': false,
     };
     globals.idNum = int.parse(idNum);
@@ -152,7 +165,7 @@ class CreateSession2 extends StatelessWidget {
                       }).toList(),
                       onChanged: (item) {
                         print('[Dropdown] changed to ' + item);
-                        //setState(() {
+                        //setState(() {//       FIXME
                         _level = item;
                         //globals.level = _level;
                         //});

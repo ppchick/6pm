@@ -14,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 1;
   final List<Widget> _children = [
     GymPage(),
-    SessionWidget(),
+    SessionMainPage(),
     MyProfile(),
   ];
 

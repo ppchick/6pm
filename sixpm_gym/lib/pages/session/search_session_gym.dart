@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'global.dart' as globals;
 
 class SearchSession extends StatelessWidget {
  // final formKey = new GlobalKey<FormState>();
