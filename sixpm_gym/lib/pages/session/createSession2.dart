@@ -155,7 +155,7 @@ class CreateSession2 extends StatelessWidget {
                       }).toList(),
                       onChanged: (item) {
                         print('[Dropdown] changed to ' + item);
-                        //setState(() {
+                        //setState(() {//       FIXME
                         _level = item;
                         //globals.level = _level;
                         //});
