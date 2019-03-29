@@ -109,65 +109,7 @@ class SessionListState extends State<SessionList> {
                 uid1NotComplete)), //FIXME CANNOT DISPLAY MORE THAN 2 SESSION (OVERFLOW)
                 //TODO NEED TO ADD ANOTHER _streamBulder( uid2NotComplete)) WIDGET HERE TO LOAD THE REST OF THE SESSIONS
                 //TODO MAKE SURE THAT BOTH STREAMBUILDERS ARE INSIDE A SCROLLABLE WIDGET THAT DO NOT OVERFLOW INTO THE 2 BUTTONS BELOW
-        Container(
-          padding: EdgeInsets.fromLTRB(35.0, 10.0, 30.0, 20.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                height: 50,
-                width: 170,
-                child: Material(
-                  borderRadius: BorderRadius.circular(10.0),
-                  shadowColor: Colors.blueAccent,
-                  color: Colors.blue,
-                  elevation: 7.0,
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.of(context).pushNamed('/createSession');
-                    },
-                    child: Center(
-                      child: Text(
-                        'Create Session',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Montserrat'),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                height: 50,
-                width: 170,
-                child: Material(
-                  borderRadius: BorderRadius.circular(10.0),
-                  shadowColor: Colors.blueAccent,
-                  color: Colors.blue,
-                  elevation: 7.0,
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.of(context).pushNamed('/joinSession');
-                    },
-                    child: Center(
-                        child: Text(
-                      'Join Session',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Montserrat'),
-                    )),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
+        
       ],
     );
   }
@@ -181,7 +123,7 @@ class SessionListState extends State<SessionList> {
         switch (snapshot.connectionState) {
           //if takes too long to load, display "loading"
           case ConnectionState.waiting:
-            return new CircularProgressIndicator();
+            return new Text('Loading...');
           default:
             final int sessionCount = snapshot
                 .data.documents.length; //get number of documents in collection
@@ -249,6 +191,8 @@ class SessionListState extends State<SessionList> {
                                               child: Center(
                                                 child: Text(
                                                     document['location'],
+                                                    overflow: TextOverflow.clip,
+                                                    textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                         fontSize: 16,
                                                         fontWeight:
@@ -303,6 +247,68 @@ class SessionListState extends State<SessionList> {
 class SessionMainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(resizeToAvoidBottomPadding: false, body: SessionList());
+    return new Scaffold(
+      resizeToAvoidBottomPadding: false, 
+      body: SessionList(),
+      bottomNavigationBar: Container(
+          padding: EdgeInsets.fromLTRB(35.0, 10.0, 30.0, 20.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                height: 50,
+                width: 170,
+                child: Material(
+                  borderRadius: BorderRadius.circular(10.0),
+                  shadowColor: Colors.blueAccent,
+                  color: Colors.blue,
+                  elevation: 7.0,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushNamed('/createSession');
+                    },
+                    child: Center(
+                      child: Text(
+                        'Create Session',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Montserrat'),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                height: 50,
+                width: 170,
+                child: Material(
+                  borderRadius: BorderRadius.circular(10.0),
+                  shadowColor: Colors.blueAccent,
+                  color: Colors.blue,
+                  elevation: 7.0,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushNamed('/joinSession');
+                    },
+                    child: Center(
+                        child: Text(
+                      'Join Session',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Montserrat'),
+                    )),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      );
   }
 }
