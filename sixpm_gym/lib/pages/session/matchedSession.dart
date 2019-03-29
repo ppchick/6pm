@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../globalUserID.dart' as globalUID;
+import '../session/checkin.dart';
 
 class MatchedSession extends StatelessWidget {
   MatchedSession(
@@ -116,12 +117,18 @@ class MatchedSession extends StatelessWidget {
               elevation: 7.0,
               child: InkWell(
                 onTap: () {
-                  print('[Check In] Pressed');
-                  // Navigator.of(context).pushNamed('/rateSession'); //NOTE TEMP
-                  //TODO CHECK IN PAGE
-                  // Navigator.pushNamed('/checkIn');
-                  Navigator.of(context).pushNamed('/checkIn');
-                },
+                  if(document!=null){
+                  
+                  Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SessionCheckIn(
+                                      document:
+                                          document)));
+
+                }
+                           //Sends current session document to matchedSession page
+                        },
                 child: Center(
                   child: Text(
                     'Check In',

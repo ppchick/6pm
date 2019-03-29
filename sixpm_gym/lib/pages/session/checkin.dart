@@ -7,8 +7,10 @@ class SessionCheckIn extends StatefulWidget {
   final DocumentSnapshot document;
   SessionCheckIn(
       {this.document});
+  //  final  DocumentSnapshot document;
   @override
-  SessionCheckInState createState() => new SessionCheckInState();
+  SessionCheckInState createState() => new SessionCheckInState(document);
+  // State<StatefulWidget> createState() => new SessionCheckInState(document);
   
 }
 
@@ -19,9 +21,10 @@ class SessionCheckInState extends State<SessionCheckIn> {
   int _hour = 0;
   String showTimer = "START";
   DocumentSnapshot document;
-  SessionCheckInState(
-      {this.document});
-
+  
+  SessionCheckInState(DocumentSnapshot document){
+    this.document = document;
+  }
   void startTimer() {
     const oneSec = const Duration(seconds: 1);
     _timer = new Timer.periodic(
@@ -43,14 +46,14 @@ class SessionCheckInState extends State<SessionCheckIn> {
   }
   void update(String field){
     DocumentReference doc;
-    int id = document['ID'];
-    doc = Firestore.instance.document('UnmatchedSession/session$id');
+    String id = document['ID'];
+    doc = Firestore.instance.document('MatchedSession/session$id');
     
       Map<String, Object> data1 = <String, Object>{
-      'hasCheckedIn1':true,
+      'hasCheckIn1':true,
     };
     Map<String, Object> data2 = <String, Object>{
-      'hasCheckedIn2':true,
+      'hasCheckIn2':true,
     };
     Map<String, Object> data3 = <String, Object>{
       'completed':true,
@@ -79,6 +82,8 @@ class SessionCheckInState extends State<SessionCheckIn> {
     _timer.cancel();
     super.dispose();
   }
+  
+  
 
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -130,8 +135,10 @@ class SessionCheckInState extends State<SessionCheckIn> {
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    
-                    if (document['hasCheckedIn1'] == false ||document['hasCheckedIn2'] == false ) {
+                    // print("aaa");
+                    // print(document["ID"]);
+                    if (document['hasCheckIn1'] == false && document['hasCheckIn2'] == false ) {
+                      
                       if(globalUID.uid==document['userID1']){
                         update("hasCheckedIn1");
                       }
@@ -139,14 +146,14 @@ class SessionCheckInState extends State<SessionCheckIn> {
                         update("hasCheckedIn2");
                       }
                     }
-                    else if (document['hasCheckedIn1'] == true ||document['hasCheckedIn2'] == false ){
+                    else if (document['hasCheckIn1'] == true && document['hasCheckIn2'] == false ){
                       if(globalUID.uid==document['userID1']){}
                       else if (globalUID.uid==document['userID2']){
                         update("hasCheckedIn2");
                         startTimer();
                       }
                     }
-                    else if (document['hasCheckedIn1'] == false ||document['hasCheckedIn2'] == true ){
+                    else if (document['hasCheckIn1'] == false && document['hasCheckIn2'] == true ){
                       if(globalUID.uid==document['userID1']){
                         update("hasCheckedIn1");
                         startTimer();
