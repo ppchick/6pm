@@ -82,70 +82,11 @@ class MapSampleState extends State<GymPage> {
         print(longitude.toString());
       });
     });
-    // widget.storage.readContent().then((String content) {
-    //   print(content.substring(1, 100));
-    //   setState(() {
-    //     List allgyms = [];
-    //     var document = xml.parse(content);
-
-    //     var gymName = document.findAllElements('Placemark');
-    //     List gymNames = [];
-    //     for (var gym in gymName) {
-    //       gymNames.add(gym.findAllElements('name').single.text);
-    //       allgyms.add(gym.findAllElements('description'));
-    //     }
-    //     for (int i = 0; i < 152; i++) {
-    //       var firstGym = allgyms[i];
-    //       var firstDescription;
-    //       for (var des in firstGym) {
-    //         firstDescription = des;
-    //       }
-    //       var tables = firstDescription
-    //           .findAllElements('body')
-    //           .single
-    //           .findAllElements('table');
-    //       var secondTable;
-    //       for (var table in tables) {
-    //         secondTable = table;
-    //       }
-    //       var trIter = secondTable.findAllElements('tr');
-    //       List tdList = [];
-    //       for (var tr in trIter) {
-    //         var tdIter = tr.findAllElements('td');
-    //         for (var td in tdIter) {
-    //           tdList.add(td);
-    //         }
-    //       }
-    //       print(i);
-    //       double dis = await Geolocator().distanceBetween(latitude, longitude, double.parse(tdList[31].text), double.parse(tdList[33].text));
-    //       var result = gymTile(
-    //           name: gymNames[i],
-    //           postalCode: tdList[7].text,
-    //           address: tdList[19].text,
-    //           description: tdList[23].text,
-    //           latitude: double.parse(tdList[31].text),
-    //           longitude: double.parse(tdList[33].text),
-    //           distance: dis,
-    //       );
-    //       // print("start!!!!!");
-    //       // print(firstDescription);
-    //       // print("end!!!");
-    //       // var tableIter = firstDescription.text;
-    //       // print(tableIter);
-    //       allTiles.add(result);
-    //    }
-    //   // kmlContent = content;
-    //   });
-    // });
-    getGymTiles(0.000, 0.000).then((List Tiles) {
-      allTiles = Tiles;
+    getGymTiles().then((List Tiles) {
+      setState(() {
+        allTiles = Tiles;
+      });
     });
-    // setState(() {
-    //   List tiles =getAllTiles(kmlContent, latitude, longitude);
-    //   print(latitude);
-    //   print(longitude);
-    //   allTiles = tiles;
-    // });
   }
 
   // static CameraPosition _kWestgate = CameraPosition(
@@ -226,10 +167,16 @@ class MapSampleState extends State<GymPage> {
                 child: Text(tile.name),
               ),
               Container(
-                width: 100,
-                child: Text(tile.latitude.toString()),
-                // child: Text(latitude.toString()),
-              )
+                height: 40.0,
+                width: 1.0,
+                color: Colors.black,
+                margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+              ),
+              Container(
+                  width: 150,
+                  child: Text(tile.distance.toString().substring(0, 4))
+                  // child: Text(latitude.toString()),
+                  )
             ],
           )),
         );
@@ -252,15 +199,32 @@ class MapSampleState extends State<GymPage> {
             ),
           ),
           Container(
-            padding: EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
-            child: Text(
-              'Notification',
-              style: TextStyle(
-                  fontSize: 20.0,
-                  fontFamily: "Montserrat",
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
+              padding: EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    width: 220,
+                    child: Text(
+                      'Gym Name',
+                      style: TextStyle(
+                          fontSize: 15.0,
+                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Container(
+                    width: 150,
+                    child: Text(
+                      'Distance(km)',
+                      style: TextStyle(
+                          fontSize: 15.0,
+                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.bold),
+                    ),
+                    // child: Text(latitude.toString()),
+                  )
+                ],
+              )),
           new Expanded(
               child: ListView.separated(
                   separatorBuilder: (context, index) => Divider(
@@ -319,16 +283,25 @@ class MapSampleState extends State<GymPage> {
   }
 }
 
-Future<List> getGymTiles(double latitude, double longitude) async {
+Future<List> getGymTiles() async {
+  Position pos = await Geolocator()
+      .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
   List allgyms = [];
   var content = await rootBundle.loadString('assets/EXERCISEFACILITIES.kml');
   var document = xml.parse(content);
 
   var gymName = document.findAllElements('Placemark');
   List gymNames = [];
+  List gymCoordinates = [];
   for (var gym in gymName) {
     gymNames.add(gym.findAllElements('name').single.text);
     allgyms.add(gym.findAllElements('description'));
+    gymCoordinates.add(gym
+        .findAllElements('Point')
+        .single
+        .findAllElements('coordinates')
+        .single
+        .text);
   }
   List gymContents = [];
   for (int i = 0; i < 152; i++) {
@@ -354,74 +327,20 @@ Future<List> getGymTiles(double latitude, double longitude) async {
       }
     }
     print(i);
-    double dis = await Geolocator().distanceBetween(latitude, longitude,
-        double.parse(tdList[31].text), double.parse(tdList[33].text));
+    List coords = gymCoordinates[i].split(",");
+    double dis = await Geolocator().distanceBetween(pos.latitude, pos.longitude,
+        double.parse(coords[1]), double.parse(coords[0]));
     var result = gymTile(
       name: gymNames[i],
       postalCode: tdList[7].text,
       address: tdList[19].text,
       description: tdList[23].text,
-      latitude: double.parse(tdList[31].text),
-      longitude: double.parse(tdList[33].text),
-      distance: dis,
+      latitude: double.parse(coords[1]),
+      longitude: double.parse(coords[0]),
+      distance: dis / 1000,
     );
     gymContents.add(result);
   }
+  gymContents.sort((a, b) => a.distance.compareTo(b.distance));
   return gymContents;
 }
-// // List getGymTiles() {
-// //   return [gymTile(name: "gymboxx", postalCode: "453543", address: 'sfljdsa', description: 'lsdjfslfa', latitude: 324.32, longitude: 324.32),];
-// // }
-
-// List getAllTiles(String content, double latitude, double longitude){
-//   List allTiles = [];
-//   List allgyms = [];
-//   var document = xml.parse(content);
-
-//   var gymName = document.findAllElements('Placemark');
-//   List gymNames = [];
-//   for (var gym in gymName) {
-//     gymNames.add(gym.findAllElements('name').single.text);
-//     allgyms.add(gym.findAllElements('description'));
-//   }
-//   for (int i = 0; i < 152; i++) {
-//     var firstGym = allgyms[i];
-//     var firstDescription;
-//     for (var des in firstGym) {
-//       firstDescription = des;
-//     }
-//     var tables = firstDescription
-//         .findAllElements('body')
-//         .single
-//         .findAllElements('table');
-//     var secondTable;
-//     for (var table in tables) {
-//       secondTable = table;
-//     }
-//     var trIter = secondTable.findAllElements('tr');
-//     List tdList = [];
-//     for (var tr in trIter) {
-//       var tdIter = tr.findAllElements('td');
-//       for (var td in tdIter) {
-//         tdList.add(td);
-//       }
-//     }
-//     print(i);
-//     var result = gymTile(
-//         name: gymNames[i],
-//         postalCode: tdList[7].text,
-//         address: tdList[19].text,
-//         description: tdList[23].text,
-//         latitude: double.parse(tdList[31].text),
-//         longitude: double.parse(tdList[33].text),
-//         // distance: await Geolocator().distanceBetween(latitude, longitude, double.parse(tdList[31].text), double.parse(tdList[33].text)),
-//     );
-//     // print("start!!!!!");
-//     // print(firstDescription);
-//     // print("end!!!");
-//     // var tableIter = firstDescription.text;
-//     // print(tableIter);
-//     allTiles.add(result);
-//   }
-//   return allTiles;
-// }
