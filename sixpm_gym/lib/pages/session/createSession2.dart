@@ -27,7 +27,11 @@ class CreateSession2State extends State<CreateSession2> {
         return AlertDialog(
           title: new Text("New Session Info"),
           content: new Text(
-              "Time  \n" + "Gym  \n" + "Focus  \n" + "Level of experience  \n"),
+              "Date: " + widget.params[3]['date'] + "\n" + 
+              "Time: " + widget.params[1]['startTime'] + " - " + widget.params[2]['endTime'] + "\n" + 
+              "Gym: " + widget.params[0]['location'] + "\n" + 
+              "Focus: " +  globals.focus + "\n" +
+              "Level of experience: " + _level),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             Container(
@@ -97,7 +101,6 @@ class CreateSession2State extends State<CreateSession2> {
       'userGender': _gender,
       'isMatched': false,
     };
-    globals.idNum = int.parse(idNum);
 
     doc.setData(data).whenComplete(() {
       print("UnmatchedSession/session$idNum added");
@@ -203,37 +206,7 @@ class CreateSession2State extends State<CreateSession2> {
                   SizedBox(
                     width: 20,
                   ),
-                  /*Container(
-                    // padding: EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
-                    height: 40.0,
-                    width: 110.0,
-                    color: Colors.transparent,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color: Colors.black,
-                              style: BorderStyle.solid,
-                              width: 1.0),
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(20.0)),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Center(
-                          child: Text(
-                            'Go Back',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Montserrat',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),*/
                   Container(
-                    // padding: EdgeInsets.only(top: 10.0, left: 0.0, right: 20.0),
                     height: 40.0,
                     width: 100.0,
                     child: Material(
@@ -243,7 +216,9 @@ class CreateSession2State extends State<CreateSession2> {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          //Navigator.popUntil(context, ModalRoute.withName('/homepage'));
+                          //Reset globals
+                          globals.focus = 'HIIT';
+                          globals.sameGender = true;
                           Navigator.of(context).pop();
                         },
                         child: Center(

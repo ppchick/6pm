@@ -119,7 +119,6 @@ class CreateSessionState extends State<CreateSession> {
                   width: 1000.0,
                   child: Material(
                     borderRadius: BorderRadius.circular(10.0),
-                    // shadowColor: Colors.grey,
                     color: Colors.white,
                     elevation: 7.0,
                     child: InkWell(
@@ -145,20 +144,6 @@ class CreateSessionState extends State<CreateSession> {
                     ),
                   ),
                 ),
-                /*Container(
-                  padding: EdgeInsets.only(top: 20.0, left: 40.0, right: 40.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        labelText: 'Search For Gym',
-                        labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.blue))),
-                  ),
-                ),*/
-                // SearchGym(),
               ],
             ),
           ),
@@ -210,7 +195,6 @@ class CreateSessionState extends State<CreateSession> {
                                   print('[Dropdown] changed to ' + item);
                                   setState(() {
                                     _startTime = item;
-                                    //globals.startTime = _startTime;
                                   });
                                 },
                               ),
@@ -245,7 +229,6 @@ class CreateSessionState extends State<CreateSession> {
                                   print('[Dropdown] changed to ' + item);
                                   setState(() {
                                     _endTime = item;
-                                    //globals.endTime = _endTime;
                                   });
                                 },
                               ),
@@ -279,7 +262,6 @@ class CreateSessionState extends State<CreateSession> {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          // print('[Go Back] Pressed');
                           Navigator.of(context).pop();
                         },
                         child: Center(
@@ -296,7 +278,6 @@ class CreateSessionState extends State<CreateSession> {
                   ),
                   SizedBox(height: 20.0, width: 150),
                   Container(
-                    // padding: EdgeInsets.only(top: 10.0, left: 0.0, right: 20.0),
                     height: 40.0,
                     width: 100.0,
                     child: Material(
