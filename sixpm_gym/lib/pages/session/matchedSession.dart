@@ -117,9 +117,10 @@ class MatchedSession extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   print('[Check In] Pressed');
-                  Navigator.of(context).pushNamed('/rateSession'); //NOTE TEMP
+                  // Navigator.of(context).pushNamed('/rateSession'); //NOTE TEMP
                   //TODO CHECK IN PAGE
-                  //Navigator.pushNamed('/checkIn');
+                  // Navigator.pushNamed('/checkIn');
+                  Navigator.of(context).pushNamed('/checkIn');
                 },
                 child: Center(
                   child: Text(
