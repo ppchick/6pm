@@ -67,7 +67,7 @@ class SessionListState extends State<SessionList> {
             switch (snapshot.connectionState) {
               //if takes too long to load, display "loading"
               case ConnectionState.waiting:
-                return new Text('Loading...');
+                return new CircularProgressIndicator();
               default:
                 final int sessionCount = snapshot.data.documents
                     .length; //get number of documents in collection

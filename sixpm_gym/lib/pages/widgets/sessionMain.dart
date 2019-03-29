@@ -10,28 +10,19 @@ class SessionList extends StatefulWidget {
 
 class SessionListState extends State<SessionList> {
   CollectionReference col = Firestore.instance.collection('MatchedSession');
-  DocumentSnapshot _profile;
 
-  Future getProfileDocument() async {
-    DocumentReference document = Firestore.instance //Get current user profile
-        .collection('Profile')
-        .document(globalUID.uid);
-    document.get().then((profile) {
-      setState(() {
-        _profile = profile;
-      });
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getProfileDocument();
+  Future<DocumentSnapshot> getProfileDocument() async {
+    DocumentSnapshot document =
+        await Firestore.instance //Get current user profile
+            .collection('Profile')
+            .document(globalUID.uid)
+            .get();
+    return document;
   }
 
   Widget build(BuildContext context) {
-    Query uid1 = col.where('userID1', isEqualTo: globalUID.uid); 
-    Query uid2 = col.where('userID2', isEqualTo: globalUID.uid); 
+    Query uid1 = col.where('userID1', isEqualTo: globalUID.uid);
+    Query uid2 = col.where('userID2', isEqualTo: globalUID.uid);
 
     Query uid1NotComplete = uid1.where('completed', isEqualTo: false);
     Query uid2NotComplete = uid2.where('completed', isEqualTo: false);
@@ -40,16 +31,28 @@ class SessionListState extends State<SessionList> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Container(
-            padding: EdgeInsets.fromLTRB(100.0, 20.0, 0.0, 10.0),
-            child: Row(children: [
-              Icon(Icons.cloud, color: Colors.black),
-              Text(
-                  '   Hello ' +
-                      _profile.data['firstName'] +
-                      ' ' +
-                      _profile.data['lastName'],
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold))
-            ])),
+          padding: EdgeInsets.fromLTRB(100.0, 20.0, 0.0, 10.0),
+          child: new FutureBuilder(
+              future: getProfileDocument(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasData) {
+                  if (snapshot.data != null) {
+                    return new Row(children: [
+                      Icon(Icons.cloud, color: Colors.black),
+                      Text(
+                          '   Hello ' +
+                              snapshot.data['firstName'] +
+                              ' ' +
+                              snapshot.data['lastName'],
+                          style: TextStyle(
+                              fontSize: 20.0, fontWeight: FontWeight.bold))
+                    ]);
+                  }
+                } else {
+                  return new CircularProgressIndicator();
+                }
+              }),
+        ),
         Container(
             padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
             decoration: new BoxDecoration(
@@ -71,11 +74,23 @@ class SessionListState extends State<SessionList> {
                               style: TextStyle(fontSize: 20.0))),
                       Container(
                           alignment: Alignment(0.0, -0.8),
-                          child: Text(
-                              _profile.data['hourSum'].toString() +
-                                  ' HOURS', //TODO sumHours HERE
-                              style: TextStyle(
-                                  fontSize: 40.0, fontWeight: FontWeight.bold)))
+                          child: new FutureBuilder(
+                              future: getProfileDocument(),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot snapshot) {
+                                if (snapshot.hasData) {
+                                  if (snapshot.data != null) {
+                                    return Text(
+                                        snapshot.data['hourSum'].toString() +
+                                            ' HOURS', //TODO sumHours HERE
+                                        style: TextStyle(
+                                            fontSize: 40.0,
+                                            fontWeight: FontWeight.bold));
+                                  }
+                                } else {
+                                  return new CircularProgressIndicator();
+                                }
+                              })),
                     ],
                   ))
                 ]))),
@@ -88,7 +103,10 @@ class SessionListState extends State<SessionList> {
           ),
         ),
         SizedBox(height: 10),
-        new Container(height: 250, child: _streamBulder(uid1NotComplete)),    //FIXME CANNOT DISPLAY MORE THAN 2 SESSION (OVERFLOW)
+        new Container(
+            height: 250,
+            child: _streamBulder(
+                uid1NotComplete)), //FIXME CANNOT DISPLAY MORE THAN 2 SESSION (OVERFLOW)
         Container(
           padding: EdgeInsets.fromLTRB(35.0, 10.0, 30.0, 20.0),
           child: Row(
@@ -161,7 +179,7 @@ class SessionListState extends State<SessionList> {
         switch (snapshot.connectionState) {
           //if takes too long to load, display "loading"
           case ConnectionState.waiting:
-            return new Text('Loading...');
+            return new CircularProgressIndicator();
           default:
             final int sessionCount = snapshot
                 .data.documents.length; //get number of documents in collection
