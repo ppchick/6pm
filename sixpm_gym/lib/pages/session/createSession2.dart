@@ -5,12 +5,15 @@ import '../widgets/radiobutton_genderPreference.dart';
 import 'global.dart' as globals;
 import '../globalUserID.dart' as globalUID;
 
-class CreateSession2 extends StatelessWidget {
-  List<Map<String, dynamic>> params;
-  BuildContext context;
-  CreateSession2(this.context,
-      this.params); //constructor receives params from createSession
+class CreateSession2 extends StatefulWidget {
+  final List<Map<String, dynamic>> params;
 
+  const CreateSession2({Key key, this.params}): super(key: key);
+  @override
+  CreateSession2State createState() => new CreateSession2State();
+}
+
+class CreateSession2State extends State<CreateSession2> {
   String _level = 'Newbie';
 
   DocumentReference doc;
@@ -39,10 +42,10 @@ class CreateSession2 extends StatelessWidget {
                   new FlatButton(
                     child: new Text("Confirm"),
                     onPressed: () {
-                      params.add({'level': _level});
-                      params.add({'focus': globals.focus});
-                      params.add({'sameGender': globals.sameGender});
-                      params.add({'userID': globalUID.uid});
+                      widget.params.add({'level': _level});
+                      widget.params.add({'focus': globals.focus});
+                      widget.params.add({'sameGender': globals.sameGender});
+                      widget.params.add({'userID': globalUID.uid});
                       add();
                       Navigator.popUntil(
                           context, ModalRoute.withName('/homepage'));
@@ -75,25 +78,22 @@ class CreateSession2 extends StatelessWidget {
     String _gender = '';
     await Firestore.instance //Get current user gender
         .collection('Profile')
-        .where('userID', isEqualTo: globalUID.uid)
-        .getDocuments()
-        .then((doc) {
-      DocumentSnapshot profile = doc.documents[0];
-      _gender = profile['gender'];
+        .document(globalUID.uid).get().then((profile) {
+        _gender = profile['gender'];
     });
 
     String idNum = (highestID + 1).toString();
     doc = Firestore.instance.document('UnmatchedSession/session$idNum');
     Map<String, Object> data = <String, Object>{
       'ID': idNum,
-      'location': params[0]['location'],
-      'startTime': params[1]['startTime'],
-      'endTime': params[2]['endTime'],
-      'date': params[3]['date'],
-      'focus': params[5]['focus'],
-      'level': params[4]['level'],
-      'sameGender': params[6]['sameGender'],
-      'userID': params[7]['userID'],
+      'location': widget.params[0]['location'],
+      'startTime': widget.params[1]['startTime'],
+      'endTime': widget.params[2]['endTime'],
+      'date': widget.params[3]['date'],
+      'focus': widget.params[5]['focus'],
+      'level': widget.params[4]['level'],
+      'sameGender': widget.params[6]['sameGender'],
+      'userID': widget.params[7]['userID'],
       'userGender': _gender,
       'isMatched': false,
     };
@@ -165,10 +165,9 @@ class CreateSession2 extends StatelessWidget {
                       }).toList(),
                       onChanged: (item) {
                         print('[Dropdown] changed to ' + item);
-                        //setState(() {//       FIXME
+                        setState(() {
                         _level = item;
-                        //globals.level = _level;
-                        //});
+                        });
                       },
                     ),
                   ),

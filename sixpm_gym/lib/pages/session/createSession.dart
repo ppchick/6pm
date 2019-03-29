@@ -313,7 +313,7 @@ class CreateSessionState extends State<CreateSession> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      CreateSession2(context, params)));
+                                      CreateSession2(params: params)));
                         },
                         child: Center(
                           child: Text(
