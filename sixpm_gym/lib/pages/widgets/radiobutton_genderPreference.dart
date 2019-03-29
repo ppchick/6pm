@@ -11,7 +11,6 @@ class GenderPrefrenceRadioButton extends StatefulWidget {
 
 class _GenderPrefrenceRadioButtonState extends State<GenderPrefrenceRadioButton> {
   String _picked = "Yes";
-
   @override
   Widget build(BuildContext context) {
     return Container(

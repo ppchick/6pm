@@ -10,9 +10,7 @@ class SessionfocusRadioButton extends StatefulWidget {
 }
 
 class _SessionfocusRadioButtonState extends State<SessionfocusRadioButton> {
-
   String _picked = "HIIT";
-
   @override
   Widget build(BuildContext context) {
     return Container(
