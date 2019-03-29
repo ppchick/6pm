@@ -21,11 +21,10 @@ class SessionListState extends State<SessionList> {
   }
 
   Widget build(BuildContext context) {
-    Query uid1 = col.where('userID1', isEqualTo: globalUID.uid);
-    Query uid2 = col.where('userID2', isEqualTo: globalUID.uid);
+    Query notComplete = col.where('completed', isEqualTo: false);                       //Get all uncompleted session
 
-    Query uid1NotComplete = uid1.where('completed', isEqualTo: false);
-    Query uid2NotComplete = uid2.where('completed', isEqualTo: false);
+    Query uid1NotComplete = notComplete.where('userID1', isEqualTo: globalUID.uid);     //UID1 = current user UID
+    Query uid2NotComplete = notComplete.where('userID2', isEqualTo: globalUID.uid);     //UID2 = current user UID
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -82,7 +81,7 @@ class SessionListState extends State<SessionList> {
                                   if (snapshot.data != null) {
                                     return Text(
                                         snapshot.data['hourSum'].toString() +
-                                            ' HOURS', //TODO sumHours HERE
+                                            ' HOURS', 
                                         style: TextStyle(
                                             fontSize: 40.0,
                                             fontWeight: FontWeight.bold));
@@ -103,13 +102,15 @@ class SessionListState extends State<SessionList> {
           ),
         ),
         SizedBox(height: 10),
-        new Container(
-            height: 250,
-            child: _streamBulder(
-                uid1NotComplete)), //FIXME CANNOT DISPLAY MORE THAN 2 SESSION (OVERFLOW)
-                //TODO NEED TO ADD ANOTHER _streamBulder( uid2NotComplete)) WIDGET HERE TO LOAD THE REST OF THE SESSIONS
-                //TODO MAKE SURE THAT BOTH STREAMBUILDERS ARE INSIDE A SCROLLABLE WIDGET THAT DO NOT OVERFLOW INTO THE 2 BUTTONS BELOW
-        
+        new Expanded(
+          child:
+          ListView(
+          shrinkWrap: true,
+          children: <Widget>[
+            _streamBulder(uid1NotComplete), //get sessions where UID1 = current user UID, completed = false
+            _streamBulder(uid2NotComplete), //get sessions where UID1 = current user UID, completed = false
+          ],
+        )),
       ],
     );
   }
@@ -248,67 +249,67 @@ class SessionMainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      resizeToAvoidBottomPadding: false, 
+      resizeToAvoidBottomPadding: false,
       body: SessionList(),
       bottomNavigationBar: Container(
-          padding: EdgeInsets.fromLTRB(35.0, 10.0, 30.0, 20.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                height: 50,
-                width: 170,
-                child: Material(
-                  borderRadius: BorderRadius.circular(10.0),
-                  shadowColor: Colors.blueAccent,
-                  color: Colors.blue,
-                  elevation: 7.0,
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.of(context).pushNamed('/createSession');
-                    },
-                    child: Center(
-                      child: Text(
-                        'Create Session',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Montserrat'),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                height: 50,
-                width: 170,
-                child: Material(
-                  borderRadius: BorderRadius.circular(10.0),
-                  shadowColor: Colors.blueAccent,
-                  color: Colors.blue,
-                  elevation: 7.0,
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.of(context).pushNamed('/joinSession');
-                    },
-                    child: Center(
-                        child: Text(
-                      'Join Session',
+        padding: EdgeInsets.fromLTRB(35.0, 10.0, 30.0, 20.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+              height: 50,
+              width: 170,
+              child: Material(
+                borderRadius: BorderRadius.circular(10.0),
+                shadowColor: Colors.blueAccent,
+                color: Colors.blue,
+                elevation: 7.0,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/createSession');
+                  },
+                  child: Center(
+                    child: Text(
+                      'Create Session',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Montserrat'),
-                    )),
+                    ),
                   ),
                 ),
-              )
-            ],
-          ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+              height: 50,
+              width: 170,
+              child: Material(
+                borderRadius: BorderRadius.circular(10.0),
+                shadowColor: Colors.blueAccent,
+                color: Colors.blue,
+                elevation: 7.0,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/joinSession');
+                  },
+                  child: Center(
+                      child: Text(
+                    'Join Session',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat'),
+                  )),
+                ),
+              ),
+            )
+          ],
         ),
-      );
+      ),
+    );
   }
 }
