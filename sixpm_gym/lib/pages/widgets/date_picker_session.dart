@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import '../session/global.dart' as globals;
 
-class DatePickerSession extends StatelessWidget {
-  BuildContext context;
-  DatePickerSession(this.context);
+class DatePickerSession extends StatefulWidget {
+  @override
+  DatePickerSessionState createState() => new DatePickerSessionState();
+}
+
+class DatePickerSessionState extends State<DatePickerSession> {
   String _datetime;
   String _year;
   String _month;
@@ -79,13 +82,20 @@ class DatePickerSession extends StatelessWidget {
       _date = '0' + date.toString();
     else
       _date = date.toString();
-    _datetime = _date + '/' + _month + '/' + _year;
+
+    setState(() {
+      _datetime = _date + '/' + _month + '/' + _year;
+    });
     globals.datetime = _datetime;
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     initDate();
+  }
+
+  Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[

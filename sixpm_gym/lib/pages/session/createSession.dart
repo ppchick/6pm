@@ -252,7 +252,7 @@ class CreateSessionState extends State<CreateSession> {
                           ),
                         ),
                         Container(
-                          child: DatePickerSession(context),
+                          child: DatePickerSession(),
                         ),
                       ],
                     ),
