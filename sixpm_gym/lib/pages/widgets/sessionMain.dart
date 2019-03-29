@@ -107,6 +107,8 @@ class SessionListState extends State<SessionList> {
             height: 250,
             child: _streamBulder(
                 uid1NotComplete)), //FIXME CANNOT DISPLAY MORE THAN 2 SESSION (OVERFLOW)
+                //TODO NEED TO ADD ANOTHER _streamBulder( uid2NotComplete)) WIDGET HERE TO LOAD THE REST OF THE SESSIONS
+                //TODO MAKE SURE THAT BOTH STREAMBUILDERS ARE INSIDE A SCROLLABLE WIDGET THAT DO NOT OVERFLOW INTO THE 2 BUTTONS BELOW
         Container(
           padding: EdgeInsets.fromLTRB(35.0, 10.0, 30.0, 20.0),
           child: Row(
