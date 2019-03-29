@@ -99,7 +99,8 @@ class CreateSession2State extends State<CreateSession2> {
     });
 
     String idNum = (highestID + 1).toString();
-    doc = Firestore.instance.document('UnmatchedSession/session$idNum');
+   doc = Firestore.instance.document('UnmatchedSession/session$idNum');
+
     Map<String, Object> data = <String, Object>{
       'ID': idNum,
       'location': widget.params[0]['location'],
