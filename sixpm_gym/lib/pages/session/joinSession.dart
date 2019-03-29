@@ -12,7 +12,7 @@ class SessionListState extends State<SessionList> {
   CollectionReference col = Firestore.instance.collection('UnmatchedSession');
   String _gender = '';
 
-  Future getCurrentGender() async{
+  Future getCurrentGender() async {
     DocumentReference document = Firestore.instance //Get current user gender
         .collection('Profile')
         .document(globalUID.uid);
@@ -45,152 +45,143 @@ class SessionListState extends State<SessionList> {
         sameGender2.where('userID', isGreaterThan: globalUID.uid);
     Query uidLess2 = sameGender2.where('userID', isLessThan: globalUID.uid);
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
+    return ListView(
+      shrinkWrap: true,
       children: <Widget>[
         _streamBulder(uidGreater1), //get sessions where sameGender = false, uid > current uid
-        _streamBulder(uidLess1),    //get sessions where sameGender = false, uid < current uid
+        _streamBulder(uidLess1), //get sessions where sameGender = false, uid < current uid
         _streamBulder(uidGreater2), //get sessions where sameGender = true, uid > current uid, userGender = currentGender
-        _streamBulder(uidLess2),    //get sessions where sameGender = true, uid < current uid, userGender = currentGender
+        _streamBulder(uidLess2), //get sessions where sameGender = true, uid < current uid, userGender = currentGender
       ],
     );
   }
 
   Widget _streamBulder(Query query) {
     return StreamBuilder<QuerySnapshot>(
-          stream: query
-              .snapshots(), 
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasError)
-              return new Text('Error: ${snapshot.error}'); //error checking
-            switch (snapshot.connectionState) {
-              //if takes too long to load, display "loading"
-              case ConnectionState.waiting:
-                return new CircularProgressIndicator();
-              default:
-                final int sessionCount = snapshot.data.documents
-                    .length; //get number of documents in collection
-                return ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: sessionCount,
-                  itemBuilder: (_, int index) {
-                    final DocumentSnapshot document =
-                        snapshot.data.documents[index];
+      stream: query.snapshots(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError)
+          return new Text('Error: ${snapshot.error}'); //error checking
+        switch (snapshot.connectionState) {
+          //if takes too long to load, display "loading"
+          case ConnectionState.waiting:
+            return new CircularProgressIndicator();
+          default:
+            final int sessionCount = snapshot
+                .data.documents.length; //get number of documents in collection
+            return ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
+              itemCount: sessionCount,
+              itemBuilder: (_, int index) {
+                final DocumentSnapshot document =
+                    snapshot.data.documents[index];
 
-                    return Card(
-                        elevation: 8.0,
-                        margin: new EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 2.0),
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 75,
-                          decoration:
-                              BoxDecoration(color: Color.fromRGBO(0, 0, 0, 0)),
-                          child: ListTile(
-                            leading: Container(
-                                child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                Icon(Icons.people,
-                                    color: Colors.black, size: 60.0),
-                                Container(
-                                  padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                                  width: 290,
-                                  alignment: Alignment.center,
-                                  child: Column(
+                return Card(
+                    elevation: 8.0,
+                    margin: new EdgeInsets.symmetric(
+                        horizontal: 10.0, vertical: 2.0),
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 75,
+                      decoration:
+                          BoxDecoration(color: Color.fromRGBO(0, 0, 0, 0)),
+                      child: ListTile(
+                        leading: Container(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Icon(Icons.people, color: Colors.black, size: 60.0),
+                            Container(
+                              padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                              width: 290,
+                              alignment: Alignment.center,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                      document['date'] +
+                                          ', ' +
+                                          document['startTime'] +
+                                          ' - ' +
+                                          document['endTime'],
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold)),
+                                  Container(
+                                      child: Row(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: <Widget>[
-                                      Text(
-                                          document['date'] +
-                                              ', ' +
-                                              document['startTime'] +
-                                              ' - ' +
-                                              document['endTime'],
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold)),
                                       Container(
-                                          child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
-                                          Container(
-                                              height: 40.0,
-                                              width: 125.0,
-                                              color: Colors.transparent,
-                                              child: Container(
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Colors.black,
-                                                          style:
-                                                              BorderStyle.solid,
-                                                          width: 1.0),
-                                                      color: Colors.transparent,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20.0)),
-                                                  child: Center(
-                                                    child: Text(
-                                                        document['location'],
-                                                        style: TextStyle(
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold)),
-                                                  ))),
-                                          Container(
-                                              height: 40.0,
-                                              width: 125.0,
-                                              color: Colors.transparent,
-                                              child: Container(
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Colors.black,
-                                                          style:
-                                                              BorderStyle.solid,
-                                                          width: 1.0),
-                                                      color: Colors.transparent,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20.0)),
-                                                  child: Center(
-                                                    child: Text(
-                                                        document['focus'],
-                                                        style: TextStyle(
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold)),
-                                                  ))),
-                                        ],
-                                      ))
+                                          height: 40.0,
+                                          width: 125.0,
+                                          color: Colors.transparent,
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Colors.black,
+                                                      style: BorderStyle.solid,
+                                                      width: 1.0),
+                                                  color: Colors.transparent,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0)),
+                                              child: Center(
+                                                child: Text(
+                                                    document['location'],
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold)),
+                                              ))),
+                                      Container(
+                                          height: 40.0,
+                                          width: 125.0,
+                                          color: Colors.transparent,
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Colors.black,
+                                                      style: BorderStyle.solid,
+                                                      width: 1.0),
+                                                  color: Colors.transparent,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0)),
+                                              child: Center(
+                                                child: Text(document['focus'],
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold)),
+                                              ))),
                                     ],
-                                  ),
-                                )
-                              ],
-                            )),
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SessionInfo(
-                                          document:
-                                              document))); //Sends current session document to sessionInfo page
-                            },
-                          ),
-                        ));
-                  },
-                );
-            }
-          },
-        );
+                                  ))
+                                ],
+                              ),
+                            )
+                          ],
+                        )),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SessionInfo(
+                                      document:
+                                          document))); //Sends current session document to sessionInfo page
+                        },
+                      ),
+                    ));
+              },
+            );
+        }
+      },
+    );
   }
-
 }
 
 class JoinSessionPage extends StatelessWidget {

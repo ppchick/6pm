@@ -188,6 +188,7 @@ class SessionListState extends State<SessionList> {
             return ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
               itemCount: sessionCount,
               itemBuilder: (_, int index) {
                 final DocumentSnapshot document =

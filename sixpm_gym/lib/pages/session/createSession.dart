@@ -129,6 +129,7 @@ class CreateSessionState extends State<CreateSession> {
                                 MaterialPageRoute(
                                     builder: (context) => SearchSession()))
                             .then((location) {
+                              if (location != null)
                           _location = location.toString();
                         });
                       },
