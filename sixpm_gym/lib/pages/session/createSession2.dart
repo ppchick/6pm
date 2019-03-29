@@ -5,12 +5,15 @@ import '../widgets/radiobutton_genderPreference.dart';
 import 'global.dart' as globals;
 import '../globalUserID.dart' as globalUID;
 
-class CreateSession2 extends StatelessWidget {
-  List<Map<String, dynamic>> params;
-  BuildContext context;
-  CreateSession2(this.context,
-      this.params); //constructor receives params from createSession
+class CreateSession2 extends StatefulWidget {
+  final List<Map<String, dynamic>> params;
 
+  const CreateSession2({Key key, this.params}) : super(key: key);
+  @override
+  CreateSession2State createState() => new CreateSession2State();
+}
+
+class CreateSession2State extends State<CreateSession2> {
   String _level = 'Newbie';
 
   DocumentReference doc;
@@ -23,8 +26,22 @@ class CreateSession2 extends StatelessWidget {
         // return object of type Dialog
         return AlertDialog(
           title: new Text("New Session Info"),
-          content: new Text(
-              "Time  \n" + "Gym  \n" + "Focus  \n" + "Level of experience  \n"),
+          content: new Text("Date: " +
+              widget.params[3]['date'] +
+              "\n" +
+              "Time: " +
+              widget.params[1]['startTime'] +
+              " - " +
+              widget.params[2]['endTime'] +
+              "\n" +
+              "Gym: " +
+              widget.params[0]['location'] +
+              "\n" +
+              "Focus: " +
+              globals.focus +
+              "\n" +
+              "Level of experience: " +
+              _level),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             Container(
@@ -39,10 +56,10 @@ class CreateSession2 extends StatelessWidget {
                   new FlatButton(
                     child: new Text("Confirm"),
                     onPressed: () {
-                      params.add({'level': _level});
-                      params.add({'focus': globals.focus});
-                      params.add({'sameGender': globals.sameGender});
-                      params.add({'userID': globalUID.uid});
+                      widget.params.add({'level': _level});
+                      widget.params.add({'focus': globals.focus});
+                      widget.params.add({'sameGender': globals.sameGender});
+                      widget.params.add({'userID': globalUID.uid});
                       add();
                       Navigator.popUntil(
                           context, ModalRoute.withName('/homepage'));
@@ -75,10 +92,9 @@ class CreateSession2 extends StatelessWidget {
     String _gender = '';
     await Firestore.instance //Get current user gender
         .collection('Profile')
-        .where('userID', isEqualTo: globalUID.uid)
-        .getDocuments()
-        .then((doc) {
-      DocumentSnapshot profile = doc.documents[0];
+        .document(globalUID.uid)
+        .get()
+        .then((profile) {
       _gender = profile['gender'];
     });
 
@@ -86,18 +102,17 @@ class CreateSession2 extends StatelessWidget {
     doc = Firestore.instance.document('UnmatchedSession/session$idNum');
     Map<String, Object> data = <String, Object>{
       'ID': idNum,
-      'location': params[0]['location'],
-      'startTime': params[1]['startTime'],
-      'endTime': params[2]['endTime'],
-      'date': params[3]['date'],
-      'focus': params[5]['focus'],
-      'level': params[4]['level'],
-      'sameGender': params[6]['sameGender'],
-      'userID': params[7]['userID'],
+      'location': widget.params[0]['location'],
+      'startTime': widget.params[1]['startTime'],
+      'endTime': widget.params[2]['endTime'],
+      'date': widget.params[3]['date'],
+      'focus': widget.params[5]['focus'],
+      'level': widget.params[4]['level'],
+      'sameGender': widget.params[6]['sameGender'],
+      'userID': widget.params[7]['userID'],
       'userGender': _gender,
       'isMatched': false,
     };
-    globals.idNum = int.parse(idNum);
 
     doc.setData(data).whenComplete(() {
       print("UnmatchedSession/session$idNum added");
@@ -165,10 +180,9 @@ class CreateSession2 extends StatelessWidget {
                       }).toList(),
                       onChanged: (item) {
                         print('[Dropdown] changed to ' + item);
-                        //setState(() {//       FIXME
-                        _level = item;
-                        //globals.level = _level;
-                        //});
+                        setState(() {
+                          _level = item;
+                        });
                       },
                     ),
                   ),
@@ -204,37 +218,7 @@ class CreateSession2 extends StatelessWidget {
                   SizedBox(
                     width: 20,
                   ),
-                  /*Container(
-                    // padding: EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
-                    height: 40.0,
-                    width: 110.0,
-                    color: Colors.transparent,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color: Colors.black,
-                              style: BorderStyle.solid,
-                              width: 1.0),
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(20.0)),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Center(
-                          child: Text(
-                            'Go Back',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Montserrat',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),*/
                   Container(
-                    // padding: EdgeInsets.only(top: 10.0, left: 0.0, right: 20.0),
                     height: 40.0,
                     width: 100.0,
                     child: Material(
@@ -244,7 +228,9 @@ class CreateSession2 extends StatelessWidget {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          //Navigator.popUntil(context, ModalRoute.withName('/homepage'));
+                          //Reset globals
+                          globals.focus = 'HIIT';
+                          globals.sameGender = true;
                           Navigator.of(context).pop();
                         },
                         child: Center(

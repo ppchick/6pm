@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class SearchSession extends StatelessWidget {
- // final formKey = new GlobalKey<FormState>();
- // final key = new GlobalKey<ScaffoldState>();
+class SearchSession extends StatefulWidget {
+  @override
+  SearchSessionState createState() => new SearchSessionState();
+}
+
+class SearchSessionState extends State<SearchSession> {
+  // final formKey = new GlobalKey<FormState>();
+  // final key = new GlobalKey<ScaffoldState>();
   final TextEditingController _filter = new TextEditingController();
   String _searchText = "";
-  List names = ["NTU Stadium","GYMMBOXX"];
-  List filteredNames = ["NTU Stadium","GYMMBOXX"];
+  List names = ["NTU Stadium", "GYMMBOXX"];
+  List filteredNames = ["NTU Stadium", "GYMMBOXX"];
   Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle = new Text( '...' );
+  Widget _appBarTitle = new Text('...');
 
 /*
   SearchSessionState() {
@@ -45,37 +51,43 @@ class SearchSession extends StatelessWidget {
       title: _appBarTitle,
       leading: new IconButton(
         icon: _searchIcon,
-        //onPressed: _searchPressed,
-
+        onPressed: _searchPressed,
       ),
     );
   }
 
-  Widget _buildList() {   //TODO GET DB DATA (GYM LIST)
-    if (!(_searchText.isEmpty)) {
-      List tempList = new List();
-      for (int i = 0; i < filteredNames.length; i++) {
-        if (filteredNames[i].toLowerCase().contains(_searchText.toLowerCase())) {
-          tempList.add(filteredNames[i]);
-        }
-      }
-      filteredNames = tempList;
-    }
-    return ListView.builder(
-      itemCount: names == null ? 0 : filteredNames.length,
-      itemBuilder: (BuildContext context, int index) {
-        return new ListTile(
-          title: Text(filteredNames[index]),
-          onTap: ()=>
-          { _filter.text = filteredNames[index],
-            Navigator.pop(context, filteredNames[index])
-          } ,
-        );
-        },
-        );
-      }
+  Widget _buildList() {
+    //TODO GET DB DATA (GYM LIST)
+    return StreamBuilder<QuerySnapshot>(
+        stream: Firestore.instance.collection('Gym').snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError)
+            return new Text('Error: ${snapshot.error}'); //error checking
+          switch (snapshot.connectionState) {
+            //if takes too long to load, display "loading"
+            case ConnectionState.waiting:
+              return new CircularProgressIndicator();
+            default:
+              final int gymCount = snapshot
+                  .data.documents.length; //get number of gyms in collection
+              return ListView.builder(
+                itemCount: gymCount,
+                itemBuilder: (BuildContext context, int index) {
+                  return new ListTile(
+                    title: Text(snapshot.data.documents[index]['locationStr']),
+                    onTap: () => {
+                          _filter.text =
+                              snapshot.data.documents[index]['locationStr'],
+                          Navigator.pop(context,
+                              snapshot.data.documents[index]['locationStr'])
+                        },
+                  );
+                },
+              );
+          }
+        });
+  }
 
-/*
   void _searchPressed() {
     setState(() {
       if (this._searchIcon.icon == Icons.search) {
@@ -83,17 +95,14 @@ class SearchSession extends StatelessWidget {
         this._appBarTitle = new TextField(
           controller: _filter,
           decoration: new InputDecoration(
-            prefixIcon: new Icon(Icons.search),
-            hintText: 'Search...'
-          ),
+              prefixIcon: new Icon(Icons.search), hintText: 'Search...'),
         );
       } else {
         this._searchIcon = new Icon(Icons.search);
-        this._appBarTitle = new Text( '...' );
+        this._appBarTitle = new Text('...');
         filteredNames = names;
         _filter.clear();
       }
     });
   }
-*/
 }
