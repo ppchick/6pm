@@ -233,7 +233,7 @@ class SessionListState extends State<SessionList> {
                               MaterialPageRoute(
                                   builder: (context) => MatchedSession(
                                       document:
-                                          document))); //Sends current session document to sessionInfo page
+                                          document))); //Sends current session document to matchedSession page
                         },
                       ),
                     ));
