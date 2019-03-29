@@ -3,7 +3,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 import 'gymTile.dart';
 import 'package:xml/xml.dart' as xml;
-import 'dart:async';
 import 'dart:io';
 import 'package:path/path.dart' as path;
 import 'package:flutter/services.dart' show rootBundle;
