@@ -8,7 +8,7 @@ import '../globalUserID.dart' as globalUID;
 class CreateSession2 extends StatefulWidget {
   final List<Map<String, dynamic>> params;
 
-  const CreateSession2({Key key, this.params}): super(key: key);
+  const CreateSession2({Key key, this.params}) : super(key: key);
   @override
   CreateSession2State createState() => new CreateSession2State();
 }
@@ -26,12 +26,22 @@ class CreateSession2State extends State<CreateSession2> {
         // return object of type Dialog
         return AlertDialog(
           title: new Text("New Session Info"),
-          content: new Text(
-              "Date: " + widget.params[3]['date'] + "\n" + 
-              "Time: " + widget.params[1]['startTime'] + " - " + widget.params[2]['endTime'] + "\n" + 
-              "Gym: " + widget.params[0]['location'] + "\n" + 
-              "Focus: " +  globals.focus + "\n" +
-              "Level of experience: " + _level),
+          content: new Text("Date: " +
+              widget.params[3]['date'] +
+              "\n" +
+              "Time: " +
+              widget.params[1]['startTime'] +
+              " - " +
+              widget.params[2]['endTime'] +
+              "\n" +
+              "Gym: " +
+              widget.params[0]['location'] +
+              "\n" +
+              "Focus: " +
+              globals.focus +
+              "\n" +
+              "Level of experience: " +
+              _level),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             Container(
@@ -82,8 +92,10 @@ class CreateSession2State extends State<CreateSession2> {
     String _gender = '';
     await Firestore.instance //Get current user gender
         .collection('Profile')
-        .document(globalUID.uid).get().then((profile) {
-        _gender = profile['gender'];
+        .document(globalUID.uid)
+        .get()
+        .then((profile) {
+      _gender = profile['gender'];
     });
 
     String idNum = (highestID + 1).toString();
@@ -169,7 +181,7 @@ class CreateSession2State extends State<CreateSession2> {
                       onChanged: (item) {
                         print('[Dropdown] changed to ' + item);
                         setState(() {
-                        _level = item;
+                          _level = item;
                         });
                       },
                     ),

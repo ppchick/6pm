@@ -21,10 +21,13 @@ class SessionListState extends State<SessionList> {
   }
 
   Widget build(BuildContext context) {
-    Query notComplete = col.where('completed', isEqualTo: false);                       //Get all uncompleted session
+    Query notComplete =
+        col.where('completed', isEqualTo: false); //Get all uncompleted session
 
-    Query uid1NotComplete = notComplete.where('userID1', isEqualTo: globalUID.uid);     //UID1 = current user UID
-    Query uid2NotComplete = notComplete.where('userID2', isEqualTo: globalUID.uid);     //UID2 = current user UID
+    Query uid1NotComplete = notComplete.where('userID1',
+        isEqualTo: globalUID.uid); //UID1 = current user UID
+    Query uid2NotComplete = notComplete.where('userID2',
+        isEqualTo: globalUID.uid); //UID2 = current user UID
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -81,7 +84,7 @@ class SessionListState extends State<SessionList> {
                                   if (snapshot.data != null) {
                                     return Text(
                                         snapshot.data['hourSum'].toString() +
-                                            ' HOURS', 
+                                            ' HOURS',
                                         style: TextStyle(
                                             fontSize: 40.0,
                                             fontWeight: FontWeight.bold));
@@ -103,12 +106,13 @@ class SessionListState extends State<SessionList> {
         ),
         SizedBox(height: 10),
         new Expanded(
-          child:
-          ListView(
+            child: ListView(
           shrinkWrap: true,
           children: <Widget>[
-            _streamBulder(uid1NotComplete), //get sessions where UID1 = current user UID, completed = false
-            _streamBulder(uid2NotComplete), //get sessions where UID1 = current user UID, completed = false
+            _streamBulder(
+                uid1NotComplete), //get sessions where UID1 = current user UID, completed = false
+            _streamBulder(
+                uid2NotComplete), //get sessions where UID1 = current user UID, completed = false
           ],
         )),
       ],

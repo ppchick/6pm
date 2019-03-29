@@ -48,10 +48,14 @@ class SessionListState extends State<SessionList> {
     return ListView(
       shrinkWrap: true,
       children: <Widget>[
-        _streamBulder(uidGreater1), //get sessions where sameGender = false, uid > current uid
-        _streamBulder(uidLess1), //get sessions where sameGender = false, uid < current uid
-        _streamBulder(uidGreater2), //get sessions where sameGender = true, uid > current uid, userGender = currentGender
-        _streamBulder(uidLess2), //get sessions where sameGender = true, uid < current uid, userGender = currentGender
+        _streamBulder(
+            uidGreater1), //get sessions where sameGender = false, uid > current uid
+        _streamBulder(
+            uidLess1), //get sessions where sameGender = false, uid < current uid
+        _streamBulder(
+            uidGreater2), //get sessions where sameGender = true, uid > current uid, userGender = currentGender
+        _streamBulder(
+            uidLess2), //get sessions where sameGender = true, uid < current uid, userGender = currentGender
       ],
     );
   }
@@ -173,7 +177,7 @@ class SessionListState extends State<SessionList> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => SessionInfo(
-                                      document:
+                                      unmatchedDocument:
                                           document))); //Sends current session document to sessionInfo page
                         },
                       ),

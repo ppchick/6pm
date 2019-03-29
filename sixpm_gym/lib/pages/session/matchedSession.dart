@@ -67,7 +67,8 @@ class MatchedSession extends StatelessWidget {
                                     ' ' +
                                     snapshot.data['lastName'],
                                 style: TextStyle(
-                                    fontSize: 20.0, fontWeight: FontWeight.normal));
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.normal));
                           }
                         } else {
                           return new CircularProgressIndicator();
