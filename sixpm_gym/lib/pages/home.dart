@@ -67,6 +67,6 @@ class _HomePageState extends State<HomePage> {
 
   void SignOut() async {
     FirebaseAuth.instance.signOut();
-    Navigator.popUntil(context, ModalRoute.withName('/'));
+    Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
   }
 }
