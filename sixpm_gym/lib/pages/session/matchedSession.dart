@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../globalUserID.dart' as globalUID;
+import '../session/checkin.dart';
 
 class MatchedSession extends StatelessWidget {
   MatchedSession(
@@ -116,10 +117,25 @@ class MatchedSession extends StatelessWidget {
               elevation: 7.0,
               child: InkWell(
                 onTap: () {
-                  print('[Check In] Pressed');
                   //TODO ONLY ENABLE CHECKIN BUTTON 15MINS BEFORE START TIME
-                  Navigator.of(context).pushNamed('/checkIn');  //FIXME MUST PASS SESSION DOCUMENT TO CHECKIN PAGE
-                },
+                  print('[Check In] Pressed');
+                  if(document!=null){
+                  
+                  Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SessionCheckIn(
+                                      document:
+                                          document)));
+
+                }
+                           
+                        },
+
+                  
+                  
+
+
                 child: Center(
                   child: Text(
                     'Check In',

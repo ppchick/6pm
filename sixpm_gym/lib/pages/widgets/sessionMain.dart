@@ -83,7 +83,7 @@ class SessionListState extends State<SessionList> {
                                 if (snapshot.hasData) {
                                   if (snapshot.data != null) {
                                     return Text(
-                                        snapshot.data['hourSum'].toString() +
+                                        snapshot.data['Sum'].toString() +
                                             ' HOURS',
                                         style: TextStyle(
                                             fontSize: 40.0,
