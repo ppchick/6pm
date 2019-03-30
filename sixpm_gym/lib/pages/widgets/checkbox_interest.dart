@@ -44,4 +44,4 @@ class _InterestCheckboxWidgetState extends State<InterestCheckboxWidget> {
   }
 }
 
-Widget getCheckboxWidgets(List<String> strings) {}
+//Widget getCheckboxWidgets(List<String> strings) {}

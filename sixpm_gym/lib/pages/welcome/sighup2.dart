@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/date_picker.dart';
-import '../widgets/checkbox_interest.dart';
-import '../widgets/checkbox_strength.dart';
+//import '../widgets/checkbox_interest.dart';
+//import '../widgets/checkbox_strength.dart';
 import '../home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,10 +26,10 @@ class _SignupPageState2 extends State<SignupPage2> {
   _SignupPageState2(this.user, this.username, this.email, this.password);
   final FirebaseUser user;
   final String username, email, password;
-  String _genderValue = 'Male';
+  String _genderValue = 'male';
   String _levelValue = 'Newbie';
-  String _interest = '';
-  String _strength = '';
+  //String _interest = '';
+  //String _strength = '';
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Firestore db = Firestore.instance;
   TextEditingController interestController = new TextEditingController();
@@ -327,7 +327,7 @@ class _SignupPageState2 extends State<SignupPage2> {
       // FirebaseUser user = await FirebaseAuth.instance
       //     .createUserWithEmailAndPassword(email: email, password: password);
       var dataMap = new Map<String, dynamic>();
-      dataMap['gender'] = _genderValue;
+      dataMap['gender'] = _genderValue.toLowerCase();
       dataMap['level'] = _levelValue;
       dataMap['username'] = username;
       dataMap['email'] = email;

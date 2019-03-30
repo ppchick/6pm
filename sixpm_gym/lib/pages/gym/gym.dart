@@ -4,7 +4,7 @@ import 'dart:async';
 import 'gymTile.dart';
 import 'package:xml/xml.dart' as xml;
 import 'dart:io';
-import 'package:path/path.dart' as path;
+//import 'package:path/path.dart' as path;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
@@ -82,9 +82,9 @@ class MapSampleState extends State<GymPage> {
         print(longitude.toString());
       });
     });
-    getGymTiles().then((List Tiles) {
+    getGymTiles().then((List tiles) {
       setState(() {
-        allTiles = Tiles;
+        allTiles = tiles;
       });
     });
   }
@@ -133,7 +133,7 @@ class MapSampleState extends State<GymPage> {
   // }
 
   final Set<Marker> _markers = {};
-
+/*
   LatLng _lastMapPosition = LatLng(1.3521, 103.8198);
 
   void _onCameraMove(CameraPosition position) {
@@ -154,11 +154,11 @@ class MapSampleState extends State<GymPage> {
       ));
     });
   }
-
+*/
   List androidVersionNames = ["Cupcake", "Donut"];
   @override
   Widget build(BuildContext context) {
-    ListTile makeListTile(gymTile tile) => ListTile(
+    ListTile makeListTile(GymTile tile) => ListTile(
           title: Container(
               child: Row(
             children: <Widget>[
@@ -330,7 +330,7 @@ Future<List> getGymTiles() async {
     List coords = gymCoordinates[i].split(",");
     double dis = await Geolocator().distanceBetween(pos.latitude, pos.longitude,
         double.parse(coords[1]), double.parse(coords[0]));
-    var result = gymTile(
+    var result = GymTile(
       name: gymNames[i],
       postalCode: tdList[7].text,
       address: tdList[19].text,

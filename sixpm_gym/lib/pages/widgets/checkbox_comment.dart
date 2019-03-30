@@ -71,4 +71,4 @@ class _CommentCheckboxState extends State<CommentCheckbox> {
   }
 }
 
-Widget getCheckboxWidgets(List<String> strings) {}
+//Widget getCheckboxWidgets(List<String> strings) {}

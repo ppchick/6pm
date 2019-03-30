@@ -44,4 +44,4 @@ class _StrengthCheckboxWidgetState extends State<StrengthCheckboxWidget> {
   }
 }
 
-Widget getCheckboxWidgets(List<String> strings) {}
+//Widget getCheckboxWidgets(List<String> strings) {}

@@ -31,8 +31,7 @@ class _HomePageState extends State<HomePage> {
                 child: new Text('No'),
               ),
               new FlatButton(
-                onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                    context, '/', (_) => false),
+                onPressed: () => signOut(),
                 child: new Text('Yes'),
               ),
             ],
@@ -52,8 +51,7 @@ class _HomePageState extends State<HomePage> {
                     child: new Text('No'),
                   ),
                   new FlatButton(
-                    onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                        context, '/', (_) => false),
+                    onPressed: () => signOut(),
                     child: new Text('Yes'),
                   ),
                 ],
@@ -109,7 +107,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void SignOut() async {
+  void signOut() async {
     FirebaseAuth.instance.signOut();
     Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
   }

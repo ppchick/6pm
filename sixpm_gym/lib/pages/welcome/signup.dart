@@ -9,7 +9,7 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  String _email, _password, _verifyPassword, _username;
+  String _email, _password, _username;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   var passKey = GlobalKey<FormFieldState>();
   @override

@@ -80,7 +80,7 @@ class _MyProfileState extends State<MyProfile> {
                                               fontSize: 20.0),
                                         ),
                                         SizedBox(width: 5.0),
-                                        snapshot.data['gender'] == 'Male'
+                                        snapshot.data['gender'] == 'male'
                                             ? Image.asset(
                                                 'img/male.png',
                                                 height: 20.0,
@@ -354,7 +354,7 @@ class _MyProfileState extends State<MyProfile> {
                             color: Colors.red,
                             elevation: 7.0,
                             child: InkWell(
-                              onTap: SignOut,
+                              onTap: signOut,
                               child: Center(
                                 child: Text(
                                   'LOGOUT',
@@ -381,7 +381,7 @@ class _MyProfileState extends State<MyProfile> {
         });
   }
 
-  void SignOut() async {
+  void signOut() async {
     FirebaseAuth.instance.signOut();
     Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
   }
