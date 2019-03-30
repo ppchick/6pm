@@ -46,19 +46,19 @@ class _MyHomePageState extends State<WelcomePage> {
                   child: Stack(
                     children: <Widget>[
                       Container(
-                        padding: EdgeInsets.fromLTRB(15.0, 70.0, 0.0, 0.0),
+                        padding: EdgeInsets.fromLTRB(15.0, 90.0, 0.0, 0.0),
                         child: Text('Hello',
                             style: TextStyle(
                                 fontSize: 80.0, fontWeight: FontWeight.bold)),
                       ),
                       Container(
-                        padding: EdgeInsets.fromLTRB(16.0, 135.0, 0.0, 0.0),
+                        padding: EdgeInsets.fromLTRB(16.0, 165.0, 0.0, 0.0),
                         child: Text('There',
                             style: TextStyle(
                                 fontSize: 80.0, fontWeight: FontWeight.bold)),
                       ),
                       Container(
-                        padding: EdgeInsets.fromLTRB(225.0, 135.0, 0.0, 0.0),
+                        padding: EdgeInsets.fromLTRB(225.0, 165.0, 0.0, 0.0),
                         child: Text('.',
                             style: TextStyle(
                                 fontSize: 80.0,
@@ -113,22 +113,7 @@ class _MyHomePageState extends State<WelcomePage> {
                                             BorderSide(color: Colors.blue))),
                                 obscureText: true,
                               ),
-                              Container(
-                                //TODO IMPLEMENT OR REMOVE
-                                alignment: Alignment(1.0, 0.0),
-                                padding: EdgeInsets.only(top: 25.0, left: 20.0),
-                                child: InkWell(
-                                  child: Text(
-                                    'Forgot Password',
-                                    style: TextStyle(
-                                        color: Colors.blue,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Montserrat',
-                                        decoration: TextDecoration.underline),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 60.0),
+                              SizedBox(height: 70.0),
                               Container(
                                 height: 40.0,
                                 child: Material(
@@ -247,10 +232,19 @@ class _MyHomePageState extends State<WelcomePage> {
         globalUID.uid = user.uid;
         // Navigator.push(
         //     context, MaterialPageRoute(builder: (context) => Home(user: user)));
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => HomePage(user: user), settings: RouteSettings(name: "homepage")));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomePage(user: user),
+                settings: RouteSettings(name: "homepage")));
         // Navigator.of(context).pushNamed('homepage');
       } catch (e) {
+        showDialog(
+            context: context,
+            child: AlertDialog(
+              title: Text('Wrong Password'),
+              content: Text('Please check your password is correct'),
+            ));
         print('Wrong account');
         print(e.message);
       }
