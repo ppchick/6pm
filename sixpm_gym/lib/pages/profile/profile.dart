@@ -1,12 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MyProfile extends StatefulWidget {
+  final FirebaseUser user;
+  MyProfile({Key key, @required this.user}) : super(key: key);
   @override
-  _MyProfileState createState() => new _MyProfileState();
+  _MyProfileState createState() => new _MyProfileState(user);
 }
 
 class _MyProfileState extends State<MyProfile> {
   List<String> items = ['1', '2', '3'];
+  final FirebaseUser user;
+  DocumentSnapshot _profile;
+  _MyProfileState(this.user);
+  Future getProfileDocument() async {
+    DocumentReference document = Firestore.instance //Get current user profile
+        .collection('Profile')
+        .document(user.uid);
+    document.get().then((profile) {
+      setState(() {
+        _profile = profile;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getProfileDocument();
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -46,7 +70,7 @@ class _MyProfileState extends State<MyProfile> {
                   Container(
                     padding: EdgeInsets.fromLTRB(20.0, 80.0, 0, 0),
                     child: Text(
-                      'USERNAME',
+                      _profile.data['username'],
                       style: TextStyle(
                           fontSize: 30.0,
                           fontFamily: 'Montserrat',
@@ -143,10 +167,7 @@ class _MyProfileState extends State<MyProfile> {
                   color: Colors.red,
                   elevation: 7.0,
                   child: InkWell(
-                    onTap: () {
-                      Navigator.popUntil(
-                          context, (Route<dynamic> route) => route.isFirst);
-                    },
+                    onTap: SignOut,
                     child: Center(
                       child: Text(
                         'LOGOUT',
@@ -166,6 +187,11 @@ class _MyProfileState extends State<MyProfile> {
         ],
       ),
     );
+  }
+
+  void SignOut() async {
+    FirebaseAuth.instance.signOut();
+    Navigator.popUntil(context, ModalRoute.withName('/'));
   }
 }
 

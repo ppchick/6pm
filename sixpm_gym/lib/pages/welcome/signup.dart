@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../globalUserID.dart' as globalUID;
 import 'package:firebase_auth/firebase_auth.dart';
+import './sighup2.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -217,9 +218,15 @@ class _SignupPageState extends State<SignupPage> {
             .createUserWithEmailAndPassword(email: _email, password: _password);
         // FIXME user.sendEmailVerification();
         globalUID.uid = user.uid;
-        // Navigator.push(
-        //     context, MaterialPageRoute(builder: (context) => Home(user: user)));
-        Navigator.pushNamed(context, '/signup2', arguments: {user: user});
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SignupPage2(
+                    user: user,
+                    email: _email,
+                    password: _password,
+                    username: _username)));
+        // Navigator.pushNamed(context, '/signup2', arguments: {user: user});
         // Navigator.of(context).pushNamed('/homepage');
       } catch (e) {
         print('Wrong account');

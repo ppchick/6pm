@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder>{
         '/signup': (BuildContext context) => new SignupPage(),
-        '/homepage': (BuildContext context) => new HomePage(),
-        '/signup2': (BuildContext context) => new SignupPage2(),
+        // '/homepage': (BuildContext context) => new HomePage(),
+        // '/signup2': (BuildContext context) => new SignupPage2(),
         '/sessionHistory': (BuildContext context) => new SessionHistory(),
         '/rateSession': (BuildContext context) => new RateSession(),
         '/createSession': (BuildContext context) => new CreateSession(),
