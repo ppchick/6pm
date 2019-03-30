@@ -62,6 +62,29 @@ class CreateSessionState extends State<CreateSession> {
     '23:30',
   ];
 
+// user defined function
+  void _errorDialog(context) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Error!"),
+          content: new Text("Please select a gym before proceeding!"),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Okay"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -287,6 +310,10 @@ class CreateSessionState extends State<CreateSession> {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
+                          if (_location == "SEARCH FOR GYM"){   //No gym selected
+                              _errorDialog(context);
+                          }
+                          else{
                           params.add({'location': _location});
                           params.add({'startTime': _startTime});
                           params.add({'endTime': _endTime});
@@ -296,7 +323,7 @@ class CreateSessionState extends State<CreateSession> {
                               MaterialPageRoute(
                                   builder: (context) =>
                                       CreateSession2(params: params)));
-                        },
+                      }},
                         child: Center(
                           child: Text(
                             'NEXT',

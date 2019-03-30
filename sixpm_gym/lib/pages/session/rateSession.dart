@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import '../widgets/checkbox_comment.dart';
+
 class RateSession extends StatefulWidget{
   @override
   _RateSessionState createState() => _RateSessionState();
 }
 
 class _RateSessionState extends State<RateSession>{
+  //TODO CONSTRUCTOR TO GET SESSION DOCUMENT FROM CHECKIN PAGE
   double rating = 0;
   int starCount = 5;
   @override
@@ -116,7 +118,8 @@ class _RateSessionState extends State<RateSession>{
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          //TODO UPDATE DB WITH RATE ETC
+                          //TODO UPDATE MatchedSession DB WITH RATE, FEEDBACK, COMPLETED = TRUE
+                          //TODO UPDATE BOTH PROFILES HourSum AND numOfSession
                           Navigator.popUntil(
                         context, ModalRoute.withName('/homepage'));
                         },

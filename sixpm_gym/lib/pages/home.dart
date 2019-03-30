@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import './widgets/sessionMain.dart';
 import './gym/gym.dart';
@@ -19,6 +18,50 @@ class _HomePageState extends State<HomePage> {
   _HomePageState(this.user);
   int _currentIndex = 1;
 
+  void _logoutDialog(context) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+            title: new Text('Logout'),
+            content: new Text('Do you want to logout?'),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: new Text('No'),
+              ),
+              new FlatButton(
+                onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                    context, '/', (_) => false),
+                child: new Text('Yes'),
+              ),
+            ],
+          ),
+    );
+  }
+
+  Future<bool> _onWillPop() {
+    return showDialog(
+          context: context,
+          builder: (context) => new AlertDialog(
+                title: new Text('Logout'),
+                content: new Text('Do you want to logout?'),
+                actions: <Widget>[
+                  new FlatButton(
+                    onPressed: () => Navigator.of(context).pop(false),
+                    child: new Text('No'),
+                  ),
+                  new FlatButton(
+                    onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                        context, '/', (_) => false),
+                    child: new Text('Yes'),
+                  ),
+                ],
+              ),
+        ) ??
+        false;
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> _children = [
@@ -28,35 +71,36 @@ class _HomePageState extends State<HomePage> {
         user: user,
       ),
     ];
-    return new Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-        automaticallyImplyLeading: false,
-        actions: <Widget>[
-          FlatButton(
-            textColor: Colors.white,
-            onPressed: SignOut,
-            child: Text('Logout'),
+
+    return new WillPopScope(
+        onWillPop: _onWillPop,
+        child: new Scaffold(
+          appBar: AppBar(
+            title: Text('Home'),
+            automaticallyImplyLeading: false,
+            actions: <Widget>[
+              FlatButton(
+                textColor: Colors.white,
+                onPressed: () => _logoutDialog(context),
+                child: Text('Logout'),
+              ),
+            ],
           ),
-        ],
-        // elevation: 0.0,
-      ),
-      backgroundColor: Colors.white,
-      body: _children[_currentIndex],
-      bottomNavigationBar: new BottomNavigationBar(
-        //backgroundColor: Colors.white,
-        currentIndex: _currentIndex,
-        onTap: onTabTapped,
-        items: [
-          new BottomNavigationBarItem(
-              icon: new Icon(Icons.map), title: new Text("gym")),
-          new BottomNavigationBarItem(
-              icon: new Icon(Icons.home), title: new Text("session")),
-          new BottomNavigationBarItem(
-              icon: new Icon(Icons.person), title: new Text("profile"))
-        ],
-      ),
-    );
+          backgroundColor: Colors.white,
+          body: _children[_currentIndex],
+          bottomNavigationBar: new BottomNavigationBar(
+            currentIndex: _currentIndex,
+            onTap: onTabTapped,
+            items: [
+              new BottomNavigationBarItem(
+                  icon: new Icon(Icons.map), title: new Text("gym")),
+              new BottomNavigationBarItem(
+                  icon: new Icon(Icons.home), title: new Text("session")),
+              new BottomNavigationBarItem(
+                  icon: new Icon(Icons.person), title: new Text("profile"))
+            ],
+          ),
+        ));
   }
 
   void onTabTapped(int index) {
