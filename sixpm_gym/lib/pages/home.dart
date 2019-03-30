@@ -18,6 +18,28 @@ class _HomePageState extends State<HomePage> {
   _HomePageState(this.user);
   int _currentIndex = 1;
 
+  void _logoutDialog(context) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+            title: new Text('Logout'),
+            content: new Text('Do you want to logout?'),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: new Text('No'),
+              ),
+              new FlatButton(
+                onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                    context, '/', (_) => false),
+                child: new Text('Yes'),
+              ),
+            ],
+          ),
+    );
+  }
+
   Future<bool> _onWillPop() {
     return showDialog(
           context: context,
@@ -59,7 +81,7 @@ class _HomePageState extends State<HomePage> {
             actions: <Widget>[
               FlatButton(
                 textColor: Colors.white,
-                onPressed: SignOut,
+                onPressed: () => _logoutDialog(context),
                 child: Text('Logout'),
               ),
             ],

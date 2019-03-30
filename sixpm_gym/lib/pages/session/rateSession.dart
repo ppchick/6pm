@@ -119,6 +119,7 @@ class _RateSessionState extends State<RateSession>{
                       child: InkWell(
                         onTap: () {
                           //TODO UPDATE MatchedSession DB WITH RATE, FEEDBACK, COMPLETED = TRUE
+                          //TODO UPDATE BOTH PROFILES HourSum AND numOfSession
                           Navigator.popUntil(
                         context, ModalRoute.withName('/homepage'));
                         },
