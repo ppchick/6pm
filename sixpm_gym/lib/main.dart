@@ -14,6 +14,7 @@ import 'pages/session/search_session_gym.dart';
 import 'pages/session/rateSession.dart';
 import 'pages/session/sessionHistoryInfo.dart';
 import 'pages/auth.dart';
+import 'pages/session/checkin.dart';
 
 void main() {
   runApp(new MyApp());
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         '/searchSession': (BuildContext context) => new SearchSession(),
         '/sessionHistoryInfo': (BuildContext context) =>
             new SessionHistoryInfo(),
+        '/checkIn': (BuildContext context) => new SessionCheckIn(),
       },
       home: new WelcomePage(),
     );
