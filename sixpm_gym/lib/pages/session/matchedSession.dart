@@ -25,28 +25,28 @@ class MatchedSession extends StatelessWidget {
   }
 
   Widget _checkInButton(context, allowCheckIn) {
-    if (!allowCheckIn) {
-      return Container(
-        height: 40.0,
-        child: Material(
-          borderRadius: BorderRadius.circular(20.0),
-          shadowColor: Colors.blueAccent,
-          color: Colors.grey,
-          elevation: 7.0,
-          child: InkWell(
-            child: Center(
-              child: Text(
-                'Check In',
-                style: TextStyle(
-                    color: Colors.blueGrey,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat'),
-              ),
-            ),
-          ),
-        ),
-      );
-    } else {
+    // if (!allowCheckIn) {
+    //   return Container(
+    //     height: 40.0,
+    //     child: Material(
+    //       borderRadius: BorderRadius.circular(20.0),
+    //       shadowColor: Colors.blueAccent,
+    //       color: Colors.grey,
+    //       elevation: 7.0,
+    //       child: InkWell(
+    //         child: Center(
+    //           child: Text(
+    //             'Check In',
+    //             style: TextStyle(
+    //                 color: Colors.blueGrey,
+    //                 fontWeight: FontWeight.bold,
+    //                 fontFamily: 'Montserrat'),
+    //           ),
+    //         ),
+    //       ),
+    //     ),
+    //   );
+    // } else {
       return Container(
         height: 40.0,
         child: Material(
@@ -77,7 +77,7 @@ class MatchedSession extends StatelessWidget {
           ),
         ),
       );
-    }
+    // }
   }
 
   void _confirmCancelDialog(context) {
@@ -114,7 +114,8 @@ class MatchedSession extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
-    final bool allowCheckIn = (now.isAfter(
+    DateTime checkin = now.add(new Duration(minutes: 15));
+    final bool allowCheckIn = (checkin.isAfter(
         document['startDateTime'])); //Only can check in after start time
     return Scaffold(
       appBar: AppBar(
