@@ -11,12 +11,11 @@ class SearchSessionState extends State<SearchSession> {
   // final key = new GlobalKey<ScaffoldState>();
   final TextEditingController _filter = new TextEditingController();
   String _searchText = "";
-  List names = ["NTU Stadium", "GYMMBOXX"];
-  List filteredNames = ["NTU Stadium", "GYMMBOXX"];
+  List names = new List();
+  List filteredNames = new List();
   Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle = new Text('...');
+  Widget _appBarTitle = new Text('Search');
 
-/*
   SearchSessionState() {
     _filter.addListener(() {
       if (_filter.text.isEmpty) {
@@ -27,14 +26,32 @@ class SearchSessionState extends State<SearchSession> {
       } else {
         setState(() {
           _searchText = _filter.text;
-          globals.gymText = _searchText;
         });
       }
     });
   }
-*/
+
+  Future<QuerySnapshot> getGyms() async {
+    CollectionReference col = Firestore.instance.collection('Gym');
+    col.getDocuments().then((doc) {
+      int gymCount = doc.documents.length;
+      for (int i = 0; i < gymCount; i++) {
+        DocumentSnapshot gym = doc.documents[i];
+        names.add(gym.documentID);
+      }
+    });
+    setState(() {
+      filteredNames = names;
+    });
+    return col.getDocuments();
+  }
 
   @override
+  void initState() {
+    super.initState();
+    getGyms();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildBar(context),
@@ -57,35 +74,55 @@ class SearchSessionState extends State<SearchSession> {
   }
 
   Widget _buildList() {
-    //TODO GET DB DATA (GYM LIST)
-    return StreamBuilder<QuerySnapshot>(
-        stream: Firestore.instance.collection('Gym').snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasError)
-            return new Text('Error: ${snapshot.error}'); //error checking
-          switch (snapshot.connectionState) {
-            //if takes too long to load, display "loading"
-            case ConnectionState.waiting:
-              return new CircularProgressIndicator();
-            default:
-              final int gymCount = snapshot
-                  .data.documents.length; //get number of gyms in collection
-              return ListView.builder(
-                itemCount: gymCount,
-                itemBuilder: (BuildContext context, int index) {
-                  return new ListTile(
-                    title: Text(snapshot.data.documents[index]['locationStr']),
-                    onTap: () => {
-                          _filter.text =
-                              snapshot.data.documents[index]['locationStr'],
-                          Navigator.pop(context,
-                              snapshot.data.documents[index]['locationStr'])
-                        },
-                  );
+    if (!(_searchText.isEmpty)) {
+      List tempList = new List();
+      for (int i = 0; i < names.length; i++) {
+        if (names[i]
+            .toLowerCase()
+            .contains(_searchText.toLowerCase())) {
+          tempList.add(names[i]);
+        }
+      }
+      filteredNames = tempList;
+
+      return ListView.builder(
+        itemCount: filteredNames.length,
+        itemBuilder: (BuildContext context, int index) {
+          return new ListTile(
+            title: Text(filteredNames[index]),
+            onTap: () => {
+                  _filter.text = filteredNames[index],
+                  Navigator.pop(context, filteredNames[index])
                 },
-              );
-          }
-        });
+          );
+        },
+      );
+    } else {
+      return FutureBuilder(
+          future: getGyms(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              if (snapshot.data != null) {
+                return new ListView.builder(
+                  itemCount: snapshot.data.documents.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final DocumentSnapshot gymDoc =
+                        snapshot.data.documents[index];
+                    return new ListTile(
+                      title: Text(gymDoc.documentID),
+                      onTap: () => {
+                            _filter.text = gymDoc.documentID,
+                            Navigator.pop(context, gymDoc.documentID)
+                          },
+                    );
+                  },
+                );
+              }
+            } else {
+              return new CircularProgressIndicator();
+            }
+          });
+    }
   }
 
   void _searchPressed() {
@@ -99,7 +136,7 @@ class SearchSessionState extends State<SearchSession> {
         );
       } else {
         this._searchIcon = new Icon(Icons.search);
-        this._appBarTitle = new Text('...');
+        this._appBarTitle = new Text('Search');
         filteredNames = names;
         _filter.clear();
       }
