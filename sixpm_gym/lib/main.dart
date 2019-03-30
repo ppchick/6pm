@@ -11,7 +11,6 @@ import 'pages/session/search_session_gym.dart';
 import 'pages/session/rateSession.dart';
 import 'pages/session/sessionHistoryInfo.dart';
 import 'pages/session/checkin.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() {
   runApp(new MyApp());
