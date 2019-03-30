@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import '../widgets/checkbox_comment.dart';
+
 class RateSession extends StatefulWidget{
   @override
   _RateSessionState createState() => _RateSessionState();
 }
 
 class _RateSessionState extends State<RateSession>{
+  //TODO CONSTRUCTOR TO GET SESSION DOCUMENT FROM CHECKIN PAGE
   double rating = 0;
   int starCount = 5;
   @override

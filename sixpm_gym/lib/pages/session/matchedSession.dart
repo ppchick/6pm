@@ -117,10 +117,8 @@ class MatchedSession extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   print('[Check In] Pressed');
-                  // Navigator.of(context).pushNamed('/rateSession'); //NOTE TEMP
-                  //TODO CHECK IN PAGE
-                  // Navigator.pushNamed('/checkIn');
-                  Navigator.of(context).pushNamed('/checkIn');
+                  //TODO ONLY ENABLE CHECKIN BUTTON 15MINS BEFORE START TIME
+                  Navigator.of(context).pushNamed('/checkIn');  //FIXME MUST PASS SESSION DOCUMENT TO CHECKIN PAGE
                 },
                 child: Center(
                   child: Text(
@@ -145,6 +143,7 @@ class MatchedSession extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   print('[Cancel Session] Pressed');
+                  //TODO ALERT DIALOG TO CONFIRM
                   //TODO IMPLEMENT CANCEL SESSION
                   Navigator.of(context).pop();
                 },

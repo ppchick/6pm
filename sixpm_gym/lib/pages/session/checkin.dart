@@ -128,9 +128,10 @@ class SessionCheckInState extends State<SessionCheckIn> {
               //   ),
               // ),
               GestureDetector(
-                onTap: () {
+                onTap: () { //TODO START TIMER
                   setState(() {
-                    
+                    //FIXME hasCheckedIn FLAG SHOULD BE UPDATED WHEN USER CLICKS ON CHECK IN IN matchedSession PAGE, NOT HERE
+                    //TODO ONLY ALLOW USER TO START THE TIMER WHEN BOTH USERS HAVE CHECKED IN ALREADY
                     if (document['hasCheckedIn1'] == false ||document['hasCheckedIn2'] == false ) {
                       if(globalUID.uid==document['userID1']){
                         update("hasCheckedIn1");
@@ -191,10 +192,9 @@ class SessionCheckInState extends State<SessionCheckIn> {
               elevation: 7.0,
               child: InkWell(
                 onTap: () {
-                  print('[Go Back] Pressed');
+                  print('[Finish] Pressed');
                   update("finish");
-                  Navigator.of(context).pushNamed('/rateSession');
-                  // Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed('/rateSession'); //TODO PASS SESSION DOCUMENT TO RATING PAGE
                 },
                 child: Center(
                   child: Text(

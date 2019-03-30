@@ -191,7 +191,7 @@ class _MyProfileState extends State<MyProfile> {
 
   void SignOut() async {
     FirebaseAuth.instance.signOut();
-    Navigator.popUntil(context, ModalRoute.withName('/'));
+    Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
   }
 }
 

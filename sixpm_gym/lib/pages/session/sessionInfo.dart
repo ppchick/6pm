@@ -175,7 +175,6 @@ class SessionInfo extends StatelessWidget {
               elevation: 7.0,
               child: InkWell(
                 onTap: () {
-                  //TODO IMPLEMENT JOIN SESSION
                   print('[Join Session] Pressed');
                   _showDialog(context);
                 },
