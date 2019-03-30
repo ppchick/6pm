@@ -91,8 +91,7 @@ class SessionInfo extends StatelessWidget {
     unmatchedDocRef.updateData({'isMatched': true});
   }
 
-  bool isExpired;
-  Widget _joinButton(context) {
+  Widget _joinButton(context, isExpired) {
     if (isExpired) {
       return Container(
         height: 40.0,
@@ -145,7 +144,7 @@ class SessionInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
-    isExpired = (now.isAfter(unmatchedDocument['startDateTime']));
+    final bool isExpired = (now.isAfter(unmatchedDocument['startDateTime']));
     String _text = 'Waiting for someone to join...';
 
     if (isExpired) _text = 'Session Expired!';
@@ -225,7 +224,7 @@ class SessionInfo extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20),
-          _joinButton(context),
+          _joinButton(context, isExpired),
           SizedBox(height: 10),
           Container(
             height: 40.0,

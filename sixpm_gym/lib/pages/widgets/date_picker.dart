@@ -75,7 +75,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
       _date = date;
       _datetime = '$year-$month-$date';
     });
-    global.DOB = _datetime;
+    global.dob = _datetime;
   }
 
   @override

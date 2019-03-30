@@ -1,3 +1,3 @@
 library welcome.global;
 
-String DOB = '';
+String dob = '';

@@ -339,7 +339,7 @@ class _SignupPageState2 extends State<SignupPage2> {
       dataMap['strength'] = strengthController.text;
       dataMap['firstName'] = firstnameController.text;
       dataMap['lastName'] = lastnameController.text;
-      dataMap['DOB'] = global.DOB;
+      dataMap['DOB'] = global.dob;
 
       Firestore.instance
           .collection('Profile')
