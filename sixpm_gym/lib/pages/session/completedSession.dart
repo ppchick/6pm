@@ -3,7 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../globalUserID.dart' as globalUID;
 
 class CompletedSession extends StatelessWidget {
-  CompletedSession(this.document); //constructor receives session document from sessionHistory
+  CompletedSession(
+      this.document); //constructor receives session document from sessionHistory
   final DocumentSnapshot document;
 
   Future<DocumentSnapshot> getPartner(DocumentSnapshot document) async {
@@ -22,8 +23,28 @@ class CompletedSession extends StatelessWidget {
     return partnerDoc;
   }
 
+  Widget _partnerFeedback(context, partnerIsID1) {
+    if (partnerIsID1) {
+      return Text(
+        'Partner Feedback:\n' + document['feedback1'],
+        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.normal),
+      );
+    } else {
+      return Text(
+        'Partner Feedback:\n' + document['feedback2'],
+        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.normal),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    bool partnerIsID1;
+    if (globalUID.uid == document['userID1']) //Partner is UserID2
+      partnerIsID1 = false;
+    else //Partner is UserID1
+      partnerIsID1 = true;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Session Details'),
@@ -50,8 +71,7 @@ class CompletedSession extends StatelessWidget {
           SizedBox(height: 10),
           Card(
             color: Colors.white,
-            child: Center(
-              child: Column(
+            child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   SizedBox(height: 20),
@@ -100,10 +120,11 @@ class CompletedSession extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 20.0, fontWeight: FontWeight.normal),
                   ),
+                  SizedBox(height: 10),
+                  _partnerFeedback(context, partnerIsID1),
                   SizedBox(height: 20),
                 ],
               ),
-            ),
           ),
         ],
       ),
