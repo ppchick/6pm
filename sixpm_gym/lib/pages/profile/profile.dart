@@ -151,7 +151,7 @@ class _MyProfileState extends State<MyProfile> {
                               onTap: () {
                                 showDialog(
                                     context: context,
-                                    child: AlertDialog(
+                                    builder: (_) => AlertDialog(
                                       title: Text('Interest'),
                                       content: Text(snapshot.data['interest']),
                                     ));
@@ -184,7 +184,7 @@ class _MyProfileState extends State<MyProfile> {
                               onTap: () {
                                 showDialog(
                                     context: context,
-                                    child: AlertDialog(
+                                    builder: (_) => AlertDialog(
                                       title: Text('Strength'),
                                       content: Text(snapshot.data['strength']),
                                     ));

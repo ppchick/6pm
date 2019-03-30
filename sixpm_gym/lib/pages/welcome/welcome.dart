@@ -241,7 +241,7 @@ class _MyHomePageState extends State<WelcomePage> {
       } catch (e) {
         showDialog(
             context: context,
-            child: AlertDialog(
+            builder: (_) => AlertDialog(
               title: Text('Wrong Password'),
               content: Text('Please check your password is correct'),
             ));

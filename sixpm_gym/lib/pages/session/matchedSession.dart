@@ -80,10 +80,42 @@ class MatchedSession extends StatelessWidget {
     }
   }
 
+  void _confirmCancelDialog(context) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+            title: new Text('Cancel Session'),
+            content: new Text('Are you sure you want to cancel this session?'),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: new Text('No'),
+              ),
+              new FlatButton(
+                onPressed: () {
+                  DocumentReference docRef = Firestore.instance
+                      .collection('MatchedSession')
+                      .document(document.documentID);
+                  Firestore.instance
+                      .runTransaction((Transaction myTransaction) async {
+                    await myTransaction.delete(docRef);
+                    Navigator.popUntil(
+                        context, ModalRoute.withName('homepage'));
+                  });
+                },
+                child: new Text('Yes'),
+              ),
+            ],
+          ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
-    final bool allowCheckIn = (now.isAfter(document['startDateTime'])); //Only can check in after start time
+    final bool allowCheckIn = (now.isAfter(
+        document['startDateTime'])); //Only can check in after start time
     return Scaffold(
       appBar: AppBar(
         title: Text('Session Details'),
@@ -178,9 +210,7 @@ class MatchedSession extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   print('[Cancel Session] Pressed');
-                  //TODO ALERT DIALOG TO CONFIRM
-                  //TODO IMPLEMENT CANCEL SESSION
-                  //Navigator.of(context).pop();
+                  _confirmCancelDialog(context);
                 },
                 child: Center(
                   child: Text(
