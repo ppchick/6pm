@@ -300,7 +300,7 @@ class _SignupPageState2 extends State<SignupPage2> {
                     //   //TODO IMPLEMENT INPUT VALIDATION BEFORE CAN TAP, ADD NEW USER AND CREATE PROFILE DOCUMENT IN DB
                     //   Navigator.popUntil(
                     //       context, ModalRoute.withName('/'));
-                    //   Navigator.pushNamed(context, '/homepage');
+                    //   Navigator.pushNamed(context, 'homepage');
                     // },
                     child: Center(
                       child: Text(

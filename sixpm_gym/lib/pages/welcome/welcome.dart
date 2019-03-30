@@ -139,7 +139,7 @@ class _MyHomePageState extends State<WelcomePage> {
                                   child: InkWell(
                                     // NOTE Uncomment this and comment next line during testing
                                     // onTap: () {
-                                    //   Navigator.of(context).pushNamed('/homepage');
+                                    //   Navigator.of(context).pushNamed('homepage');
                                     // },
                                     onTap: signIn,
                                     child: Center(
@@ -248,8 +248,8 @@ class _MyHomePageState extends State<WelcomePage> {
         // Navigator.push(
         //     context, MaterialPageRoute(builder: (context) => Home(user: user)));
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => HomePage(user: user)));
-        // Navigator.of(context).pushNamed('/homepage');
+            MaterialPageRoute(builder: (context) => HomePage(user: user), settings: RouteSettings(name: "homepage")));
+        // Navigator.of(context).pushNamed('homepage');
       } catch (e) {
         print('Wrong account');
         print(e.message);

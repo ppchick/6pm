@@ -62,7 +62,7 @@ class CreateSession2State extends State<CreateSession2> {
                       widget.params.add({'userID': globalUID.uid});
                       add();
                       Navigator.popUntil(
-                          context, ModalRoute.withName('/homepage'));
+                          context, ModalRoute.withName('homepage'));
                     },
                   ),
                 ],
@@ -99,18 +99,19 @@ class CreateSession2State extends State<CreateSession2> {
     });
 
     String idNum = (highestID + 1).toString();
-   doc = Firestore.instance.document('UnmatchedSession/session$idNum');
-
+    doc = Firestore.instance.document('UnmatchedSession/session$idNum');
+    
     Map<String, Object> data = <String, Object>{
       'ID': idNum,
       'location': widget.params[0]['location'],
       'startTime': widget.params[1]['startTime'],
       'endTime': widget.params[2]['endTime'],
       'date': widget.params[3]['date'],
-      'focus': widget.params[5]['focus'],
-      'level': widget.params[4]['level'],
-      'sameGender': widget.params[6]['sameGender'],
-      'userID': widget.params[7]['userID'],
+      'startDateTime': widget.params[4]['startDateTimeISO'],
+      'level': widget.params[5]['level'],
+      'focus': widget.params[6]['focus'],
+      'sameGender': widget.params[7]['sameGender'],
+      'userID': widget.params[8]['userID'],
       'userGender': _gender,
       'isMatched': false,
     };

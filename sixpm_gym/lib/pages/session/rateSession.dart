@@ -121,7 +121,7 @@ class _RateSessionState extends State<RateSession>{
                           //TODO UPDATE MatchedSession DB WITH RATE, FEEDBACK, COMPLETED = TRUE
                           //TODO UPDATE BOTH PROFILES HourSum AND numOfSession
                           Navigator.popUntil(
-                        context, ModalRoute.withName('/homepage'));
+                        context, ModalRoute.withName('homepage'));
                         },
                         child: Center(
                           child: Text(

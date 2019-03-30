@@ -1,12 +1,14 @@
 library session.global;
 
 
-String datetime = '';
+String date = '';
+String dateISO = '';
 String focus = 'HIIT';
 bool sameGender = true;
 
 void init() {
-  datetime = '';
+  date = '';
+  dateISO = '';
   focus = 'HIIT';
   sameGender = true;
 }

@@ -227,7 +227,7 @@ class _SignupPageState extends State<SignupPage> {
                     password: _password,
                     username: _username)));
         // Navigator.pushNamed(context, '/signup2', arguments: {user: user});
-        // Navigator.of(context).pushNamed('/homepage');
+        // Navigator.of(context).pushNamed('homepage');
       } catch (e) {
         print('Wrong account');
         print(e.message);
