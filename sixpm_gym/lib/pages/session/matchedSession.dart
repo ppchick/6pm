@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../globalUserID.dart' as globalUID;
+import '../session/checkin.dart';
 
 class MatchedSession extends StatelessWidget {
   MatchedSession(
@@ -23,8 +24,98 @@ class MatchedSession extends StatelessWidget {
     return partnerDoc;
   }
 
+  Widget _checkInButton(context, allowCheckIn) {
+    if (!allowCheckIn) {
+      return Container(
+        height: 40.0,
+        child: Material(
+          borderRadius: BorderRadius.circular(20.0),
+          shadowColor: Colors.blueAccent,
+          color: Colors.grey,
+          elevation: 7.0,
+          child: InkWell(
+            child: Center(
+              child: Text(
+                'Check In',
+                style: TextStyle(
+                    color: Colors.blueGrey,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Montserrat'),
+              ),
+            ),
+          ),
+        ),
+      );
+    } else {
+      return Container(
+        height: 40.0,
+        child: Material(
+          borderRadius: BorderRadius.circular(20.0),
+          shadowColor: Colors.blueAccent,
+          color: Colors.blue,
+          elevation: 7.0,
+          child: InkWell(
+            onTap: () {
+              print('[Check In] Pressed');
+              if (document != null) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            SessionCheckIn(document: document)));
+              }
+            },
+            child: Center(
+              child: Text(
+                'Join Session',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Montserrat'),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+  }
+
+  void _confirmCancelDialog(context) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+            title: new Text('Cancel Session'),
+            content: new Text('Are you sure you want to cancel this session?'),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: new Text('No'),
+              ),
+              new FlatButton(
+                onPressed: () {
+                  DocumentReference docRef = Firestore.instance
+                      .collection('MatchedSession')
+                      .document(document.documentID);
+                  Firestore.instance
+                      .runTransaction((Transaction myTransaction) async {
+                    await myTransaction.delete(docRef);
+                    Navigator.popUntil(
+                        context, ModalRoute.withName('homepage'));
+                  });
+                },
+                child: new Text('Yes'),
+              ),
+            ],
+          ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    final bool allowCheckIn = (now.isAfter(
+        document['startDateTime'])); //Only can check in after start time
     return Scaffold(
       appBar: AppBar(
         title: Text('Session Details'),
@@ -107,32 +198,7 @@ class MatchedSession extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20),
-          Container(
-            height: 40.0,
-            child: Material(
-              borderRadius: BorderRadius.circular(20.0),
-              shadowColor: Colors.blueAccent,
-              color: Colors.blue,
-              elevation: 7.0,
-              child: InkWell(
-                onTap: () {
-                  print('[Check In] Pressed');
-                  Navigator.of(context).pushNamed('/rateSession'); //NOTE TEMP
-                  //TODO CHECK IN PAGE
-                  //Navigator.pushNamed('/checkIn');
-                },
-                child: Center(
-                  child: Text(
-                    'Check In',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Montserrat'),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          _checkInButton(context, allowCheckIn),
           SizedBox(height: 10),
           Container(
             height: 40.0,
@@ -144,8 +210,7 @@ class MatchedSession extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   print('[Cancel Session] Pressed');
-                  //TODO IMPLEMENT CANCEL SESSION
-                  Navigator.of(context).pop();
+                  _confirmCancelDialog(context);
                 },
                 child: Center(
                   child: Text(

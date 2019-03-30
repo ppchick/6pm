@@ -8,10 +8,7 @@ class DatePickerSession extends StatefulWidget {
 }
 
 class DatePickerSessionState extends State<DatePickerSession> {
-  String _datetime;
-  String _year;
-  String _month;
-  String _date;
+  String _date, _dateISO, _year, _month, _day;
 
   String _lang = 'en';
   String _format = 'dd-mmmm-yyyy';
@@ -31,11 +28,13 @@ class DatePickerSessionState extends State<DatePickerSession> {
     else
       _month = now.month.toString();
     if (now.day < 10)
-      _date = '0' + now.day.toString();
+      _day = '0' + now.day.toString();
     else
-      _date = now.day.toString();
-    _datetime = _date + '/' + _month + '/' + _year;
-    globals.datetime = _datetime;
+      _day = now.day.toString();
+    _date = _day + '/' + _month + '/' + _year;
+    _dateISO = _year + '-' + _month + '-' + _day;
+    globals.date = _date;
+    globals.dateISO = _dateISO;
   }
 
   /// Display date picker.
@@ -79,14 +78,16 @@ class DatePickerSessionState extends State<DatePickerSession> {
     else
       _month = month.toString();
     if (date < 10)
-      _date = '0' + date.toString();
+      _day = '0' + date.toString();
     else
-      _date = date.toString();
+      _day = date.toString();
 
     setState(() {
-      _datetime = _date + '/' + _month + '/' + _year;
+      _date = _day + '/' + _month + '/' + _year;
+      _dateISO = _year + '-' + _month + '-' + _day;
     });
-    globals.datetime = _datetime;
+    globals.date = _date;
+    globals.dateISO = _dateISO;
   }
 
   @override
@@ -111,7 +112,7 @@ class DatePickerSessionState extends State<DatePickerSession> {
               Container(
                 padding: EdgeInsets.only(left: 12.0),
                 child: Text(
-                  '$_datetime',
+                  '$_date',
                   style: Theme.of(context).textTheme.title,
                 ),
               ),

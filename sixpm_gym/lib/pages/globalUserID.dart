@@ -1,3 +1,3 @@
-library globalUserID;
+library global_user_id;
 
-String uid = "UCAaloSVi7VYLhfCKnIQA3AbLsw2";
+String uid = "";

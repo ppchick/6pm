@@ -8,7 +8,7 @@ class InterestCheckboxWidget extends StatefulWidget {
 }
 
 class _InterestCheckboxWidgetState extends State<InterestCheckboxWidget> {
-  Map<String, bool> interest_values = {
+  Map<String, bool> interestValues = {
     'HIIT': false,
     'Burpees': false,
     'Yoga': false,
@@ -22,14 +22,14 @@ class _InterestCheckboxWidgetState extends State<InterestCheckboxWidget> {
     return Container(
       child: new Center(
         child: new Column(
-          children: interest_values.keys
+          children: interestValues.keys
               .map((key) => Container(
                     height: 45.0,
                     child: CheckboxListTile(
-                      value: interest_values[key],
+                      value: interestValues[key],
                       onChanged: (value) {
                         setState(() {
-                          interest_values[key] = value;
+                          interestValues[key] = value;
                         });
                       },
                       title: new Text(key),
@@ -44,4 +44,4 @@ class _InterestCheckboxWidgetState extends State<InterestCheckboxWidget> {
   }
 }
 
-Widget getCheckboxWidgets(List<String> strings) {}
+//Widget getCheckboxWidgets(List<String> strings) {}
