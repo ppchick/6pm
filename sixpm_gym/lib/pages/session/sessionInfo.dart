@@ -65,6 +65,7 @@ class SessionInfo extends StatelessWidget {
       'startTime': unmatchedDocument['startTime'],
       'endTime': unmatchedDocument['endTime'],
       'date': unmatchedDocument['date'],
+      'startDateTime': unmatchedDocument['startDateTime'],
       'focus': unmatchedDocument['focus'],
       'level': unmatchedDocument['level'],
       'userID1': unmatchedDocument['userID'],
