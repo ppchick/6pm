@@ -6,6 +6,7 @@ import '../widgets/date_picker.dart';
 import '../home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import './global.dart' as global;
 
 class SignupPage2 extends StatefulWidget {
   const SignupPage2(
@@ -122,7 +123,7 @@ class _SignupPageState2 extends State<SignupPage2> {
                                   fontSize: 20.0,
                                   color: Colors.blue,
                                   decorationColor: Colors.blue),
-                              items: <String>['Male', 'Female', 'Other']
+                              items: <String>['male', 'female', 'other']
                                   .map((String value) {
                                 return new DropdownMenuItem<String>(
                                   value: value,
@@ -338,9 +339,7 @@ class _SignupPageState2 extends State<SignupPage2> {
       dataMap['strength'] = strengthController.text;
       dataMap['firstName'] = firstnameController.text;
       dataMap['lastName'] = lastnameController.text;
-
-      // TODO implement fields for inputing following
-      dataMap['DOB'] = 'birthday';
+      dataMap['DOB'] = global.DOB;
 
       Firestore.instance
           .collection('Profile')

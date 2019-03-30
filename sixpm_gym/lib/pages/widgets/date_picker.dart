@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
+import '../welcome/global.dart' as global;
 
 class DatePickerWidget extends StatefulWidget {
   DatePickerWidget({Key key}) : super(key: key);
@@ -74,6 +75,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
       _date = date;
       _datetime = '$year-$month-$date';
     });
+    global.DOB = _datetime;
   }
 
   @override
