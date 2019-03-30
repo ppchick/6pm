@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../globalUserID.dart' as globalUID;
-import '../session/checkin.dart';
 
-class MatchedSession extends StatelessWidget {
-  MatchedSession(
-      {this.document}); //constructor receives session document from sessionMain
+class CompletedSession extends StatelessWidget {
+  CompletedSession(this.document); //constructor receives session document from sessionHistory
   final DocumentSnapshot document;
 
   Future<DocumentSnapshot> getPartner(DocumentSnapshot document) async {
@@ -45,7 +43,7 @@ class MatchedSession extends StatelessWidget {
           Container(
             padding: EdgeInsets.fromLTRB(20.0, 25.0, 20.0, 0.0),
             child: Text(
-              'Your upcoming session details:',
+              'Past session details:',
               style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
             ),
           ),
@@ -104,74 +102,6 @@ class MatchedSession extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                 ],
-              ),
-            ),
-          ),
-          SizedBox(height: 20),
-          Container(
-            height: 40.0,
-            child: Material(
-              borderRadius: BorderRadius.circular(20.0),
-              shadowColor: Colors.blueAccent,
-              color: Colors.blue,
-              elevation: 7.0,
-              child: InkWell(
-                onTap: () {
-                  //TODO ONLY ENABLE CHECKIN BUTTON 15MINS BEFORE START TIME
-                  print('[Check In] Pressed');
-                  if(document!=null){
-                  
-                  Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SessionCheckIn(
-                                      document:
-                                          document)));
-
-                }
-                           
-                        },
-
-                  
-                  
-
-
-                child: Center(
-                  child: Text(
-                    'Check In',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Montserrat'),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: 10),
-          Container(
-            height: 40.0,
-            child: Material(
-              borderRadius: BorderRadius.circular(20.0),
-              shadowColor: Colors.grey,
-              color: Colors.white,
-              elevation: 7.0,
-              child: InkWell(
-                onTap: () {
-                  print('[Cancel Session] Pressed');
-                  //TODO ALERT DIALOG TO CONFIRM
-                  //TODO IMPLEMENT CANCEL SESSION
-                  Navigator.of(context).pop();
-                },
-                child: Center(
-                  child: Text(
-                    'CANCEL SESSION',
-                    style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Montserrat'),
-                  ),
-                ),
               ),
             ),
           ),

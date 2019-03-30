@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../globalUserID.dart' as globalUID;
+import 'package:firebase_auth/firebase_auth.dart';
+import './sighup2.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -6,6 +9,9 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  String _email, _password, _username;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  var passKey = GlobalKey<FormFieldState>();
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -17,7 +23,7 @@ class _SignupPageState extends State<SignupPage> {
                 child: Stack(
                   children: <Widget>[
                     Container(
-                      padding: EdgeInsets.fromLTRB(15.0, 80.0, 0.0, 0.0),
+                      padding: EdgeInsets.fromLTRB(15.0, 60.0, 0.0, 0.0),
                       child: Text(
                         'Signup',
                         style: TextStyle(
@@ -25,7 +31,7 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.fromLTRB(260.0, 95.0, 0.0, 0.0),
+                      padding: EdgeInsets.fromLTRB(260.0, 75.0, 0.0, 0.0),
                       child: Text(
                         '.',
                         style: TextStyle(
@@ -37,11 +43,19 @@ class _SignupPageState extends State<SignupPage> {
                   ],
                 ),
               ),
-              Container(
+              Form(
+                key: _formKey,
+                child: Container(
                   padding: EdgeInsets.only(top: 30.0, left: 20.0, right: 20.0),
                   child: Column(
                     children: <Widget>[
-                      TextField(
+                      TextFormField(
+                        validator: (input) {
+                          if (input.isEmpty) {
+                            return 'Please enter your email';
+                          }
+                        },
+                        onSaved: (input) => _email = input,
                         decoration: InputDecoration(
                             labelText: 'EMAIL',
                             labelStyle: TextStyle(
@@ -54,7 +68,15 @@ class _SignupPageState extends State<SignupPage> {
                                 borderSide: BorderSide(color: Colors.blue))),
                       ),
                       SizedBox(height: 15.0),
-                      TextField(
+                      TextFormField(
+                        key: passKey,
+                        validator: (password) {
+                          var result = password.length < 4
+                              ? "Password should have at least 4 characters"
+                              : null;
+                          return result;
+                        },
+                        onSaved: (input) => _password = input,
                         decoration: InputDecoration(
                             labelText: 'PASSWORD ',
                             labelStyle: TextStyle(
@@ -66,7 +88,14 @@ class _SignupPageState extends State<SignupPage> {
                         obscureText: true,
                       ),
                       SizedBox(height: 15.0),
-                      TextField(
+                      TextFormField(
+                        validator: (input) {
+                          var password = passKey.currentState.value;
+                          return input == password
+                              ? null
+                              : "Confirm Password should match password";
+                        },
+                        onSaved: (input) => _password = input,
                         decoration: InputDecoration(
                             labelText: 'CONFIRM PASSWORD ',
                             labelStyle: TextStyle(
@@ -78,7 +107,13 @@ class _SignupPageState extends State<SignupPage> {
                         obscureText: true,
                       ),
                       SizedBox(height: 15.0),
-                      TextField(
+                      TextFormField(
+                        validator: (input) {
+                          if (input.isEmpty) {
+                            return 'Please enter your username';
+                          }
+                        },
+                        onSaved: (input) => _username = input,
                         decoration: InputDecoration(
                             labelText: 'USERNAME ',
                             labelStyle: TextStyle(
@@ -97,13 +132,14 @@ class _SignupPageState extends State<SignupPage> {
                           color: Colors.blue,
                           elevation: 7.0,
                           child: InkWell(
-                            onTap: () {
-                              print('[NEXT] Pressed');
-                              Navigator.of(context).pushNamed('/signup2');
-                            },
+                            onTap: signUp,
+                            // onTap: () {
+                            //   print('[Register] Pressed');
+                            //   Navigator.of(context).pushNamed('/signup2');
+                            // },
                             child: Center(
                               child: Text(
-                                'NEXT',
+                                'Register',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -143,7 +179,10 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                       ),
                     ],
-                  )),
+                  ),
+                ),
+              ),
+
               // SizedBox(height: 15.0),
               // Row(
               //   mainAxisAlignment: MainAxisAlignment.center,
@@ -166,5 +205,33 @@ class _SignupPageState extends State<SignupPage> {
               //   ],
               // )
             ]));
+  }
+
+  void signUp() async {
+    final formState = _formKey.currentState;
+    if (formState.validate()) {
+      formState.save();
+      debugPrint(_email);
+      debugPrint(_password);
+      try {
+        FirebaseUser user = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: _email, password: _password);
+        // FIXME user.sendEmailVerification();
+        globalUID.uid = user.uid;
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SignupPage2(
+                    user: user,
+                    email: _email,
+                    password: _password,
+                    username: _username)));
+        // Navigator.pushNamed(context, '/signup2', arguments: {user: user});
+        // Navigator.of(context).pushNamed('/homepage');
+      } catch (e) {
+        print('Wrong account');
+        print(e.message);
+      }
+    }
   }
 }

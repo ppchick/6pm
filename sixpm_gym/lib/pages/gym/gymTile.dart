@@ -1,6 +1,6 @@
 import 'dart:core';
 
-class gymTile {
+class GymTile {
   String name;
   double distance;
   String postalCode;
@@ -8,5 +8,5 @@ class gymTile {
   String description;
   double latitude;
   double longitude;
-  gymTile({this.name, this.distance, this.postalCode, this.address, this.description, this.latitude, this.longitude});
+  GymTile({this.name, this.distance, this.postalCode, this.address, this.description, this.latitude, this.longitude});
 }
