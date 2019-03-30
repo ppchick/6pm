@@ -8,7 +8,7 @@ class StrengthCheckboxWidget extends StatefulWidget {
 }
 
 class _StrengthCheckboxWidgetState extends State<StrengthCheckboxWidget> {
-  Map<String, bool> strength_values = {
+  Map<String, bool> strengthValues = {
     'HIIT': false,
     'Burpees': false,
     'Yoga': false,
@@ -22,14 +22,14 @@ class _StrengthCheckboxWidgetState extends State<StrengthCheckboxWidget> {
     return Container(
       child: new Center(
         child: new Column(
-          children: strength_values.keys
+          children: strengthValues.keys
               .map((key) => Container(
                     height: 45.0,
                     child: CheckboxListTile(
-                      value: strength_values[key],
+                      value: strengthValues[key],
                       onChanged: (value) {
                         setState(() {
-                          strength_values[key] = value;
+                          strengthValues[key] = value;
                         });
                       },
                       title: new Text(key),

@@ -8,12 +8,12 @@ class CommentCheckbox extends StatefulWidget {
 }
 
 class _CommentCheckboxState extends State<CommentCheckbox> {
-  Map<String, bool> comment_values = {
+  Map<String, bool> commentValues = {
     'Helpful': false,
     'Considerate': false,
     'Responsible': false,
   };
-  Map<String, bool> comment_values1 = {
+  Map<String, bool> commentValues1 = {
     'Enthusiastic': false,
     'Punctual': false,
     'Skilful': false,
@@ -27,14 +27,14 @@ class _CommentCheckboxState extends State<CommentCheckbox> {
       child: new Stack(
         children: <Widget>[
           Column(
-            children: comment_values.keys
+            children: commentValues.keys
                 .map((key) => Container(
                       height: 45.0,
                       child: CheckboxListTile(
-                        value: comment_values[key],
+                        value: commentValues[key],
                         onChanged: (value) {
                         setState(() {
-                          comment_values[key] = value;
+                          commentValues[key] = value;
                           });
                         },
                         title: new Text(key),
@@ -47,14 +47,14 @@ class _CommentCheckboxState extends State<CommentCheckbox> {
           Container(
             padding: EdgeInsets.fromLTRB(180.0, 0.0, 0.0, 0.0),
             child: Column(
-              children: comment_values1.keys
+              children: commentValues1.keys
                   .map((key) => Container(
                         height: 45.0,
                         child: CheckboxListTile(
-                          value: comment_values1[key],
+                          value: commentValues1[key],
                           onChanged: (value) {
                         setState(() {
-                          comment_values1[key] = value;
+                          commentValues1[key] = value;
                           });
                         },
                           title: new Text(key),
