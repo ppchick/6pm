@@ -46,7 +46,7 @@ class _SignupPageState extends State<SignupPage> {
               Form(
                 key: _formKey,
                 child: Container(
-                  padding: EdgeInsets.only(top: 30.0, left: 20.0, right: 20.0),
+                  padding: EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
                   child: Column(
                     children: <Widget>[
                       TextFormField(

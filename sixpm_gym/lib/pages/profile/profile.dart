@@ -65,7 +65,7 @@ class _MyProfileState extends State<MyProfile> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.fromLTRB(40.0, 80.0, 0, 0),
+                              padding: EdgeInsets.fromLTRB(30.0, 80.0, 0, 0),
                               child: Container(
                                 padding: EdgeInsets.all(7.0),
                                 child: Column(
@@ -77,9 +77,10 @@ class _MyProfileState extends State<MyProfile> {
                                           snapshot.data['username'],
                                           style: TextStyle(
                                               fontFamily: 'Montserrat',
-                                              fontSize: 20.0),
+                                              fontSize: 25.0,
+                                              fontWeight: FontWeight.bold),
                                         ),
-                                        SizedBox(width: 5.0),
+                                        SizedBox(width: 7.0),
                                         snapshot.data['gender'] == 'male'
                                             ? Image.asset(
                                                 'img/male.png',
@@ -91,15 +92,6 @@ class _MyProfileState extends State<MyProfile> {
                                                 height: 20.0,
                                                 width: 20.0,
                                               )
-
-                                        // SizedBox(width: 110.0),
-                                        // Text(
-                                        //   '5.8km',
-                                        //   style: TextStyle(
-                                        //       fontFamily: 'Montserrat',
-                                        //       fontSize: 20.0,
-                                        //       color: Colors.grey),
-                                        // ),
                                       ],
                                     ),
                                     SizedBox(height: 9.0),
@@ -112,7 +104,7 @@ class _MyProfileState extends State<MyProfile> {
                                               ' hours!',
                                           style: TextStyle(
                                               fontFamily: 'Montserrat',
-                                              fontSize: 12.0,
+                                              fontSize: 13.0,
                                               color: Colors.grey),
                                         )
                                       ],
@@ -120,14 +112,6 @@ class _MyProfileState extends State<MyProfile> {
                                   ],
                                 ),
                               ),
-
-                              // Text(
-                              //   snapshot.data['username'],
-                              //   style: TextStyle(
-                              //       fontSize: 30.0,
-                              //       fontFamily: 'Montserrat',
-                              //       fontWeight: FontWeight.bold),
-                              // ),
                             ),
                           ],
                         ),
@@ -152,198 +136,84 @@ class _MyProfileState extends State<MyProfile> {
                                         fontFamily: 'Montserrat',
                                         fontSize: 20.0),
                                   ),
-                                  // SizedBox(width: 110.0),
-                                  // Text(
-                                  //   '5.8km',
-                                  //   style: TextStyle(
-                                  //       fontFamily: 'Montserrat',
-                                  //       fontSize: 20.0,
-                                  //       color: Colors.grey),
-                                  // ),
                                 ],
                               ),
                             ],
                           ),
                         ),
-
                         SizedBox(
-                          height: 20.0,
+                          height: 40.0,
                         ),
-                        Card(
-                          child: Container(
-                            padding: EdgeInsets.all(7.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Text(
-                                      'Interest',
-                                      style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 20.0),
-                                    ),
-                                    SizedBox(width: 4.0),
-                                    Icon(Icons.favorite_border)
-
-                                    // SizedBox(width: 110.0),
-                                    // Text(
-                                    //   '5.8km',
-                                    //   style: TextStyle(
-                                    //       fontFamily: 'Montserrat',
-                                    //       fontSize: 20.0,
-                                    //       color: Colors.grey),
-                                    // ),
-                                  ],
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            InkWell(
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (_) => AlertDialog(
+                                      title: Text('Interest'),
+                                      content: Text(snapshot.data['interest']),
+                                    ));
+                              },
+                              child: Card(
+                                child: Container(
+                                  height: 100.0,
+                                  width: 120,
+                                  padding: EdgeInsets.all(7.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Icon(Icons.favorite_border),
+                                      SizedBox(height: 4.0),
+                                      Text(
+                                        'Interest',
+                                        style: TextStyle(
+                                            fontFamily: 'Montserrat',
+                                            fontSize: 20.0),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                SizedBox(height: 9.0),
-                                Row(
-                                  children: <Widget>[
-                                    Text(
-                                      snapshot.data['interest']
-                                          .toString()
-                                          .substring(0, 48),
-                                      textAlign: TextAlign.justify,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 15.0,
-                                          color: Colors.grey),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 9.0),
-                                Row(
-                                  children: <Widget>[
-                                    Text(
-                                      snapshot.data['interest']
-                                          .toString()
-                                          .substring(48, 100),
-                                      textAlign: TextAlign.justify,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 15.0,
-                                          color: Colors.grey),
-                                    ),
-                                  ],
-                                )
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Card(
-                          child: Container(
-                            padding: EdgeInsets.all(7.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Text(
-                                      'Strength',
-                                      style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 20.0),
-                                    ),
-                                    SizedBox(width: 4.0),
-                                    Icon(Icons.accessibility_new)
-
-                                    // SizedBox(width: 110.0),
-                                    // Text(
-                                    //   '5.8km',
-                                    //   style: TextStyle(
-                                    //       fontFamily: 'Montserrat',
-                                    //       fontSize: 20.0,
-                                    //       color: Colors.grey),
-                                    // ),
-                                  ],
-                                ),
-                                SizedBox(height: 9.0),
-                                Row(
-                                  children: <Widget>[
-                                    Text(
-                                      snapshot.data['strength']
-                                          .toString()
-                                          .substring(0, 48),
-                                      textAlign: TextAlign.justify,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 15.0,
-                                          color: Colors.grey),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 9.0),
-                                Row(
-                                  children: <Widget>[
-                                    Text(
-                                      snapshot.data['strength']
-                                          .toString()
-                                          .substring(48, 100),
-                                      textAlign: TextAlign.justify,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 15.0,
-                                          color: Colors.grey),
-                                    ),
-                                  ],
-                                )
-                              ],
+                            SizedBox(
+                              width: 35.0,
                             ),
-                          ),
+                            InkWell(
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (_) => AlertDialog(
+                                      title: Text('Strength'),
+                                      content: Text(snapshot.data['strength']),
+                                    ));
+                              },
+                              child: Card(
+                                child: Container(
+                                  height: 100,
+                                  width: 120,
+                                  padding: EdgeInsets.all(7.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Icon(Icons.accessibility_new),
+                                      SizedBox(height: 4.0),
+                                      Text(
+                                        'Strength',
+                                        style: TextStyle(
+                                            fontFamily: 'Montserrat',
+                                            fontSize: 20.0),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        // Card(
-                        //   child: Column(
-                        //     crossAxisAlignment: CrossAxisAlignment.start,
-                        //     children: <Widget>[
-                        //       Container(
-                        //         padding:
-                        //             EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
-                        //         child: Text(
-                        //           'Notification',
-                        //           style: TextStyle(
-                        //               fontSize: 20.0,
-                        //               fontFamily: "Montserrat",
-                        //               fontWeight: FontWeight.bold),
-                        //         ),
-                        //       ),
-
-                        //       // FIXME should be scrollable
-                        //       ListTile(
-                        //         dense: true,
-                        //         trailing: Icon(Icons.accessibility_new),
-                        //         title: Text(
-                        //           'Noti1',
-                        //           style: TextStyle(fontFamily: "Montserrat"),
-                        //         ),
-                        //       ),
-                        //       ListTile(
-                        //         dense: true,
-                        //         trailing: Icon(Icons.accessibility_new),
-                        //         title: Text(
-                        //           'Noti2',
-                        //           style: TextStyle(fontFamily: "Montserrat"),
-                        //         ),
-                        //       ),
-                        //       ListTile(
-                        //         dense: true,
-                        //         trailing: Icon(Icons.accessibility_new),
-                        //         title: Text(
-                        //           'Noti3',
-                        //           style: TextStyle(fontFamily: "Montserrat"),
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
                         SizedBox(
-                          height: 25.0,
+                          height: 55.0,
                         ),
                         Container(
                           height: 30.0,
