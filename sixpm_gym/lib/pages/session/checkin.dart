@@ -135,10 +135,11 @@ class SessionCheckInState extends State<SessionCheckIn> {
               GestureDetector(
                 onTap: () { //TODO START TIMER
                   setState(() {
+                    print("Aaa");
 
                     //FIXME hasCheckedIn FLAG SHOULD BE UPDATED WHEN USER CLICKS ON CHECK IN IN matchedSession PAGE, NOT HERE
                     //TODO ONLY ALLOW USER TO START THE TIMER WHEN BOTH USERS HAVE CHECKED IN ALREADY
-                    if (document['hasCheckedIn1'] == false ||document['hasCheckedIn2'] == false ) {
+                    if (document['hasCheckIn1'] == false ||document['hasCheckIn2'] == false ) {
 
                       if(globalUID.uid==document['userID1']){
                         update("hasCheckedIn1");
