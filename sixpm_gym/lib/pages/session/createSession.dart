@@ -11,6 +11,7 @@ class CreateSession extends StatefulWidget {
 
 class CreateSessionState extends State<CreateSession> {
   String _startTime, _endTime, _location = 'SEARCH FOR GYM';
+  int _startTimeIndex, _endTimeIndex;
   List<String> time = [
     '00:00',
     '00:30',
@@ -62,9 +63,7 @@ class CreateSessionState extends State<CreateSession> {
     '23:30',
   ];
 
-// user defined function
   void _errorDialog(context) {
-    // flutter defined function
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -72,6 +71,27 @@ class CreateSessionState extends State<CreateSession> {
         return AlertDialog(
           title: new Text("Error!"),
           content: new Text("Please select a gym before proceeding!"),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Okay"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _timeErrorDialog(context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Error!"),
+          content: new Text("Start Time cannot be after end time!"),
           actions: <Widget>[
             new FlatButton(
               child: new Text("Okay"),
@@ -104,6 +124,7 @@ class CreateSessionState extends State<CreateSession> {
       _min = "30";
 
     _startTime = _hour + ':' + _min;
+    _startTimeIndex = time.indexOf(_startTime);
 
     if (now.hour == 22)
       _endHour = "00";
@@ -114,6 +135,11 @@ class CreateSessionState extends State<CreateSession> {
     else
       _endHour = (now.hour + 2).toString();
     _endTime = _endHour + ':' + _min;
+    _endTimeIndex = time.indexOf(_endTime);
+    print('startIndex: ' +
+        _startTimeIndex.toString() +
+        '\nendIndex: ' +
+        _endTimeIndex.toString());
   }
 
   Widget build(BuildContext context) {
@@ -221,6 +247,7 @@ class CreateSessionState extends State<CreateSession> {
                                   print('[Dropdown] changed to ' + item);
                                   setState(() {
                                     _startTime = item;
+                                    _startTimeIndex = time.indexOf(item);
                                   });
                                 },
                               ),
@@ -255,6 +282,7 @@ class CreateSessionState extends State<CreateSession> {
                                   print('[Dropdown] changed to ' + item);
                                   setState(() {
                                     _endTime = item;
+                                    _endTimeIndex = time.indexOf(item);
                                   });
                                 },
                               ),
@@ -316,10 +344,15 @@ class CreateSessionState extends State<CreateSession> {
                           if (_location == "SEARCH FOR GYM") {
                             //No gym selected
                             _errorDialog(context);
+                          } else if (_startTimeIndex > _endTimeIndex) {
+                            //start time after end time
+                            _timeErrorDialog(context);
                           } else {
-                            String _startDateTime = globals.dateISO + ' ' + _startTime + ':00';
+                            String _startDateTime =
+                                globals.dateISO + ' ' + _startTime + ':00';
                             print(_startDateTime);
-                            DateTime startDateTime = DateTime.parse(_startDateTime);
+                            DateTime startDateTime =
+                                DateTime.parse(_startDateTime);
                             params.add({'location': _location});
                             params.add({'startTime': _startTime});
                             params.add({'endTime': _endTime});

@@ -14,15 +14,44 @@ class RateSession extends StatefulWidget{
 
 class _RateSessionState extends State<RateSession>{
   //GET BOTH USER PROFILE DOCUMENT
-  DocumentSnapshot document;
-  
+  DocumentSnapshot document, currentUserDoc, partnerDoc;
   _RateSessionState(DocumentSnapshot document){
     this.document = document;
+  }
+
+ getCurrentUser() {
+    Firestore.instance //Get partner profile
+        .collection('Profile')
+        .document(globalUID.uid)
+        .get().then((doc)=>{
+          currentUserDoc = doc
+        });
+  }
+
+  getPartner(DocumentSnapshot matchedDocument){
+    String partnerUID;
+    if (globalUID.uid == matchedDocument['userID1']) //Partner is UserID2
+      partnerUID = matchedDocument['userID2'];
+    else //Partner is UserID1
+      partnerUID = matchedDocument['userID1'];
+
+    Firestore.instance //Get partner profile
+        .collection('Profile')
+        .document(partnerUID)
+        .get().then((doc)=>{
+          partnerDoc = doc
+        });
   }
 
   double rating = 0;
   int starCount = 5;
   @override
+  void initState() {
+    super.initState();
+    currentUserDoc = getCurrentUser();
+    getPartner(document);
+  }
+
   Widget build(BuildContext context){
     return new Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -131,6 +160,7 @@ class _RateSessionState extends State<RateSession>{
                         onTap: () {
                           //TODO UPDATE MatchedSession DB WITH RATE, FEEDBACK, COMPLETED = TRUE
                           //TODO UPDATE BOTH PROFILES HourSum AND numOfSession
+                          
                           Navigator.popUntil(
                         context, ModalRoute.withName('homepage'));
                         },
