@@ -30,6 +30,7 @@ class SessionCheckInState extends State<SessionCheckIn> {
               if (_hour > 2) {
                 timer.cancel();
               } else if (_second < 60) {
+                print("aa");
                 _second += 1;
               } else if (_second >= 60) {
                 _second = 0;
@@ -70,6 +71,14 @@ class SessionCheckInState extends State<SessionCheckIn> {
         //print("UnmatchedSession/session$id added");
       }).catchError((e) => print(e));
     }
+  }
+    void updateDoc(int num) async {
+    DocumentSnapshot document1 =
+        await Firestore.instance //Get current user profile
+            .collection('MatchedSession')
+            .document('session$num')
+            .get();
+    this.document = document1;
   }
 
   @override
@@ -129,22 +138,31 @@ class SessionCheckInState extends State<SessionCheckIn> {
             onTap: () {
               //TODO START TIMER
               setState(() {
-                print("Aaa");
-
+                // print("Aaa");
+                // if(document['hasCheckIn1']==false){
+                //   print("bbb");
+                // }
+                // if(document['hasCheckIn2']==false){
+                //   print("cc");
+                // }
+                // startTimer();
                 //FIXME hasCheckedIn FLAG SHOULD BE UPDATED WHEN USER CLICKS ON CHECK IN IN matchedSession PAGE, NOT HERE
                 //TODO ONLY ALLOW USER TO START THE TIMER WHEN BOTH USERS HAVE CHECKED IN ALREADY
-                if (document['hasCheckIn1'] == false ||
-                    document['hasCheckIn2'] == false) {
+                if ((document['hasCheckIn1'] == false) && (document['hasCheckIn2']==false)) {
                   if (globalUID.uid == document['userID1']) {
                     update("hasCheckedIn1");
+                    updateDoc(document['ID']);
                   } else if (globalUID.uid == document['userID2']) {
+                    // print("aaa");
                     update("hasCheckedIn2");
                   }
                 } else if (document['hasCheckIn1'] == true &&
                     document['hasCheckIn2'] == false) {
                   if (globalUID.uid == document['userID1']) {
                   } else if (globalUID.uid == document['userID2']) {
+                    print("bb");
                     update("hasCheckedIn2");
+                    
                     startTimer();
                   }
                 } else if (document['hasCheckIn1'] == false &&
