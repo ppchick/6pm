@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './widgets/sessionMain.dart';
 import './gym/gym.dart';
+import './gym/weather.dart';
 import './profile/profile.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,7 +14,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 1;
   final List<Widget> _children = [
-    GymPage(storage: GymStorage()),
+    // GymPage(storage: GymStorage()),
+    WeatherPage(),
     SessionMainPage(),
     MyProfile(),
   ];

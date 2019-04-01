@@ -13,6 +13,7 @@ import 'pages/session/matchedSession.dart';
 import 'pages/session/search_session_gym.dart';
 import 'pages/session/rateSession.dart';
 import 'pages/session/sessionHistoryInfo.dart';
+import 'pages/gym/gym.dart';
 
 void main() {
   runApp(new MyApp());
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder>{
+        '/gympage': (BuildContext context) => new GymPage(storage: GymStorage(),),
         '/signup': (BuildContext context) => new SignupPage(),
         '/homepage': (BuildContext context) => new HomePage(),
         '/signup2': (BuildContext context) => new SignupPage2(),
