@@ -20,7 +20,7 @@ class InitDBWidget extends StatelessWidget {
 //Profiles
     data = <String, Object>{
       'DOB': '1991-01-01',
-      'currentRating': 4.67,
+      'currentRating': 5.0,
       'email': 'testing@gmail.com',
       'firstName': 'Alex',
       'gender': 'male',
@@ -35,7 +35,7 @@ class InitDBWidget extends StatelessWidget {
     profileList.add(data);
     data = <String, Object>{
       'DOB': '1994-04-04',
-      'currentRating': 5,
+      'currentRating': 5.0,
       'email': 'testing2@gmail.com',
       'firstName': 'Betty',
       'gender': 'female',
@@ -50,11 +50,11 @@ class InitDBWidget extends StatelessWidget {
     profileList.add(data);
     data = <String, Object>{
       'DOB': '1993-03-03',
-      'currentRating': 2.5,
+      'currentRating': 3.33,
       'email': 'testing3@gmail.com',
       'firstName': 'Charlie',
       'gender': 'male',
-      'hourSum': 2,
+      'hourSum': 2.5,
       'interest': 'Gaming',
       'strength': 'Studying',
       'lastName': 'Cooper',
@@ -65,11 +65,11 @@ class InitDBWidget extends StatelessWidget {
     profileList.add(data);
     data = <String, Object>{
       'DOB': '1997-06-01',
-      'currentRating': 4.9,
+      'currentRating': 4.75,
       'email': 'testing4@gmail.com',
       'firstName': 'Debbie',
       'gender': 'female',
-      'hourSum': 8,
+      'hourSum': 7.5,
       'interest': 'Movies, Music',
       'strength': 'Everything',
       'lastName': 'Danvers',
@@ -265,7 +265,7 @@ class InitDBWidget extends StatelessWidget {
       'ID': '2',
       'location': 'Absolute Yoga',
       'startTime': '12:00',
-      'endTime': '14:00',
+      'endTime': '13:30',
       'date': '01/04/2019',
       'startDateTime': DateTime.parse('2019-04-01 12:00:00'),
       'focus': 'Yoga',
@@ -278,7 +278,7 @@ class InitDBWidget extends StatelessWidget {
       'rate2': 5,
       'feedback1': 'Debbie is pretty decent',
       'feedback2': 'Alex is highly recommended!',
-      'numHour': 2,
+      'numHour': 1.5,
     };
     matchedList.add(data);
     data = <String, Object>{
@@ -325,7 +325,7 @@ class InitDBWidget extends StatelessWidget {
       'ID': '5',
       'location': 'Physical ABuse',
       'startTime': '09:00',
-      'endTime': '10:00',
+      'endTime': '10:30',
       'date': '01/04/2019',
       'startDateTime': DateTime.parse('2019-04-01 09:00:00'),
       'focus': 'Strength',
@@ -338,7 +338,7 @@ class InitDBWidget extends StatelessWidget {
       'rate2': 5,
       'feedback1': 'Charlie could use some improvement',
       'feedback2': 'Alex is amazing',
-      'numHour': 1,
+      'numHour': 1.5,
     };
     matchedList.add(data);
 
