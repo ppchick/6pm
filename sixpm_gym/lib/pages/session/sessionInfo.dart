@@ -91,64 +91,9 @@ class SessionInfo extends StatelessWidget {
     unmatchedDocRef.updateData({'isMatched': true});
   }
 
-  Widget _joinButton(context, isExpired) {
-    if (isExpired) {
-      return Container(
-        height: 40.0,
-        child: Material(
-          borderRadius: BorderRadius.circular(20.0),
-          shadowColor: Colors.blueAccent,
-          color: Colors.grey,
-          elevation: 7.0,
-          child: InkWell(
-            child: Center(
-              child: Text(
-                'Join Session',
-                style: TextStyle(
-                    color: Colors.blueGrey,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat'),
-              ),
-            ),
-          ),
-        ),
-      );
-    } else {
-      return Container(
-        height: 40.0,
-        child: Material(
-          borderRadius: BorderRadius.circular(20.0),
-          shadowColor: Colors.blueAccent,
-          color: Colors.blue,
-          elevation: 7.0,
-          child: InkWell(
-            onTap: () {
-              print('[Join Session] Pressed');
-              _showDialog(context);
-            },
-            child: Center(
-              child: Text(
-                'Join Session',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat'),
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
-    final bool isExpired = (now.isAfter(unmatchedDocument['startDateTime']));
-    String _text = 'Waiting for someone to join...';
-
-    if (isExpired) _text = 'Session Expired!';
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Session Details'),
@@ -168,7 +113,7 @@ class SessionInfo extends StatelessWidget {
           Container(
             padding: EdgeInsets.fromLTRB(20.0, 25.0, 20.0, 0.0),
             child: Text(
-              _text,
+              'Waiting for someone to join...',
               style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
             ),
           ),
@@ -224,7 +169,30 @@ class SessionInfo extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20),
-          _joinButton(context, isExpired),
+          Container(
+        height: 40.0,
+        child: Material(
+          borderRadius: BorderRadius.circular(20.0),
+          shadowColor: Colors.blueAccent,
+          color: Colors.blue,
+          elevation: 7.0,
+          child: InkWell(
+            onTap: () {
+              print('[Join Session] Pressed');
+              _showDialog(context);
+            },
+            child: Center(
+              child: Text(
+                'Join Session',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Montserrat'),
+              ),
+            ),
+          ),
+        ),
+      ),
           SizedBox(height: 10),
           Container(
             height: 40.0,

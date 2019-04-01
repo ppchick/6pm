@@ -30,160 +30,159 @@ class SessionListState extends State<SessionList> {
   }
 
   Widget build(BuildContext context) {
-    //Create nested queries
-    Query notMatched = col.where('isMatched', isEqualTo: false);
+    List<DocumentSnapshot> docs;
+    DateTime now = DateTime.now();
 
-    Query notSameGender = notMatched.where('sameGender', isEqualTo: false);
-    Query sameGender = notMatched.where('sameGender', isEqualTo: true);
-    Query sameGender2 = sameGender.where('userGender', isEqualTo: _gender);
-
-    Query uidGreater1 =
-        notSameGender.where('userID', isGreaterThan: globalUID.uid);
-    Query uidLess1 = notSameGender.where('userID', isLessThan: globalUID.uid);
-
-    Query uidGreater2 =
-        sameGender2.where('userID', isGreaterThan: globalUID.uid);
-    Query uidLess2 = sameGender2.where('userID', isLessThan: globalUID.uid);
-
-    return ListView(
-      shrinkWrap: true,
-      children: <Widget>[
-        _streamBulder(
-            uidGreater1), //get sessions where sameGender = false, uid > current uid
-        _streamBulder(
-            uidLess1), //get sessions where sameGender = false, uid < current uid
-        _streamBulder(
-            uidGreater2), //get sessions where sameGender = true, uid > current uid, userGender = currentGender
-        _streamBulder(
-            uidLess2), //get sessions where sameGender = true, uid < current uid, userGender = currentGender
-      ],
-    );
-  }
-
-  Widget _streamBulder(Query query) {
     return StreamBuilder<QuerySnapshot>(
-      stream: query.snapshots(),
+      stream: col.where('isMatched', isEqualTo: false).snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError)
           return new Text('Error: ${snapshot.error}'); //error checking
         switch (snapshot.connectionState) {
           //if takes too long to load, display "loading"
           case ConnectionState.waiting:
-            return new Text('Loading...');
+            return new CircularProgressIndicator();
           default:
-            final int sessionCount = snapshot
-                .data.documents.length; //get number of documents in collection
-            return ListView.builder(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              physics: ClampingScrollPhysics(),
-              itemCount: sessionCount,
-              itemBuilder: (_, int index) {
-                final DocumentSnapshot document =
-                    snapshot.data.documents[index];
+            docs = snapshot.data.documents; //adds all documents to a list
+            //client-side filters
+            docs.retainWhere((item) =>
+                item['userID'] !=
+                globalUID
+                    .uid); //removes all documents where userID = current user
 
-                return Card(
-                    elevation: 8.0,
-                    margin: new EdgeInsets.symmetric(
-                        horizontal: 10.0, vertical: 2.0),
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 75,
-                      decoration:
-                          BoxDecoration(color: Color.fromRGBO(0, 0, 0, 0)),
-                      child: ListTile(
-                        leading: Container(
-                            child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Icon(Icons.people, color: Colors.black, size: 60.0),
-                            Container(
-                              padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                              width: 290,
-                              alignment: Alignment.center,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                      document['date'] +
-                                          ', ' +
-                                          document['startTime'] +
-                                          ' - ' +
-                                          document['endTime'],
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold)),
-                                  Container(
-                                      child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: <Widget>[
-                                      Container(
-                                          height: 40.0,
-                                          width: 125.0,
-                                          color: Colors.transparent,
-                                          child: Container(
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.black,
-                                                      style: BorderStyle.solid,
-                                                      width: 1.0),
-                                                  color: Colors.transparent,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0)),
-                                              child: Center(
-                                                child: Text(
-                                                    document['location'],
-                                                    overflow: TextOverflow.clip,
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.bold)),
-                                              ))),
-                                      Container(
-                                          height: 40.0,
-                                          width: 125.0,
-                                          color: Colors.transparent,
-                                          child: Container(
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.black,
-                                                      style: BorderStyle.solid,
-                                                      width: 1.0),
-                                                  color: Colors.transparent,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0)),
-                                              child: Center(
-                                                child: Text(document['focus'],
-                                                    style: TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.bold)),
-                                              ))),
-                                    ],
-                                  ))
-                                ],
-                              ),
-                            )
-                          ],
-                        )),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SessionInfo(
-                                      unmatchedDocument:
-                                          document))); //Sends current session document to sessionInfo page
-                        },
-                      ),
-                    ));
-              },
-            );
+            docs.retainWhere((item) => ((item['sameGender'] == false) ||
+                ((item['sameGender'] == true) &&
+                    (item['userGender'] ==
+                        _gender)))); //removes all documents where sameGender == true but userGender != curent gender
+
+            docs.retainWhere((item) => now.isBefore(item[
+                'startDateTime'])); //removes all documents where start datetime is before now
+            if (docs.length != 0) {
+              return ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
+                itemCount: docs.length,
+                itemBuilder: (_, int index) {
+                  final DocumentSnapshot document = docs[index];
+
+                  return Card(
+                      elevation: 8.0,
+                      margin: new EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 2.0),
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 75,
+                        decoration:
+                            BoxDecoration(color: Color.fromRGBO(0, 0, 0, 0)),
+                        child: ListTile(
+                          leading: Container(
+                              child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Icon(Icons.people,
+                                  color: Colors.black, size: 60.0),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                                width: 290,
+                                alignment: Alignment.center,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text(
+                                        document['date'] +
+                                            ', ' +
+                                            document['startTime'] +
+                                            ' - ' +
+                                            document['endTime'],
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold)),
+                                    Container(
+                                        child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        Container(
+                                            height: 40.0,
+                                            width: 125.0,
+                                            color: Colors.transparent,
+                                            child: Container(
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.black,
+                                                        style:
+                                                            BorderStyle.solid,
+                                                        width: 1.0),
+                                                    color: Colors.transparent,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0)),
+                                                child: Center(
+                                                  child: Text(
+                                                      document['location'],
+                                                      overflow:
+                                                          TextOverflow.clip,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                ))),
+                                        Container(
+                                            height: 40.0,
+                                            width: 125.0,
+                                            color: Colors.transparent,
+                                            child: Container(
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.black,
+                                                        style:
+                                                            BorderStyle.solid,
+                                                        width: 1.0),
+                                                    color: Colors.transparent,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0)),
+                                                child: Center(
+                                                  child: Text(document['focus'],
+                                                      style: TextStyle(
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                ))),
+                                      ],
+                                    ))
+                                  ],
+                                ),
+                              )
+                            ],
+                          )),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SessionInfo(
+                                        unmatchedDocument:
+                                            document))); //Sends current session document to sessionInfo page
+                          },
+                        ),
+                      ));
+                },
+              );
+            } else {
+              return Container(
+                  padding: EdgeInsets.fromLTRB(35, 20, 35, 0),
+                  alignment: Alignment.center,
+                  child: Center(
+                      child: Text(
+                          'There are no sessions to display. Why don\'t you create one?',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold))));
+            }
         }
       },
     );
