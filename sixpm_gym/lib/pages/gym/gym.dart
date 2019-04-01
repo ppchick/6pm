@@ -123,7 +123,7 @@ class MapSampleState extends State<GymPage> {
 
   final Set<Marker> _markers = {};
 
-  void _onAddMarkerButtonPressed(gymTile tile) {
+  void _onAddMarkerButtonPressed(GymTile tile) {
   setState(() {
     _markers.add(Marker(
       // This marker id can be anything that uniquely identifies each marker.
