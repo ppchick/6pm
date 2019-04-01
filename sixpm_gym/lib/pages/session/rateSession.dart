@@ -8,7 +8,6 @@ class RateSession extends StatefulWidget{
 }
 
 class _RateSessionState extends State<RateSession>{
-<<<<<<< HEAD
   //GET BOTH USER PROFILE DOCUMENT
   DocumentSnapshot document, currentUserDoc, partnerDoc;
   _RateSessionState(DocumentSnapshot document){
@@ -39,9 +38,6 @@ class _RateSessionState extends State<RateSession>{
         });
   }
 
-=======
-  //TODO CONSTRUCTOR TO GET SESSION DOCUMENT FROM CHECKIN PAGE
->>>>>>> parent of 7875b28... Minor changes
   double rating = 0;
   int starCount = 5;
   @override
