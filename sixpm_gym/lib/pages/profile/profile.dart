@@ -131,7 +131,8 @@ class _MyProfileState extends State<MyProfile> {
                                     width: 8.0,
                                   ),
                                   Text(
-                                    snapshot.data['currentRating'].toString(),  //TODO IF LESS THAN 3-5 SESSIONS, DONT SHOW RATING
+                                    snapshot.data['currentRating']
+                                        .toString(), //TODO IF LESS THAN 3-5 SESSIONS, DONT SHOW RATING
                                     style: TextStyle(
                                         fontFamily: 'Montserrat',
                                         fontSize: 20.0),
@@ -152,9 +153,10 @@ class _MyProfileState extends State<MyProfile> {
                                 showDialog(
                                     context: context,
                                     builder: (_) => AlertDialog(
-                                      title: Text('Interest'),
-                                      content: Text(snapshot.data['interest']),
-                                    ));
+                                          title: Text('Interest'),
+                                          content:
+                                              Text(snapshot.data['interest']),
+                                        ));
                               },
                               child: Card(
                                 child: Container(
@@ -185,9 +187,10 @@ class _MyProfileState extends State<MyProfile> {
                                 showDialog(
                                     context: context,
                                     builder: (_) => AlertDialog(
-                                      title: Text('Strength'),
-                                      content: Text(snapshot.data['strength']),
-                                    ));
+                                          title: Text('Strength'),
+                                          content:
+                                              Text(snapshot.data['strength']),
+                                        ));
                               },
                               child: Card(
                                 child: Container(
@@ -270,7 +273,6 @@ class GetClipper extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) {
-    // TODO: implement shouldReclip
     return true;
   }
 }

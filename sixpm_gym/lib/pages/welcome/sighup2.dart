@@ -71,7 +71,6 @@ class _SignupPageState2 extends State<SignupPage2> {
                 ],
               ),
             ),
-
             SizedBox(
               height: 15.0,
             ),
@@ -239,50 +238,6 @@ class _SignupPageState2 extends State<SignupPage2> {
                 ),
               ),
             ),
-            // Row(
-            //   children: <Widget>[
-            //     Container(
-            //       padding: EdgeInsets.only(left: 10.0),
-            //       width: 200.0,
-            //       child: Card(
-            //         child: Column(
-            //           crossAxisAlignment: CrossAxisAlignment.start,
-            //           children: <Widget>[
-            //             Container(
-            //               padding:
-            //                   EdgeInsets.fromLTRB(10.0, 5.0, 0.0, 0.0),
-            //               child: Text(
-            //                 'Interest',
-            //                 style: TextStyle(fontSize: 20.0),
-            //               ),
-            //             ),
-            //             InterestCheckboxWidget(),
-            //           ],
-            //         ),
-            //       ),
-            //     ),
-            //     Container(
-            //       padding: EdgeInsets.only(left: 10.0),
-            //       width: 200.0,
-            //       child: Card(
-            //         child: Column(
-            //           crossAxisAlignment: CrossAxisAlignment.start,
-            //           children: <Widget>[
-            //             Container(
-            //               padding:
-            //                   EdgeInsets.fromLTRB(10.0, 5.0, 0.0, 0.0),
-            //               child: Text(
-            //                 'Strength',
-            //                 style: TextStyle(fontSize: 20.0),
-            //               ),
-            //             ),
-            //             StrengthCheckboxWidget(),
-            //           ],
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
             SizedBox(
               height: 25.0,
             ),
@@ -332,7 +287,7 @@ class _SignupPageState2 extends State<SignupPage2> {
       dataMap['level'] = _levelValue;
       dataMap['username'] = username;
       dataMap['email'] = email;
-      dataMap['currentRating'] = 0;
+      dataMap['currentRating'] = 5;
       dataMap['numOfSession'] = 0;
       dataMap['hourSum'] = 0;
       dataMap['interest'] = interestController.text;
