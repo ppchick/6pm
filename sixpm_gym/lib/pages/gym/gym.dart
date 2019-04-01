@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 // import 'package:location/location.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
-import 'gymTile.dart';
+import 'GymTile.dart';
 import 'package:xml/xml.dart' as xml;
 import 'dart:io';
-//import 'package:path/path.dart' as path;
+import 'package:path/path.dart' as path;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
@@ -71,9 +71,9 @@ class MapSampleState extends State<GymPage> {
   void initState() {
     // _getLocation();
     super.initState();
-    getGymTiles().then((List tiles) {
+    getGymTiles().then((List Tiles) {
       setState(() {
-        allTiles = tiles;
+        allTiles = Tiles;
       });
     });
   }
@@ -139,7 +139,6 @@ class MapSampleState extends State<GymPage> {
   });
 }
 
-
   LatLng _lastMapPosition = LatLng(1.3521, 103.8198);
 
   void _onCameraMove(CameraPosition position) {
@@ -159,6 +158,7 @@ class MapSampleState extends State<GymPage> {
   //     currentLocation = null;
   //   }
   // }
+
   List androidVersionNames = ["Cupcake", "Donut"];
   @override
   Widget build(BuildContext context) {
