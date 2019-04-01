@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/matchedSession': (BuildContext context) => new MatchedSession(),
         '/searchSession': (BuildContext context) => new SearchSession(),
         '/checkIn': (BuildContext context) => new SessionCheckIn(),
+        '/gympage': (BuildContext context) => new GymPage(storage: GymStorage()),
       },
       home: new WelcomePage(),
     );
