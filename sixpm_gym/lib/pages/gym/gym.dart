@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:location/location.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 import 'gymTile.dart';
@@ -64,24 +65,12 @@ class MapSampleState extends State<GymPage> {
     target: LatLng(1.3521, 103.8198),
     zoom: 10,
   );
-  double latitude;
-  double longitude;
   String kmlContent;
   List allTiles = [];
   @override
   void initState() {
+    // _getLocation();
     super.initState();
-    Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
-        .then((Position pos) {
-      setState(() {
-        latitude = pos.latitude;
-        longitude = pos.longitude;
-        print("hello");
-        print(latitude.toString());
-        print(longitude.toString());
-      });
-    });
     getGymTiles().then((List tiles) {
       setState(() {
         allTiles = tiles;
@@ -133,28 +122,43 @@ class MapSampleState extends State<GymPage> {
   // }
 
   final Set<Marker> _markers = {};
-/*
+
+  void _onAddMarkerButtonPressed(gymTile tile) {
+  setState(() {
+    _markers.add(Marker(
+      // This marker id can be anything that uniquely identifies each marker.
+      markerId: MarkerId(LatLng(tile.latitude, tile.longitude).toString()),
+      // markerId: MarkerId(_lastMapPosition.toString()),
+      position: LatLng(tile.latitude, tile.longitude),
+      infoWindow: InfoWindow(
+        title: tile.name,
+        snippet: '5 Star Rating',
+      ),
+      icon: BitmapDescriptor.defaultMarker,
+    ));
+  });
+}
+
+
   LatLng _lastMapPosition = LatLng(1.3521, 103.8198);
 
   void _onCameraMove(CameraPosition position) {
     _lastMapPosition = position.target;
   }
 
-  void _onAddMarkerButtonPressed() {
-    setState(() {
-      _markers.add(Marker(
-        // This marker id can be anything that uniquely identifies each marker.
-        markerId: MarkerId(_lastMapPosition.toString()),
-        position: _lastMapPosition,
-        infoWindow: InfoWindow(
-          title: 'Really cool place',
-          snippet: '5 Star Rating',
-        ),
-        icon: BitmapDescriptor.defaultMarker,
-      ));
-    });
-  }
-*/
+  // _getLocation() async {
+  //   var location = new Location();
+  //   try {
+  //     currentLocation = await location.getLocation();
+
+  //     print("locationLatitude: ${currentLocation["latitude"]}");
+  //     print("locationLongitude: ${currentLocation["longitude"]}");
+  //     setState(
+  //         () {}); //rebuild the widget after getting the current location of the user
+  //   } on Exception {
+  //     currentLocation = null;
+  //   }
+  // }
   List androidVersionNames = ["Cupcake", "Donut"];
   @override
   Widget build(BuildContext context) {
@@ -179,6 +183,7 @@ class MapSampleState extends State<GymPage> {
                   )
             ],
           )),
+          onTap: () {_onAddMarkerButtonPressed(tile);},
         );
 
     return new Scaffold(
@@ -195,6 +200,7 @@ class MapSampleState extends State<GymPage> {
               //   // _controller.complete(controller);
               // },
               onMapCreated: _onMapCreated,
+              onCameraMove: _onCameraMove,
               markers: _markers,
             ),
           ),
@@ -287,6 +293,8 @@ Future<List> getGymTiles() async {
   Position pos = await Geolocator()
       .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
   List allgyms = [];
+  print(pos.latitude);
+  print(pos.longitude);
   var content = await rootBundle.loadString('assets/EXERCISEFACILITIES.kml');
   var document = xml.parse(content);
 
