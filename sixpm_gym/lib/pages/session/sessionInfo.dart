@@ -29,7 +29,7 @@ class SessionInfo extends StatelessWidget {
               child: new Text("Confirm"),
               onPressed: () {
                 add();
-                Navigator.popUntil(context, ModalRoute.withName('/homepage'));
+                Navigator.popUntil(context, ModalRoute.withName('homepage'));
               },
             ),
           ],
@@ -41,7 +41,7 @@ class SessionInfo extends StatelessWidget {
   Future add() async {
     var highestID = 0;
     //Get current highest MatchedSession document ID
-    await Firestore.instance 
+    await Firestore.instance
         .collection('MatchedSession')
         .getDocuments()
         .then((doc) {
@@ -65,6 +65,7 @@ class SessionInfo extends StatelessWidget {
       'startTime': unmatchedDocument['startTime'],
       'endTime': unmatchedDocument['endTime'],
       'date': unmatchedDocument['date'],
+      'startDateTime': unmatchedDocument['startDateTime'],
       'focus': unmatchedDocument['focus'],
       'level': unmatchedDocument['level'],
       'userID1': unmatchedDocument['userID'],
@@ -84,10 +85,12 @@ class SessionInfo extends StatelessWidget {
     }).catchError((e) => print(e));
 
     //Set isMatched of unmatchedSession to true
-    DocumentReference unmatchedDocRef =
-        Firestore.instance.collection('UnmatchedSession').document(unmatchedDocument.documentID);
+    DocumentReference unmatchedDocRef = Firestore.instance
+        .collection('UnmatchedSession')
+        .document(unmatchedDocument.documentID);
     unmatchedDocRef.updateData({'isMatched': true});
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -167,30 +170,29 @@ class SessionInfo extends StatelessWidget {
           ),
           SizedBox(height: 20),
           Container(
-            height: 40.0,
-            child: Material(
-              borderRadius: BorderRadius.circular(20.0),
-              shadowColor: Colors.blueAccent,
-              color: Colors.blue,
-              elevation: 7.0,
-              child: InkWell(
-                onTap: () {
-                  //TODO IMPLEMENT JOIN SESSION
-                  print('[Join Session] Pressed');
-                  _showDialog(context);
-                },
-                child: Center(
-                  child: Text(
-                    'Join Session',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Montserrat'),
-                  ),
-                ),
+        height: 40.0,
+        child: Material(
+          borderRadius: BorderRadius.circular(20.0),
+          shadowColor: Colors.blueAccent,
+          color: Colors.blue,
+          elevation: 7.0,
+          child: InkWell(
+            onTap: () {
+              print('[Join Session] Pressed');
+              _showDialog(context);
+            },
+            child: Center(
+              child: Text(
+                'Join Session',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Montserrat'),
               ),
             ),
           ),
+        ),
+      ),
           SizedBox(height: 10),
           Container(
             height: 40.0,

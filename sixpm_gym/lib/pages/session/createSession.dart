@@ -62,16 +62,41 @@ class CreateSessionState extends State<CreateSession> {
     '23:30',
   ];
 
+// user defined function
+  void _errorDialog(context) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Error!"),
+          content: new Text("Please select a gym before proceeding!"),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Okay"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
     globals.init();
     String _hour, _min, _endHour;
     DateTime now = DateTime.now();
-    if (now.hour < 10)
-      _hour = "0" + now.hour.toString();
+    if (now.hour == 23)
+      _hour = "00";
+    else if (now.hour < 9)
+      _hour = "0" + (now.hour + 1).toString();
     else
-      _hour = now.hour.toString();
+      _hour = (now.hour + 1).toString();
 
     if (now.minute < 30)
       _min = "00";
@@ -80,12 +105,14 @@ class CreateSessionState extends State<CreateSession> {
 
     _startTime = _hour + ':' + _min;
 
-    if (now.hour == 23)
+    if (now.hour == 22)
+      _endHour = "00";
+    else if (now.hour == 23)
       _endHour = "01";
-    else if (now.hour < 9)
-      _endHour = "0" + (now.hour + 1).toString();
+    else if (now.hour < 8)
+      _endHour = "0" + (now.hour + 2).toString();
     else
-      _endHour = (now.hour + 1).toString();
+      _endHour = (now.hour + 2).toString();
     _endTime = _endHour + ':' + _min;
   }
 
@@ -128,8 +155,7 @@ class CreateSessionState extends State<CreateSession> {
                                 MaterialPageRoute(
                                     builder: (context) => SearchSession()))
                             .then((location) {
-                              if (location != null)
-                          _location = location.toString();
+                          if (location != null) _location = location.toString();
                         });
                       },
                       child: Center(
@@ -287,15 +313,24 @@ class CreateSessionState extends State<CreateSession> {
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          params.add({'location': _location});
-                          params.add({'startTime': _startTime});
-                          params.add({'endTime': _endTime});
-                          params.add({'date': globals.datetime});
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      CreateSession2(params: params)));
+                          if (_location == "SEARCH FOR GYM") {
+                            //No gym selected
+                            _errorDialog(context);
+                          } else {
+                            String _startDateTime = globals.dateISO + ' ' + _startTime + ':00';
+                            print(_startDateTime);
+                            DateTime startDateTime = DateTime.parse(_startDateTime);
+                            params.add({'location': _location});
+                            params.add({'startTime': _startTime});
+                            params.add({'endTime': _endTime});
+                            params.add({'date': globals.date});
+                            params.add({'startDateTimeISO': startDateTime});
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        CreateSession2(params: params)));
+                          }
                         },
                         child: Center(
                           child: Text(

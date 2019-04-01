@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import '../widgets/checkbox_comment.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../globalUserID.dart' as globalUID;
+
 class RateSession extends StatefulWidget{
+  final DocumentSnapshot document;
+  RateSession(
+      {this.document});
   @override
-  _RateSessionState createState() => _RateSessionState();
+  _RateSessionState createState() => _RateSessionState(document);
 }
 
 class _RateSessionState extends State<RateSession>{
+  //GET BOTH USER PROFILE DOCUMENT
+  DocumentSnapshot document;
+  
+  _RateSessionState(DocumentSnapshot document){
+    this.document = document;
+  }
+
   double rating = 0;
   int starCount = 5;
   @override
@@ -116,9 +129,10 @@ class _RateSessionState extends State<RateSession>{
                       elevation: 7.0,
                       child: InkWell(
                         onTap: () {
-                          //TODO UPDATE DB WITH RATE ETC
+                          //TODO UPDATE MatchedSession DB WITH RATE, FEEDBACK, COMPLETED = TRUE
+                          //TODO UPDATE BOTH PROFILES HourSum AND numOfSession
                           Navigator.popUntil(
-                        context, ModalRoute.withName('/homepage'));
+                        context, ModalRoute.withName('homepage'));
                         },
                         child: Center(
                           child: Text(
