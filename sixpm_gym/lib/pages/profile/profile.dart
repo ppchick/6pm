@@ -255,8 +255,26 @@ class _MyProfileState extends State<MyProfile> {
   }
 
   void signOut() async {
-    FirebaseAuth.instance.signOut();
-    Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+    showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+            title: new Text('Logout'),
+            content: new Text('Do you want to logout?'),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: new Text('No'),
+              ),
+              new FlatButton(
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+                },
+                child: new Text('Yes'),
+              ),
+            ],
+          ),
+    );
   }
 }
 

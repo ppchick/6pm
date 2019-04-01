@@ -122,10 +122,6 @@ class _MyHomePageState extends State<WelcomePage> {
                                   color: Colors.blue,
                                   elevation: 7.0,
                                   child: InkWell(
-                                    // NOTE Uncomment this and comment next line during testing
-                                    // onTap: () {
-                                    //   Navigator.of(context).pushNamed('homepage');
-                                    // },
                                     onTap: signIn,
                                     child: Center(
                                       child: Text(
@@ -142,37 +138,6 @@ class _MyHomePageState extends State<WelcomePage> {
                             ],
                           ),
                         ),
-
-                        // REVIEW Login with Facebook
-                        // Container(
-                        //   height: 40.0,
-                        //   color: Colors.transparent,
-                        //   child: Container(
-                        //     decoration: BoxDecoration(
-                        //         border: Border.all(
-                        //             color: Colors.black,
-                        //             style: BorderStyle.solid,
-                        //             width: 1.0),
-                        //         color: Colors.transparent,
-                        //         borderRadius: BorderRadius.circular(20.0)),
-                        //     child: Row(
-                        //       mainAxisAlignment: MainAxisAlignment.center,
-                        //       children: <Widget>[
-                        //         Center(
-                        //           child:
-                        //               ImageIcon(AssetImage('assets/facebook.png')),
-                        //         ),
-                        //         SizedBox(width: 10.0),
-                        //         Center(
-                        //           child: Text('Log in with facebook',
-                        //               style: TextStyle(
-                        //                   fontWeight: FontWeight.bold,
-                        //                   fontFamily: 'Montserrat')),
-                        //         )
-                        //       ],
-                        //     ),
-                        //   ),
-                        // )
                       ],
                     )),
                 SizedBox(height: 15.0),
@@ -201,19 +166,6 @@ class _MyHomePageState extends State<WelcomePage> {
                             },
                           )
                         ]),
-                    // InkWell(
-                    //   onTap: () {
-                    //     Navigator.of(context).pushNamed('/signup');
-                    //   },
-                    //   child: Text(
-                    //     'Register',
-                    //     style: TextStyle(
-                    //         color: Colors.blue,
-                    //         fontFamily: 'Montserrat',
-                    //         fontWeight: FontWeight.bold,
-                    //         decoration: TextDecoration.underline),
-                    //   ),
-                    // )
                   ],
                 ),
               ],
@@ -242,9 +194,10 @@ class _MyHomePageState extends State<WelcomePage> {
         showDialog(
             context: context,
             builder: (_) => AlertDialog(
-              title: Text('Wrong Password'),
-              content: Text('Please check your password is correct'),
-            ));
+                  title: Text('Wrong Account or Password'),
+                  content:
+                      Text('Please check your account or password is correct'),
+                ));
         print('Wrong account');
         print(e.message);
       }

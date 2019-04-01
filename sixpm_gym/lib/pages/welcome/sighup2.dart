@@ -139,11 +139,9 @@ class _SignupPageState2 extends State<SignupPage2> {
                           ],
                         ),
                       ),
-                      // FIXME Get DOB Data
                       Container(
                         child: DatePickerWidget(),
                       ),
-
                       Container(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -183,7 +181,12 @@ class _SignupPageState2 extends State<SignupPage2> {
                         children: <Widget>[
                           Container(
                             width: 160,
-                            child: TextField(
+                            child: TextFormField(
+                              validator: (input) {
+                                if (input.isEmpty) {
+                                  return 'Please input your First Name';
+                                }
+                              },
                               controller: firstnameController,
                               autofocus: true,
                               decoration: InputDecoration(
@@ -193,7 +196,12 @@ class _SignupPageState2 extends State<SignupPage2> {
                           ),
                           Container(
                             width: 160,
-                            child: TextField(
+                            child: TextFormField(
+                              validator: (input) {
+                                if (input.isEmpty) {
+                                  return 'Please input your Last Name';
+                                }
+                              },
                               controller: lastnameController,
                               autofocus: true,
                               decoration: InputDecoration(
@@ -205,11 +213,11 @@ class _SignupPageState2 extends State<SignupPage2> {
                       ),
                       Container(
                         width: 360,
-                        padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0.0),
+                        padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
                         child: TextFormField(
                           validator: (input) {
-                            if (input.length > 20) {
-                              return 'keep it under 20 characters';
+                            if (input.isEmpty) {
+                              return 'Please Input your interest';
                             }
                           },
                           controller: interestController,
@@ -220,11 +228,11 @@ class _SignupPageState2 extends State<SignupPage2> {
                       ),
                       Container(
                         width: 360,
-                        padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 30.0),
+                        padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 30.0),
                         child: TextFormField(
                           validator: (input) {
-                            if (input.length > 20) {
-                              return 'keep it under 20 characters';
+                            if (input.isEmpty) {
+                              return 'Please Input your strength';
                             }
                           },
                           controller: strengthController,
@@ -239,7 +247,7 @@ class _SignupPageState2 extends State<SignupPage2> {
               ),
             ),
             SizedBox(
-              height: 25.0,
+              height: 10.0,
             ),
             Center(
               child: Container(
@@ -278,37 +286,39 @@ class _SignupPageState2 extends State<SignupPage2> {
   }
 
   void createProfile() async {
-    // final formState = _formKey.currentState;
-    try {
-      // FirebaseUser user = await FirebaseAuth.instance
-      //     .createUserWithEmailAndPassword(email: email, password: password);
-      var dataMap = new Map<String, dynamic>();
-      dataMap['gender'] = _genderValue.toLowerCase();
-      dataMap['level'] = _levelValue;
-      dataMap['username'] = username;
-      dataMap['email'] = email;
-      dataMap['currentRating'] = 5;
-      dataMap['numOfSession'] = 0;
-      dataMap['hourSum'] = 0;
-      dataMap['interest'] = interestController.text;
-      dataMap['strength'] = strengthController.text;
-      dataMap['firstName'] = firstnameController.text;
-      dataMap['lastName'] = lastnameController.text;
-      dataMap['DOB'] = global.dob;
+    final formState = _formKey.currentState;
+    if (formState.validate()) {
+      try {
+        // FirebaseUser user = await FirebaseAuth.instance
+        //     .createUserWithEmailAndPassword(email: email, password: password);
+        var dataMap = new Map<String, dynamic>();
+        dataMap['gender'] = _genderValue.toLowerCase();
+        dataMap['level'] = _levelValue;
+        dataMap['username'] = username;
+        dataMap['email'] = email;
+        dataMap['currentRating'] = 5;
+        dataMap['numOfSession'] = 0;
+        dataMap['hourSum'] = 0;
+        dataMap['interest'] = interestController.text;
+        dataMap['strength'] = strengthController.text;
+        dataMap['firstName'] = firstnameController.text;
+        dataMap['lastName'] = lastnameController.text;
+        dataMap['DOB'] = global.dob;
 
-      Firestore.instance
-          .collection('Profile')
-          .document(user.uid)
-          .setData(dataMap)
-          .catchError((e) {
-        print(e);
-      });
-      Navigator.popUntil(context, ModalRoute.withName('/'));
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => HomePage(user: user)));
-    } catch (e) {
-      print("{ERROR}");
-      print(e.message);
+        Firestore.instance
+            .collection('Profile')
+            .document(user.uid)
+            .setData(dataMap)
+            .catchError((e) {
+          print(e);
+        });
+        Navigator.popUntil(context, ModalRoute.withName('/'));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => HomePage(user: user)));
+      } catch (e) {
+        print("{ERROR}");
+        print(e.message);
+      }
     }
   }
 }
