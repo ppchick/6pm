@@ -112,6 +112,9 @@ class _SignupPageState extends State<SignupPage> {
                           if (input.isEmpty) {
                             return 'Please enter your username';
                           }
+                          if (input.length > 10) {
+                            return 'No more than ten characters for username';
+                          }
                         },
                         onSaved: (input) => _username = input,
                         decoration: InputDecoration(
@@ -216,7 +219,6 @@ class _SignupPageState extends State<SignupPage> {
       try {
         FirebaseUser user = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: _email, password: _password);
-        // FIXME user.sendEmailVerification();
         globalUID.uid = user.uid;
         Navigator.push(
             context,
@@ -226,9 +228,13 @@ class _SignupPageState extends State<SignupPage> {
                     email: _email,
                     password: _password,
                     username: _username)));
-        // Navigator.pushNamed(context, '/signup2', arguments: {user: user});
-        // Navigator.of(context).pushNamed('homepage');
       } catch (e) {
+        showDialog(
+            context: context,
+            builder: (_) => AlertDialog(
+                  title: Text('The email has been used'),
+                  content: Text('Please use another email to register for 6pm'),
+                ));
         print('Wrong account');
         print(e.message);
       }

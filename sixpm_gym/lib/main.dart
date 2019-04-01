@@ -9,6 +9,7 @@ import 'pages/session/sessionHistory.dart';
 import 'pages/session/matchedSession.dart';
 import 'pages/session/search_session_gym.dart';
 import 'pages/session/rateSession.dart';
+import 'pages/gym/gym.dart';
 import 'pages/session/checkin.dart';
 
 void main() {
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/matchedSession': (BuildContext context) => new MatchedSession(),
         '/searchSession': (BuildContext context) => new SearchSession(),
         '/checkIn': (BuildContext context) => new SessionCheckIn(),
+        '/gympage': (BuildContext context) => new GymPage(storage: GymStorage()),
       },
       home: new WelcomePage(),
     );

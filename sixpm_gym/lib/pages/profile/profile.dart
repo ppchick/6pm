@@ -77,7 +77,7 @@ class _MyProfileState extends State<MyProfile> {
                                           snapshot.data['username'],
                                           style: TextStyle(
                                               fontFamily: 'Montserrat',
-                                              fontSize: 25.0,
+                                              fontSize: 22.0,
                                               fontWeight: FontWeight.bold),
                                         ),
                                         SizedBox(width: 7.0),
@@ -131,7 +131,7 @@ class _MyProfileState extends State<MyProfile> {
                                     width: 8.0,
                                   ),
                                   Text(
-                                    snapshot.data['currentRating'].toString(),  //TODO IF LESS THAN 3-5 SESSIONS, DONT SHOW RATING
+                                    snapshot.data['currentRating'].toString(),
                                     style: TextStyle(
                                         fontFamily: 'Montserrat',
                                         fontSize: 20.0),
@@ -152,9 +152,10 @@ class _MyProfileState extends State<MyProfile> {
                                 showDialog(
                                     context: context,
                                     builder: (_) => AlertDialog(
-                                      title: Text('Interest'),
-                                      content: Text(snapshot.data['interest']),
-                                    ));
+                                          title: Text('Interest'),
+                                          content:
+                                              Text(snapshot.data['interest']),
+                                        ));
                               },
                               child: Card(
                                 child: Container(
@@ -185,9 +186,10 @@ class _MyProfileState extends State<MyProfile> {
                                 showDialog(
                                     context: context,
                                     builder: (_) => AlertDialog(
-                                      title: Text('Strength'),
-                                      content: Text(snapshot.data['strength']),
-                                    ));
+                                          title: Text('Strength'),
+                                          content:
+                                              Text(snapshot.data['strength']),
+                                        ));
                               },
                               child: Card(
                                 child: Container(
@@ -246,14 +248,34 @@ class _MyProfileState extends State<MyProfile> {
               );
             }
           } else {
-            return new CircularProgressIndicator();
+            return new Center(
+              child: CircularProgressIndicator(),
+            );
           }
         });
   }
 
   void signOut() async {
-    FirebaseAuth.instance.signOut();
-    Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+    showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+            title: new Text('Logout'),
+            content: new Text('Do you want to logout?'),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: new Text('No'),
+              ),
+              new FlatButton(
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+                },
+                child: new Text('Yes'),
+              ),
+            ],
+          ),
+    );
   }
 }
 
@@ -270,7 +292,6 @@ class GetClipper extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) {
-    // TODO: implement shouldReclip
     return true;
   }
 }
