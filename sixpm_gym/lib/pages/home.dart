@@ -18,12 +18,6 @@ class _HomePageState extends State<HomePage> {
   final FirebaseUser user;
   _HomePageState(this.user);
   int _currentIndex = 1;
-  final List<Widget> _children = [
-    // GymPage(storage: GymStorage()),
-    WeatherPage(),
-    SessionMainPage(),
-    MyProfile(),
-  ];
 
   void _logoutDialog(context) {
     // flutter defined function
@@ -70,7 +64,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> _children = [
-      GymPage(storage: GymStorage()),
+      // GymPage(storage: GymStorage()),
+      WeatherPage(),
       SessionMainPage(),
       MyProfile(
         user: user,

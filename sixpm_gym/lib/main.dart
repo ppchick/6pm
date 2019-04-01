@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder>{
-        '/gympage': (BuildContext context) => new GymPage(storage: GymStorage(),),
         '/signup': (BuildContext context) => new SignupPage(),
         '/sessionHistory': (BuildContext context) => new SessionHistory(),
         '/rateSession': (BuildContext context) => new RateSession(),
