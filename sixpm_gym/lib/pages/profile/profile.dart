@@ -77,7 +77,7 @@ class _MyProfileState extends State<MyProfile> {
                                           snapshot.data['username'],
                                           style: TextStyle(
                                               fontFamily: 'Montserrat',
-                                              fontSize: 25.0,
+                                              fontSize: 22.0,
                                               fontWeight: FontWeight.bold),
                                         ),
                                         SizedBox(width: 7.0),
@@ -248,7 +248,9 @@ class _MyProfileState extends State<MyProfile> {
               );
             }
           } else {
-            return new CircularProgressIndicator();
+            return new Center(
+              child: CircularProgressIndicator(),
+            );
           }
         });
   }

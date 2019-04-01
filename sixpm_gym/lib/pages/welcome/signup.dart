@@ -112,6 +112,9 @@ class _SignupPageState extends State<SignupPage> {
                           if (input.isEmpty) {
                             return 'Please enter your username';
                           }
+                          if (input.length > 10) {
+                            return 'No more than ten characters for username';
+                          }
                         },
                         onSaved: (input) => _username = input,
                         decoration: InputDecoration(
