@@ -9,6 +9,7 @@ import 'pages/session/sessionHistory.dart';
 import 'pages/session/matchedSession.dart';
 import 'pages/session/search_session_gym.dart';
 import 'pages/session/rateSession.dart';
+import 'pages/gym/gym.dart';
 import 'pages/session/checkin.dart';
 
 void main() {
