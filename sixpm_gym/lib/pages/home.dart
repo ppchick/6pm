@@ -65,8 +65,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> _children = [
-      GymPage(storage: GymStorage()),
-      // WeatherPage(),
+      // GymPage(storage: GymStorage()),
+      WeatherPage(),
       SessionMainPage(),
       MyProfile(
         user: user,
