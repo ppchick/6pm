@@ -131,7 +131,7 @@ class _MyProfileState extends State<MyProfile> {
                                     width: 8.0,
                                   ),
                                   Text(
-                                    snapshot.data['currentRating'].toString(),
+                                    snapshot.data['currentRating'].toString(),  //TODO IF LESS THAN 3-5 SESSIONS, DONT SHOW RATING
                                     style: TextStyle(
                                         fontFamily: 'Montserrat',
                                         fontSize: 20.0),

@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import '../widgets/checkbox_comment.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../globalUserID.dart' as globalUID;
 
 class RateSession extends StatefulWidget{
+  final DocumentSnapshot document;
+  RateSession(
+      {this.document});
   @override
-  _RateSessionState createState() => _RateSessionState();
+  _RateSessionState createState() => _RateSessionState(document);
 }
 
 class _RateSessionState extends State<RateSession>{
-  //TODO CONSTRUCTOR TO GET SESSION DOCUMENT FROM CHECKIN PAGE
+  //GET BOTH USER PROFILE DOCUMENT
+  DocumentSnapshot document;
+  
+  _RateSessionState(DocumentSnapshot document){
+    this.document = document;
+  }
+
   double rating = 0;
   int starCount = 5;
   @override
