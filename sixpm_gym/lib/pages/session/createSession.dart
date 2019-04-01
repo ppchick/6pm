@@ -157,10 +157,6 @@ class CreateSessionState extends State<CreateSession> {
       _endHour = (now.hour + 2).toString();
     _endTime = _endHour + ':' + _min;
     _endTimeIndex = time.indexOf(_endTime);
-    print('startIndex: ' +
-        _startTimeIndex.toString() +
-        '\nendIndex: ' +
-        _endTimeIndex.toString());
   }
 
   Widget build(BuildContext context) {

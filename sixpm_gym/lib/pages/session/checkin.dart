@@ -29,7 +29,7 @@ class SessionCheckInState extends State<SessionCheckIn>
   String get timerString {
     Duration duration =
         animationController.duration * animationController.value;
-    return '${duration.inHours}:${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
+    return '${duration.inHours}:${(duration.inMinutes % 60).toString().padLeft(2, '0')}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
   }
 
   @override
@@ -70,7 +70,7 @@ class SessionCheckInState extends State<SessionCheckIn>
                       DocumentSnapshot sessionDoc = snapshot.data;
                       if (sessionDoc['hasCheckIn1'] == true &&
                           sessionDoc['hasCheckIn2'] == true) {    //Both users have checked in
-                        animationController.reverse(
+                        animationController.reverse(  //FIXME
                             from: animationController.value == 0.0
                                 ? 1.0
                                 : animationController
