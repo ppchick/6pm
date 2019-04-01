@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import './widgets/sessionMain.dart';
 import './gym/gym.dart';
+import './gym/weather.dart';
 import './profile/profile.dart';
 
 class HomePage extends StatefulWidget {
@@ -63,7 +64,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> _children = [
-      GymPage(storage: GymStorage()),
+      // GymPage(storage: GymStorage()),
+      WeatherPage(),
       SessionMainPage(),
       MyProfile(
         user: user,
