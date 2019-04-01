@@ -161,7 +161,6 @@ class CreateSessionState extends State<CreateSession> {
 
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> params = [];
-    DateTime now = DateTime.now();
     return new Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(

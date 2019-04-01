@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'rateSession.dart';
 import 'dart:math';
-import '../globalUserID.dart' as globalUID;
 
 class SessionCheckIn extends StatefulWidget {
   final DocumentSnapshot document;
@@ -14,11 +13,6 @@ class SessionCheckIn extends StatefulWidget {
 
 class SessionCheckInState extends State<SessionCheckIn>
     with TickerProviderStateMixin {
-  Timer _timer;
-  int _second = 0;
-  int _minute = 0;
-  int _hour = 0;
-  String timerText = "START";
   DocumentSnapshot document;
 
   SessionCheckInState(DocumentSnapshot document) {
@@ -70,7 +64,7 @@ class SessionCheckInState extends State<SessionCheckIn>
                       DocumentSnapshot sessionDoc = snapshot.data;
                       if (sessionDoc['hasCheckIn1'] == true &&
                           sessionDoc['hasCheckIn2'] == true) {    //Both users have checked in
-                        animationController.reverse(  //FIXME
+                        animationController.reverse(  //FIXME 
                             from: animationController.value == 0.0
                                 ? 1.0
                                 : animationController
