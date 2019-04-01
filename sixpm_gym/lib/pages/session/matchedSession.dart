@@ -58,7 +58,6 @@ class MatchedSession extends StatelessWidget {
             onTap: () {
               print('[Check In] Pressed');
               if (document != null) {
-                //TODO UPDATE HASCHECKIN 
                 Navigator.push(
                     context,
                     MaterialPageRoute(
