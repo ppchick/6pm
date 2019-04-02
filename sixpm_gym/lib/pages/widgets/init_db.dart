@@ -19,12 +19,27 @@ class InitDBWidget extends StatelessWidget {
 
 //Profiles
     data = <String, Object>{
+      'DOB': '1994-01-01',
+      'currentRating': 5.0,
+      'email': 'jy@gmail.com',
+      'firstName': 'Jingyi',
+      'gender': 'male',
+      'hourSum': 10.0,
+      'interest': 'Fit girls',
+      'strength': 'HIIT',
+      'lastName': 'Yang',
+      'level': 'Pro',
+      'numOfSession': 5,
+      'username': 'James23',
+    };
+    profileList.add(data);
+    data = <String, Object>{
       'DOB': '1991-01-01',
       'currentRating': 5.0,
       'email': 'testing@gmail.com',
       'firstName': 'Alex',
       'gender': 'male',
-      'hourSum': 10,
+      'hourSum': 10.0,
       'interest': 'Programming',
       'strength': 'Programming',
       'lastName': 'Ang',
