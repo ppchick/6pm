@@ -363,7 +363,7 @@ class CreateSessionState extends State<CreateSession> {
                           } else if (_startTimeIndex >= _endTimeIndex) {
                             //start time after end time
                             _timeErrorDialog(context, 1);
-                          } else if (DateTime.parse(globals.dateISO).isBefore(DateTime.now())) {
+                          } else if (DateTime.parse(globals.dateISO + ' ' + _startTime).isBefore(DateTime.now())) {
                             //start date before now
                             _timeErrorDialog(context, 2);
                           } else {

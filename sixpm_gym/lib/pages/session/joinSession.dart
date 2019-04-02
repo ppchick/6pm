@@ -42,7 +42,7 @@ class SessionListState extends State<SessionList> {
         switch (snapshot.connectionState) {
           //if takes too long to load, display "loading"
           case ConnectionState.waiting:
-            return new CircularProgressIndicator();
+            return Center(child: new CircularProgressIndicator());
           default:
             docs = snapshot.data.documents; //adds all documents to a list
             //client-side filters
