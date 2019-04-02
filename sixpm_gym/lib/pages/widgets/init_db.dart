@@ -211,7 +211,7 @@ class InitDBWidget extends StatelessWidget {
       'ID': '9',
       'location': 'Impakt Singapore',
       'startTime': '11:30',
-      'endTime': '1:00',
+      'endTime': '13:00',
       'date': '03/04/2019',
       'startDateTime': DateTime.parse('2019-04-03 11:30:00'),
       'level': 'Newbie',
