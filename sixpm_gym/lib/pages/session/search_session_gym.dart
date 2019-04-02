@@ -30,6 +30,8 @@ class SearchSessionState extends State<SearchSession> {
   }
 
   Future<QuerySnapshot> getGyms() async {
+    names.clear();
+    filteredNames.clear();
     CollectionReference col = Firestore.instance.collection('Gym');
     col.getDocuments().then((doc) {
       int gymCount = doc.documents.length;
