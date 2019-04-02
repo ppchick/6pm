@@ -36,6 +36,29 @@ class _SignupPageState2 extends State<SignupPage2> {
   TextEditingController firstnameController = new TextEditingController();
   TextEditingController lastnameController = new TextEditingController();
 
+
+  void _birthdayError(context) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          // return object of type Dialog
+          return AlertDialog(
+            title: new Text("Error!"),
+            content: new Text("Please enter birthday!"),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text("Okay"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -120,7 +143,7 @@ class _SignupPageState2 extends State<SignupPage2> {
                                   fontSize: 20.0,
                                   color: Colors.blue,
                                   decorationColor: Colors.blue),
-                              items: <String>['male', 'female', 'other']
+                              items: <String>['male', 'female']
                                   .map((String value) {
                                 return new DropdownMenuItem<String>(
                                   value: value,
@@ -257,7 +280,12 @@ class _SignupPageState2 extends State<SignupPage2> {
                   color: Colors.blue,
                   elevation: 7.0,
                   child: InkWell(
-                    onTap: createProfile,
+                    onTap: (){
+                      if (global.dob == '')
+                      _birthdayError(context);
+                      else
+                      createProfile();
+                      },
                     child: Center(
                       child: Text(
                         'FINISH',
@@ -305,8 +333,11 @@ class _SignupPageState2 extends State<SignupPage2> {
           print(e);
         });
         Navigator.popUntil(context, ModalRoute.withName('/'));
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => HomePage(user: user)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomePage(user: user),
+                settings: RouteSettings(name: "homepage")));
       } catch (e) {
         print("{ERROR}");
         print(e.message);
