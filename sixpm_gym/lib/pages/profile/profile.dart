@@ -172,7 +172,8 @@ class _MyProfileState extends State<MyProfile> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      Icon(Icons.favorite_border),
+                                      Icon(Icons.favorite_border,
+                                          color: Colors.blue),
                                       SizedBox(height: 4.0),
                                       Text(
                                         'Interest',
@@ -206,7 +207,8 @@ class _MyProfileState extends State<MyProfile> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      Icon(Icons.accessibility_new),
+                                      Icon(Icons.accessibility_new,
+                                          color: Colors.blue),
                                       SizedBox(height: 4.0),
                                       Text(
                                         'Strength',
@@ -236,7 +238,10 @@ class _MyProfileState extends State<MyProfile> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  Icon(Icons.event_busy),
+                                  Icon(
+                                    Icons.event_busy,
+                                    color: Colors.red,
+                                  ),
                                   SizedBox(height: 4.0),
                                   Text(
                                     'Unmatched Sessions',
