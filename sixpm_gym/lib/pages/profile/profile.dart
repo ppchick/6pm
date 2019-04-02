@@ -129,7 +129,10 @@ class _MyProfileState extends State<MyProfile> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  Icon(Icons.star),
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.orange[300],
+                                  ),
                                   SizedBox(
                                     width: 8.0,
                                   ),
