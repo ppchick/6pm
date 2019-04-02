@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import './mySessions.dart';
 import '../widgets/init_db.dart';
 import '../widgets/clear_db.dart';
 
@@ -13,7 +12,6 @@ class MyProfile extends StatefulWidget {
 }
 
 class _MyProfileState extends State<MyProfile> {
-  // List<String> items = ['1', '2', '3'];
   final FirebaseUser user;
   _MyProfileState(this.user);
 
@@ -59,9 +57,6 @@ class _MyProfileState extends State<MyProfile> {
                                   width: 120.0,
                                   height: 120.0,
                                   child: InkWell(
-                                    onTap: () {
-                                      print('[Avatar] Tapped');
-                                    },
                                     child: null,
                                   ),
                                 ),
@@ -271,15 +266,13 @@ class _MyProfileState extends State<MyProfile> {
                             ),
                           ),
                         ),
-                        //Row(children: <Widget>[
-                        //NOTE COMMENT THIS ROW WHEN PRESENTING
-                        //ClearDBWidget(),
-                        //InitDBWidget(),
-                        //])
+                        Row(children: <Widget>[
+                          //NOTE COMMENT THIS ROW WHEN PRESENTING
+                          ClearDBWidget(),
+                          InitDBWidget(),
+                        ])
                       ],
                     )
-
-                    // SizedBox(child: -20.0,)
                   ],
                 ),
               );

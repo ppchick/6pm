@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../widgets/date_picker.dart';
 import '../home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,8 +26,6 @@ class _SignupPageState2 extends State<SignupPage2> {
   final String username, email, password;
   String _genderValue = 'male';
   String _levelValue = 'Newbie';
-  //String _interest = '';
-  //String _strength = '';
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Firestore db = Firestore.instance;
   TextEditingController interestController = new TextEditingController();
@@ -36,28 +33,25 @@ class _SignupPageState2 extends State<SignupPage2> {
   TextEditingController firstnameController = new TextEditingController();
   TextEditingController lastnameController = new TextEditingController();
 
-
   void _birthdayError(context) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          // return object of type Dialog
-          return AlertDialog(
-            title: new Text("Error!"),
-            content: new Text("Please enter birthday!"),
-            actions: <Widget>[
-              new FlatButton(
-                child: new Text("Okay"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
-  
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text("Error!"),
+          content: new Text("Please enter birthday!"),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Okay"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,9 +111,6 @@ class _SignupPageState2 extends State<SignupPage2> {
                             width: 120.0,
                             height: 120.0,
                             child: InkWell(
-                              onTap: () {
-                                print('[Avatar] Tapped');
-                              },
                               child: null,
                             ),
                           ),
@@ -151,7 +142,6 @@ class _SignupPageState2 extends State<SignupPage2> {
                                 );
                               }).toList(),
                               onChanged: (item) {
-                                print('[Dropdown] changed to ' + item);
                                 setState(() {
                                   _genderValue = item;
                                 });
@@ -188,7 +178,6 @@ class _SignupPageState2 extends State<SignupPage2> {
                                 );
                               }).toList(),
                               onChanged: (item) {
-                                print('[Dropdown] changed to ' + item);
                                 setState(() {
                                   _levelValue = item;
                                 });
@@ -210,9 +199,8 @@ class _SignupPageState2 extends State<SignupPage2> {
                               },
                               controller: firstnameController,
                               autofocus: true,
-                              decoration: InputDecoration(
-                                  // border: InputBorder.none,
-                                  hintText: 'First Name'),
+                              decoration:
+                                  InputDecoration(hintText: 'First Name'),
                             ),
                           ),
                           Container(
@@ -225,9 +213,8 @@ class _SignupPageState2 extends State<SignupPage2> {
                               },
                               controller: lastnameController,
                               autofocus: true,
-                              decoration: InputDecoration(
-                                  // border: InputBorder.none,
-                                  hintText: 'Last Name'),
+                              decoration:
+                                  InputDecoration(hintText: 'Last Name'),
                             ),
                           ),
                         ],
@@ -242,9 +229,8 @@ class _SignupPageState2 extends State<SignupPage2> {
                             }
                           },
                           controller: interestController,
-                          decoration: InputDecoration(
-                              // border: InputBorder.none,
-                              hintText: 'Your Interest'),
+                          decoration:
+                              InputDecoration(hintText: 'Your Interest'),
                         ),
                       ),
                       Container(
@@ -257,9 +243,8 @@ class _SignupPageState2 extends State<SignupPage2> {
                             }
                           },
                           controller: strengthController,
-                          decoration: InputDecoration(
-                              // border: InputBorder.none,
-                              hintText: 'Your Strength'),
+                          decoration:
+                              InputDecoration(hintText: 'Your Strength'),
                         ),
                       ),
                     ],
@@ -280,12 +265,12 @@ class _SignupPageState2 extends State<SignupPage2> {
                   color: Colors.blue,
                   elevation: 7.0,
                   child: InkWell(
-                    onTap: (){
+                    onTap: () {
                       if (global.dob == '')
-                      _birthdayError(context);
+                        _birthdayError(context);
                       else
-                      createProfile();
-                      },
+                        createProfile();
+                    },
                     child: Center(
                       child: Text(
                         'FINISH',
@@ -309,8 +294,6 @@ class _SignupPageState2 extends State<SignupPage2> {
     final formState = _formKey.currentState;
     if (formState.validate()) {
       try {
-        // FirebaseUser user = await FirebaseAuth.instance
-        //     .createUserWithEmailAndPassword(email: email, password: password);
         var dataMap = new Map<String, dynamic>();
         dataMap['gender'] = _genderValue.toLowerCase();
         dataMap['level'] = _levelValue;
