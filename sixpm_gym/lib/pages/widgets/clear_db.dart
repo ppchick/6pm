@@ -25,32 +25,20 @@ class ClearDBWidget extends StatelessWidget {
           onTap: () {
             //Delete everything in Profile, Unmatched Session, Matched Session
             profileCollection.getDocuments().then((snapshot) {
-              List<DocumentSnapshot> profileDocs = snapshot.documents;
-              for (int i = 0; i < profileDocs.length; i++) {
-                Firestore.instance
-                    .runTransaction((Transaction myTransaction) async {
-                  await myTransaction.delete(profileDocs[i].reference);
-                });
+              for (DocumentSnapshot ds in snapshot.documents) {
+                ds.reference.delete();
               }
             });
 
             unmatchedCollection.getDocuments().then((snapshot) {
-              List<DocumentSnapshot> unmatchedDocs = snapshot.documents;
-              for (int i = 0; i < unmatchedDocs.length; i++) {
-                Firestore.instance
-                    .runTransaction((Transaction myTransaction) async {
-                  await myTransaction.delete(unmatchedDocs[i].reference);
-                });
+              for (DocumentSnapshot ds in snapshot.documents) {
+                ds.reference.delete();
               }
             });
 
             matchedCollection.getDocuments().then((snapshot) {
-              List<DocumentSnapshot> matchedDocs = snapshot.documents;
-              for (int i = 0; i < matchedDocs.length; i++) {
-                Firestore.instance
-                    .runTransaction((Transaction myTransaction) async {
-                  await myTransaction.delete(matchedDocs[i].reference);
-                });
+              for (DocumentSnapshot ds in snapshot.documents) {
+                ds.reference.delete();
               }
             });
           },

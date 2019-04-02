@@ -211,7 +211,7 @@ class InitDBWidget extends StatelessWidget {
       'ID': '9',
       'location': 'Impakt Singapore',
       'startTime': '11:30',
-      'endTime': '1:00',
+      'endTime': '13:00',
       'date': '03/04/2019',
       'startDateTime': DateTime.parse('2019-04-03 11:30:00'),
       'level': 'Newbie',
@@ -239,6 +239,7 @@ class InitDBWidget extends StatelessWidget {
       'numHour': 1,
     };
     unmatchedList.add(data);
+    
 
     //Matched Sessions
     data = <String, Object>{
@@ -341,6 +342,26 @@ class InitDBWidget extends StatelessWidget {
       'numHour': 1.5,
     };
     matchedList.add(data);
+    data = <String, Object>{
+      'ID': '6',
+      'location': 'The Gym Nation',
+      'startTime': '16:00',
+      'endTime': '18:00',
+      'date': '02/04/2019',
+      'startDateTime': DateTime.parse('2019-04-02 16:00:00'),
+      'focus': 'Strength',
+      'completed': false,
+      'userID1': 'UCAaloSVi7VYLhfCKnIQA3AbLsw2',
+      'userID2': 'pojzyU9QGNXigpTpCzMWI0Z4TaJ3',
+      'hasCheckIn1' : false,
+      'hasCheckIn2' : false,
+      'rate1': null,
+      'rate2': null,
+      'feedback1': '',
+      'feedback2': '',
+      'numHour': 2,
+    };
+    matchedList.add(data);
 
     return Container(
       padding: EdgeInsets.fromLTRB(50, 20, 0, 0),
@@ -365,7 +386,7 @@ class InitDBWidget extends StatelessWidget {
               }).catchError((e) => print(e));
             }
             //insert matched sessions
-            for (int i = 1; i <= 5; i++) {
+            for (int i = 1; i <= 6; i++) {
               docToAdd =
                   Firestore.instance.document('MatchedSession/session$i');
               docToAdd.setData(matchedList[i-1]).whenComplete(() {
