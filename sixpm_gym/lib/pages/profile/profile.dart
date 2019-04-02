@@ -274,11 +274,11 @@ class _MyProfileState extends State<MyProfile> {
                             ),
                           ),
                         ),
-                        Row(children: <Widget>[
+                        //Row(children: <Widget>[
                           //NOTE COMMENT THIS ROW WHEN PRESENTING
-                          ClearDBWidget(),
-                          InitDBWidget(),
-                        ])
+                        //ClearDBWidget(),
+                        //InitDBWidget(),
+                        //])
                       ],
                     )
                   ],
